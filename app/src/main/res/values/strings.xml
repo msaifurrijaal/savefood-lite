@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">Save Food</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error">Error</string>
+    <string name="default_text">-</string>
+    <string name="loading">Loading...</string>
+    <string name="hallo">Hallo</string>
+    <string name="ardiansyah">Ardiansyah</string>
+    <string name="message">Message</string>
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="current_location">Current Location</string>
+    <string name="not_granted">Not Granted</string>
+    <string name="register">Register</string>
+    <string name="hello_there_join_us_to_get_started">Hello there, join us to get started!</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="or_continue_with">or continue with</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="login">Login</string>
+    <string name="hello_there_sign_to_continue">Hello there, sign to continue!</string>
+    <string name="next">Next</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="role">Role</string>
+    <string name="customer">Customer</string>
+    <string name="food_and_beverage_business">Food and Beverage Business</string>
+    <string name="non_govermental_organization_ngo">Non-Govermental Organization (NGO)</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="please_fill_in_your_email">Please fill in your email</string>
+    <string name="please_use_a_valid_email">Please use a valid email</string>
+    <string name="please_fill_in_your_password">Please fill in your password</string>
+    <string name="please_enter_a_password_of_at_least_8_characters">Please enter a password of at least 8 characters</string>
+    <string name="enter_the_email_used_on_your_account">Enter the email used on your account!</string>
+    <string name="send">Send</string>
+    <string name="please_fill_in_your_name">Please fill in your name</string>
+    <string name="please_enter_a_confirmation_password">Please enter a confirmation password</string>
+    <string name="please_enter_a_confirmation_password_of_at_least_8_characters">Please enter a confirmation password of at least 8 characters</string>
+    <string name="password_and_confirm_password_are_not_the_same">Password and confirm password are not the same</string>
+    <string name="please_fill_in_your_phone_number">Please fill in your phone number</string>
+    <string name="choose_an_option">Choose an option!</string>
 </resources>

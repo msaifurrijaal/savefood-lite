@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "528751817202",
+    "project_id": "save-food-cd649",
+    "storage_bucket": "save-food-cd649.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528751817202:android:a2e8c7667e6301caac3b6b",
+        "android_client_info": {
+          "package_name": "com.msaifurrijaal.savefood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528751817202-eugilha5cqlv31o68upna8ebahpvqg7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7I7qKBJM56z2ar3p3cczj77vrOHFTjoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528751817202-eugilha5cqlv31o68upna8ebahpvqg7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
