@@ -24,7 +24,8 @@
             android:background="@drawable/item_left_side_chat"
             android:textSize="16sp"
             android:textColor="@color/black"
-            tools:text="@string/hallo" />
+            tools:text="@string/hallo"
+            android:fontFamily="@font/poppins"/>
 
     </LinearLayout>
 

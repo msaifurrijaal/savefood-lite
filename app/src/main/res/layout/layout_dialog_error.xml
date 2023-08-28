@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:text="@string/error"
         android:textColor="@android:color/holo_red_dark"
-        android:textStyle="bold"
-        android:textSize="@dimen/h6" />
+        android:textSize="@dimen/h6"
+        android:fontFamily="@font/poppins_bold"/>
 
     <TextView
         android:id="@+id/tv_message"
@@ -29,6 +29,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/body_1"
+        android:fontFamily="@font/poppins"
         android:layout_marginTop="@dimen/small_50"/>
 
 </LinearLayout>

@@ -20,6 +20,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="@dimen/h6"
+        android:fontFamily="@font/poppins_bold"
         android:layout_marginTop="@dimen/normal_100"/>
 
 </LinearLayout>

@@ -1,9 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chat.ChatActivity">
+    tools:context=".ui.chat.ChatActivity"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/normal_75"
+        android:paddingHorizontal="@dimen/normal_100"
+        android:elevation="@dimen/small_50"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/btn_close_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_keyboard_backspace_24"
+            android:layout_gravity="center_vertical"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_user"
+            android:layout_width="@dimen/image_50_custom"
+            android:layout_height="@dimen/image_50_custom"
+            tools:src="@tools:sample/avatars"
+            android:layout_marginStart="@dimen/normal_100"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/normal_100"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/ardiansyah"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online"
+                android:fontFamily="@font/poppins" />
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/normal_225"
+            android:layout_height="@dimen/normal_225"
+            android:src="@drawable/icon_telp"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/small_100"
+        android:paddingHorizontal="@dimen/small_50"
+        tools:listitem="@layout/layout_item_chat_right"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="@dimen/small_50"
+        android:paddingHorizontal="@dimen/normal_100"
+        android:paddingVertical="@dimen/normal_75">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_icon_mic"
+            android:layout_width="@dimen/normal_175"
+            android:layout_height="@dimen/normal_175"
+            android:src="@drawable/icon_mic"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/small_100"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_icon_file"
+            android:layout_width="@dimen/normal_175"
+            android:layout_height="@dimen/normal_175"
+            android:src="@drawable/icon_file"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/small_100"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text"
+            app:hintEnabled="false"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/small_100">
+
+            <EditText
+                android:id="@+id/et_message"
+                android:background="@drawable/bg_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/message"
+                android:fontFamily="@font/poppins_light"
+                android:textColorHint="@color/text_color_hint"
+                android:paddingHorizontal="@dimen/normal_100" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_icon_send"
+            android:layout_width="@dimen/normal_175"
+            android:layout_height="@dimen/normal_175"
+            android:src="@drawable/icon_send"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</LinearLayout>
