@@ -43,11 +43,12 @@
                 app:layout_constraintBottom_toTopOf="@id/container_login"
                 android:layout_marginStart="@dimen/normal_125">
 
-                <ImageView
-                    android:id="@+id/iv_back"
+                <ImageButton
+                    android:id="@+id/ib_back_regis"
                     android:layout_width="@dimen/normal_200"
                     android:layout_height="@dimen/normal_200"
                     android:src="@drawable/baseline_arrow_back_24"
+                    android:background="@android:color/transparent"
                     android:layout_marginEnd="@dimen/normal_100"
                     android:layout_gravity="center_vertical"
                     app:tint="@color/white" />

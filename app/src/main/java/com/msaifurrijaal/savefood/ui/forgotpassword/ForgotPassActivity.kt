@@ -8,21 +8,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
-import com.msaifurrijaal.savefood.databinding.ActivityForgotPasswordBinding
+import com.msaifurrijaal.savefood.databinding.ActivityForgotPassBinding
 import com.msaifurrijaal.savefood.ui.login.LoginActivity
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
-class ForgotPasswordActivity : AppCompatActivity() {
+class ForgotPassActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityForgotPasswordBinding
+    private lateinit var binding: ActivityForgotPassBinding
     private lateinit var forgotPassViewModel: ForgotPassViewModel
     private lateinit var dialogLoading: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_forgot_password)
+        binding = ActivityForgotPassBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         forgotPassViewModel = ViewModelProvider(this).get(ForgotPassViewModel::class.java)
         dialogLoading = showDialogLoading(this)
@@ -32,12 +32,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun onAction() {
         binding.apply {
-            ivBack.setOnClickListener {
-                finish()
-            }
-
             btnSendEmail.setOnClickListener {
                 forgotPasswordObserve()
+            }
+
+            ibBackForgotPass.setOnClickListener {
+                finish()
             }
         }
     }

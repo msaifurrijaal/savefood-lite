@@ -3,13 +3,16 @@ package com.msaifurrijaal.savefood.ui.chat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.adapter.ChatAdapter
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityChatBinding
+import com.msaifurrijaal.savefood.utils.showDialogError
 
 class ChatActivity : AppCompatActivity() {
 
@@ -26,8 +29,68 @@ class ChatActivity : AppCompatActivity() {
 
         chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
+        getInformationFromIntent()
+        setInformationChat()
+        dataUserObserve()
+        setChatRv()
+        onAction()
+        readChat(chatPartner!!.uidUser!!)
+
     }
 
+    private fun dataUserObserve() {
+        chatViewModel.getDataUser().observe(this) { response ->
+            when(response) {
+                is Resource.Error -> { }
+                is Resource.Loading -> { }
+                is Resource.Success -> {
+                    user = response.data
+                }
+            }
+        }
+    }
+
+    private fun setChatRv() {
+        chatAdapter = ChatAdapter()
+        binding.rvChat.apply {
+            layoutManager = LinearLayoutManager(this@ChatActivity)
+            adapter = chatAdapter
+        }
+    }
+
+    private fun onAction() {
+        binding.apply {
+            btnCloseChat.setOnClickListener {
+                finish()
+            }
+
+            btnIconSend.setOnClickListener {
+                var message = etMessage.text.toString()
+                if (message.isEmpty()) {
+                    Toast.makeText(applicationContext, "message is empty", Toast.LENGTH_SHORT).show()
+                    etMessage.setText("")
+                } else {
+                    sendMessage(chatPartner!!.uidUser, message)
+                    etMessage.setText("")
+                }
+            }
+        }
+    }
+
+    private fun sendMessage(uidUser: String?, message: String) {
+        chatViewModel.sendMessage(receiverId = uidUser!!, message = message,)
+            .observe(this) { response ->
+                when(response) {
+                    is Resource.Error -> {
+                        showDialogError(this, response.message.toString())
+                    }
+                    is Resource.Loading -> { }
+                    is Resource.Success -> {
+                        readChat(uidUser)
+                    }
+                }
+            }
+    }
 
     private fun readChat(receiverId: String) {
         chatViewModel.readChat(receiverId).observe(this) { response ->

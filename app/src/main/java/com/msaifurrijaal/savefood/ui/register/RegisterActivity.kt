@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.databinding.ActivityRegisterBinding
-import com.msaifurrijaal.savefood.ui.forgotpassword.ForgotPasswordActivity
+import com.msaifurrijaal.savefood.ui.forgotpassword.ForgotPassActivity
 import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
@@ -40,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
         radioDataChange()
         binding.apply {
             tvForgotPassword.setOnClickListener {
-                startActivity(Intent(this@RegisterActivity, ForgotPasswordActivity::class.java))
+                startActivity(Intent(this@RegisterActivity, ForgotPassActivity::class.java))
                 finish()
             }
 
@@ -48,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
             }
 
-            ivBack.setOnClickListener {
+            ibBackRegis.setOnClickListener {
                 finish()
             }
 

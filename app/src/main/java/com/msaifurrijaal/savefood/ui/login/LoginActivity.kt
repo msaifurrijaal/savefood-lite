@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.databinding.ActivityLoginBinding
-import com.msaifurrijaal.savefood.ui.forgotpassword.ForgotPasswordActivity
+import com.msaifurrijaal.savefood.ui.forgotpassword.ForgotPassActivity
 import com.msaifurrijaal.savefood.ui.main.MainActivity
 import com.msaifurrijaal.savefood.ui.register.RegisterActivity
 import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             tvForgotPassword.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+                startActivity(Intent(this@LoginActivity, ForgotPassActivity::class.java))
             }
         }
     }
