@@ -8,6 +8,7 @@ import android.os.Looper
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.ui.chat.ChatActivity
 import com.msaifurrijaal.savefood.ui.location.LocationActivity
+import com.msaifurrijaal.savefood.ui.login.LoginActivity
 import com.msaifurrijaal.savefood.ui.main.MainActivity
 
 class Splashctivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class Splashctivity : AppCompatActivity() {
     private fun delayAndGoToLogin() {
         Handler(Looper.getMainLooper())
             .postDelayed({
-                startActivity(Intent(this, LocationActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }, 1200)
     }

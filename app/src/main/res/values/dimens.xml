@@ -62,4 +62,5 @@
     <dimen name="small_25">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="small_125">10dp</dimen>
+    <dimen name="image_40_custom">40dp</dimen>
 </resources>
