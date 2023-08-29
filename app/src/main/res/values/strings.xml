@@ -66,4 +66,12 @@
     <string name="location">Location</string>
     <string name="post">Post</string>
     <string name="re_upload_photo">Re upload photo</string>
+    <string name="please_fill_in_the_name_of_the_food">please fill in the name of the food</string>
+    <string name="please_press_the_location_logo_on_the_left">please press the location logo on the left</string>
+    <string name="please_fill_in_the_food_description">Please fill in the food description</string>
+    <string name="please_fill_in_the_food_expiration_date">Please fill in the food expiration date</string>
+    <string name="please_fill_in_the_price_of_the_food">Please fill in the price of the food</string>
+    <string name="please_take_product_photos">Please take product photos!</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="fill_if_not_donate">* fill if not donate</string>
 </resources>

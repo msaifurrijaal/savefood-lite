@@ -75,8 +75,7 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/default_text"
-                    tools:text="@string/ready_to_donate_food_today"
+                    android:text="@string/ready_to_donate_food_today"
                     android:fontFamily="@font/poppins"
                     android:textSize="@dimen/caption"
                     android:textColor="@color/white" />
@@ -130,6 +129,7 @@
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/tv_point_user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="-"
@@ -254,8 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_100"
-                    tools:listitem="@layout/layout_item_article"
-                    android:layout_marginBottom="@dimen/normal_125" />
+                    tools:listitem="@layout/layout_item_article" />
 
             </LinearLayout>
 

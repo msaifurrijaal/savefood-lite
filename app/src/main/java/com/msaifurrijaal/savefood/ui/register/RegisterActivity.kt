@@ -121,16 +121,13 @@ class RegisterActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.rb_customer -> {
                     roleUser = "Customer"
-                    Log.d("RegisterActivity", roleUser!!)
                 }
                 R.id.rb_fnb -> {
                     roleUser = "FNB"
-                    Log.d("RegisterActivity", roleUser!!)
 
                 }
                 R.id.rb_ngo -> {
                     roleUser = "NGO"
-                    Log.d("RegisterActivity", roleUser!!)
                 }
             }
         }

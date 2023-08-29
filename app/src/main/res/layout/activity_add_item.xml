@@ -198,14 +198,30 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/normal_75"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/price"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/subtitle_1" />
+                    android:layout_marginTop="@dimen/normal_75">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@string/price"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/subtitle_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fill_if_not_donate"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="@dimen/caption"
+                        android:textColor="@color/darker_gray"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/small_100" />
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -264,6 +280,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/bg_edit_text"
                             android:paddingHorizontal="@dimen/normal_100"
+                            android:enabled="false"
                             android:inputType="textEmailAddress"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -307,13 +324,16 @@
                     android:visibility="gone">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_image_upload"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cardCornerRadius="@dimen/small_100" >
 
                         <ImageView
+                            android:id="@+id/iv_image_upload"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
                             tools:src="@tools:sample/backgrounds/scenic" />
 
                     </androidx.cardview.widget.CardView>
@@ -321,7 +341,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btn_upload_photo"
+                    android:id="@+id/btn_reupload_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/normal_200"
                     android:background="@drawable/bg_btn_color_primary"
