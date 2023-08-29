@@ -36,16 +36,16 @@
             android:id="@+id/ib_back_forgot_pass"
             android:layout_width="@dimen/normal_200"
             android:layout_height="@dimen/normal_200"
-            android:src="@drawable/baseline_arrow_back_24"
+            android:src="@drawable/baseline_keyboard_arrow_left_24"
             android:background="@android:color/transparent"
-            android:layout_marginEnd="@dimen/normal_100"
+            android:layout_marginEnd="@dimen/small_50"
             android:layout_gravity="center_vertical"
             app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
+            android:text="@string/forgot_password2"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/white"
             android:textSize="@dimen/h5"
@@ -57,7 +57,7 @@
         android:id="@+id/container_login"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_rounded_white"
+        android:background="@drawable/bg_rounded_bottom_white"
         android:layout_marginTop="@dimen/normal_125"
         android:orientation="vertical"
         android:padding="@dimen/normal_125"

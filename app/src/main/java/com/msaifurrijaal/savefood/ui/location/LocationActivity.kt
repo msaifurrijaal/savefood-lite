@@ -86,7 +86,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun onAction() {
         binding.apply {
-            fabBackChooseLocation.setOnClickListener {
+            btnChooseLocation.setOnClickListener {
                 val intent = Intent()
                 intent.putExtra("updatedLocation", location)
                 intent.putExtra("Lat", lastKnownLocation?.latitude.toString())
@@ -94,7 +94,9 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             }
+
             fabCurrentLocationChooseLocation.setOnClickListener { requestLocation() }
+            fabBackChooseLocation.setOnClickListener { finish() }
         }
     }
 

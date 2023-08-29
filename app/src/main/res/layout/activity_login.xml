@@ -51,7 +51,7 @@
                 android:id="@+id/container_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_white"
+                android:background="@drawable/bg_rounded_bottom_white"
                 android:layout_marginTop="@dimen/normal_125"
                 android:orientation="vertical"
                 android:padding="@dimen/normal_125"
@@ -112,6 +112,7 @@
                     android:layout_height="@dimen/edit_text"
                     app:hintEnabled="false"
                     app:endIconMode="password_toggle"
+                    app:endIconTint="@color/colorPrimaryDark"
                     android:layout_marginTop="@dimen/small_25">
 
                     <EditText
@@ -120,7 +121,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColorHint="@color/text_color_hint"
-                        android:paddingHorizontal="@dimen/normal_100" />
+                        android:paddingHorizontal="@dimen/normal_100"
+                        android:inputType="textPassword"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

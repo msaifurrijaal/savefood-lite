@@ -43,4 +43,27 @@
     <string name="password_and_confirm_password_are_not_the_same">Password and confirm password are not the same</string>
     <string name="please_fill_in_your_phone_number">Please fill in your phone number</string>
     <string name="choose_an_option">Choose an option!</string>
+    <string name="food">Food</string>
+    <string name="history">History</string>
+    <string name="ready_to_donate_food_today">Ready to donate food today?</string>
+    <string name="_2_731">2.731</string>
+    <string name="recommendations_for_you">Recommendations for you</string>
+    <string name="see_all">See All</string>
+    <string name="lowokwaru">Lowokwaru</string>
+    <string name="recent_article">Recent article</string>
+    <string name="donate">Donate</string>
+    <string name="forgot_password2">Forgot Password</string>
+    <string name="add_product">Add Product</string>
+    <string name="welcome">Welcome</string>
+    <string name="post_your_food">Post your food</string>
+    <string name="tell_us_more_about_your_food">Tell us more about your food!</string>
+    <string name="product_name">Product Name</string>
+    <string name="description">Description</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="donation">Donation</string>
+    <string name="location">Location</string>
+    <string name="post">Post</string>
+    <string name="re_upload_photo">Re upload photo</string>
 </resources>

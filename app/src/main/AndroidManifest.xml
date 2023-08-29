@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -22,6 +22,9 @@
         android:theme="@style/Theme.SaveFood"
         tools:targetApi="31">
         <activity
+            android:name=".ui.additem.AddItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.forgotpassword.ForgotPassActivity"
             android:exported="false" />
 
@@ -32,7 +35,8 @@
         <activity
             android:name=".ui.location.LocationActivity"
             android:exported="true"
-            android:label="@string/title_activity_location" />
+            android:label="@string/title_activity_location"
+            android:theme="@style/Theme.SaveFood2" />
         <activity
             android:name=".ui.splash.Splashctivity"
             android:exported="true"
