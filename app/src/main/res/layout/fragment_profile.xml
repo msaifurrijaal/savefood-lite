@@ -6,14 +6,292 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment">
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ellipse2"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/large_150"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_ellipse3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ellipse3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/normal_100" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ellipse2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="-10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/h5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/normal_100"
+                app:layout_constraintBottom_toTopOf="@id/container_image_user" />
+
+            <LinearLayout
+                android:id="@+id/container_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_top_white"
+                android:layout_marginTop="@dimen/large_200"
+                android:orientation="vertical"
+                android:padding="@dimen/normal_125"
+                app:layout_constraintTop_toBottomOf="@id/iv_ellipse3"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/custom_image_120"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/normal_100">
+
+                    <ImageView
+                        android:layout_width="@dimen/normal_175"
+                        android:layout_height="@dimen/normal_175"
+                        android:src="@drawable/icon_person" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/normal_150">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/tv_user_full_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/default_text"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            tools:text="@tools:sample/full_names"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_150"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/normal_100">
+
+                    <ImageView
+                        android:layout_width="@dimen/normal_175"
+                        android:layout_height="@dimen/normal_175"
+                        android:src="@drawable/icon_mail" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/normal_150">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/tv_user_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/default_text"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            tools:text="@string/test_mail_com"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_150"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/normal_100">
+
+                    <ImageView
+                        android:layout_width="@dimen/normal_175"
+                        android:layout_height="@dimen/normal_175"
+                        android:src="@drawable/icon_telp_2" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/normal_150">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_number"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/tv_user_phone_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/default_text"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            tools:text="@tools:sample/us_phones"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_150"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/normal_100">
+
+                    <ImageView
+                        android:layout_width="@dimen/normal_175"
+                        android:layout_height="@dimen/normal_175"
+                        android:src="@drawable/icon_role" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/normal_150">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/role"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/tv_user_role"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/default_text"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="@dimen/subtitle_1"
+                            tools:text="@string/customer"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/normal_125"
+                    android:layout_marginTop="@dimen/normal_200"
+                    android:paddingBottom="@dimen/normal_125">
+
+                    <Button
+                        android:id="@+id/btn_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="@string/logout"
+                        android:textColor="@color/danger_dark"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/bg_btn_stroke_danger"
+                        android:layout_marginEnd="@dimen/small_50"
+                        android:layout_weight="1"/>
+
+                    <Button
+                        android:id="@+id/btn_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="Edit"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/bg_btn_color_primary"
+                        android:layout_marginStart="@dimen/small_50"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_image_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_75"
+                android:background="@drawable/bg_circle_white"
+                app:layout_constraintTop_toTopOf="@id/container_login"
+                app:layout_constraintBottom_toTopOf="@id/container_login"
+                app:layout_constraintStart_toStartOf="@id/container_login"
+                app:layout_constraintEnd_toEndOf="@id/container_login">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user"
+                    android:layout_width="@dimen/custom_image_120"
+                    android:layout_height="@dimen/custom_image_120"
+                    tools:src="@tools:sample/avatars" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pg_user_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/container_image_user"
+                app:layout_constraintEnd_toEndOf="@+id/container_image_user"
+                app:layout_constraintStart_toStartOf="@+id/container_image_user"
+                app:layout_constraintBottom_toBottomOf="@+id/container_image_user"
+                android:visibility="gone"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

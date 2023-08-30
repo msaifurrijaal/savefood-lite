@@ -2,7 +2,6 @@ package com.msaifurrijaal.savefood.ui.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +19,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatViewModel: ChatViewModel
     private lateinit var chatAdapter: ChatAdapter
     private var chatPartner: User? = null
-    private var user: User? = null
+    private var uidPartner: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,21 +29,24 @@ class ChatActivity : AppCompatActivity() {
         chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         getInformationFromIntent()
-        setInformationChat()
-        dataUserObserve()
+        getDataChatPartner(uidPartner)
         setChatRv()
         onAction()
-        readChat(chatPartner!!.uidUser!!)
+        readChat(uidPartner!!)
 
     }
 
-    private fun dataUserObserve() {
-        chatViewModel.getDataUser().observe(this) { response ->
-            when(response) {
-                is Resource.Error -> { }
-                is Resource.Loading -> { }
+    private fun getDataChatPartner(uidUser: String?) {
+        chatViewModel.getSpesificUser(uidUser!!).observe(this) { response ->
+            when (response) {
+                is Resource.Error -> {
+                    showDialogError(this, response.message.toString())
+                    finish()
+                }
+                is Resource.Loading -> {}
                 is Resource.Success -> {
-                    user = response.data
+                    chatPartner = response.data
+                    setInformationChat()
                 }
             }
         }
@@ -116,11 +118,10 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun getInformationFromIntent() {
-        chatPartner = intent.getParcelableExtra<User>(ChatActivity.USER_ITEM)
-        Log.d("ChatActivity", chatPartner.toString())
+        uidPartner = intent.getStringExtra(ID_USER)
     }
 
     companion object {
-        const val USER_ITEM = "user_item"
+        const val ID_USER = "id_user"
     }
 }

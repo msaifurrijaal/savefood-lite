@@ -10,7 +10,7 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
     val userRepository = UserRepository(application)
     val chatRepository = ChatRepository(application)
 
-    fun getDataUser() = userRepository.getCurrentUser()
+    fun getSpesificUser(uidUser: String) = userRepository.getSpesificUser(uidUser)
 
     fun getAllUsers() = userRepository.getAllUsers()
 

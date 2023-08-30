@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:elevation="2dp"
     app:cardCornerRadius="@dimen/normal_150"
     app:cardUseCompatPadding="true"
     android:layout_marginEnd="@dimen/normal_125">

@@ -71,5 +71,7 @@
     <dimen name="image_40_custom">40dp</dimen>
     <dimen name="subtitle_first">18sp</dimen>
     <dimen name="custom_130">130dp</dimen>
+    <dimen name="custom_image_120">120dp</dimen>
+    <dimen name="custom_360">360dp</dimen>
 
 </resources>

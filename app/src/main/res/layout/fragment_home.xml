@@ -203,14 +203,31 @@
 
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_foods"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/custom_180"
-                    android:layout_marginTop="@dimen/small_100"
-                    tools:listitem="@layout/layout_item_food_home"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:paddingBottom="@dimen/small_25"/>
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_foods"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/custom_180"
+                        tools:listitem="@layout/layout_item_food_home"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:paddingBottom="@dimen/small_25"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ProgressBar
+                        android:id="@+id/pg_food_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@+id/rv_foods"
+                        app:layout_constraintBottom_toBottomOf="@+id/rv_foods"
+                        app:layout_constraintStart_toStartOf="@+id/rv_foods"
+                        app:layout_constraintEnd_toEndOf="@+id/rv_foods"
+                        android:layout_marginEnd="@dimen/normal_75" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

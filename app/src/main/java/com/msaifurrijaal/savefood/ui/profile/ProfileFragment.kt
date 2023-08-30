@@ -6,9 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.msaifurrijaal.savefood.R
+import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.FragmentProfileBinding
 import com.msaifurrijaal.savefood.ui.login.LoginActivity
@@ -17,6 +22,7 @@ import com.msaifurrijaal.savefood.utils.showDialogLoading
 class ProfileFragment : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var dialogLoading: AlertDialog
@@ -33,17 +39,72 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setDataUser()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogout.setOnClickListener {
-            firebaseAuth.signOut()
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-            requireActivity().finishAffinity()
+        setDataUser()
+        onAction()
+
+    }
+
+    private fun onAction() {
+        binding.apply {
+            btnLogout.setOnClickListener {
+                firebaseAuth.signOut()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                requireActivity().finishAffinity()
+            }
+        }
+    }
+
+    private fun setDataUser() {
+        profileViewModel.getCurrentUser().observe(viewLifecycleOwner, Observer { response ->
+            when(response){
+                is Resource.Error -> {
+                    successResponse()
+                    Toast.makeText(requireContext(), getString(R.string.loading_users_failed), Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+                    loadingResponse()
+                }
+                is Resource.Success -> {
+                    Glide.with(this)
+                        .load(response.data?.avatarUser)
+                        .into(binding.ivUser)
+
+                    binding.tvUserFullName.text = response.data?.nameUser
+                    binding.tvUserEmail.text = response.data?.emailUser
+                    binding.tvUserPhoneNumber.text = response.data?.phoneNumber
+                    binding.tvUserRole.text = response.data?.roleUser
+
+                    successResponse()
+
+                    user = response.data
+                }
+            }
+        })
+    }
+
+    private fun successResponse() {
+        binding.apply {
+            pgUserProfile.visibility = View.GONE
+        }
+    }
+
+    private fun loadingResponse() {
+        binding.apply {
+            pgUserProfile.visibility = View.VISIBLE
         }
     }
 

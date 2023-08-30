@@ -98,8 +98,19 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/h6"
                             android:layout_marginStart="@dimen/small_125" />
-                        
+
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_self_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/this_is_your_food_post"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/subtitle_2"
+                        android:layout_marginTop="@dimen/small_50"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 
@@ -227,8 +238,6 @@
                         android:layout_weight="1"/>
 
                 </LinearLayout>
-
-
 
             </LinearLayout>
 

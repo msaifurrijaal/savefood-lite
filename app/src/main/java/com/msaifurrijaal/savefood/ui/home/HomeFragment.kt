@@ -70,15 +70,15 @@ class HomeFragment : Fragment() {
         homeViewModel.getAllFood().observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is Resource.Error -> {
-                    binding.rvFoods.visibility = View.INVISIBLE
+                    binding.rvFoods.visibility = View.GONE
                     Toast.makeText(requireContext(), "error : ${response.message}", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
-                    // binding.pgRvDokter.visibility = View.VISIBLE
+                    binding.pgFoodHome.visibility = View.VISIBLE
                     binding.rvFoods.visibility = View.INVISIBLE
                 }
                 is Resource.Success -> {
-                    // binding.pgRvDokter.visibility = View.INVISIBLE
+                    binding.pgFoodHome.visibility = View.GONE
                     setFoodRv(response.data)
                     binding.rvFoods.visibility = View.VISIBLE
                 }
