@@ -88,4 +88,10 @@
     <string name="logout">Logout</string>
     <string name="loading_users_failed">Loading users failed</string>
     <string name="online">Online</string>
+    <string name="search">search</string>
+    <string name="all">All</string>
+    <string name="payment_summary">Payment Summary</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="shipping_cost">Shipping Cost</string>
+    <string name="total_payment">Total payment</string>
 </resources>

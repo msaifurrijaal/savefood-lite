@@ -64,7 +64,7 @@
                         android:text="@string/default_text"
                         tools:text="@string/apel_fuji_premium"
                         android:fontFamily="@font/poppins_bold"
-                        android:textSize="@dimen/h6"
+                        android:textSize="@dimen/subtitle_1"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -79,7 +79,7 @@
                             android:text="@string/default_text"
                             tools:text="@string/rp_0"
                             android:fontFamily="@font/poppins_bold"
-                            android:textSize="@dimen/h6"
+                            android:textSize="@dimen/subtitle_1"
                             android:textColor="@color/text_orange" />
 
                         <View
@@ -96,7 +96,7 @@
                             android:text="@string/donate"
                             android:fontFamily="@font/poppins_medium"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/h6"
+                            android:textSize="@dimen/subtitle_1"
                             android:layout_marginStart="@dimen/small_125" />
 
                     </LinearLayout>
@@ -149,7 +149,7 @@
                                 android:text="@string/default_text"
                                 tools:text="@tools:sample/full_names"
                                 android:fontFamily="@font/poppins_bold"
-                                android:textSize="@dimen/h6"
+                                android:textSize="@dimen/subtitle_1"
                                 android:textColor="@color/colorPrimaryDarkPro" />
 
                             <TextView
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/description"
                         android:fontFamily="@font/poppins_bold"
-                        android:textSize="@dimen/h6"
+                        android:textSize="@dimen/subtitle_1"
                         android:textColor="@color/colorPrimaryDarkPro" />
 
                     <TextView
@@ -200,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/expired_date"
                         android:fontFamily="@font/poppins_bold"
-                        android:textSize="@dimen/h6"
+                        android:textSize="@dimen/subtitle_1"
                         android:textColor="@color/colorPrimaryDarkPro"
                         android:layout_marginTop="@dimen/normal_75"/>
 
@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/location"
                         android:fontFamily="@font/poppins_bold"
-                        android:textSize="@dimen/h6"
+                        android:textSize="@dimen/subtitle_1"
                         android:textColor="@color/colorPrimaryDarkPro" />
 
                     <TextView
@@ -254,22 +254,22 @@
                     android:paddingBottom="@dimen/normal_125">
 
                     <Button
-                        android:id="@+id/btn_order"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/button_primary"
-                        android:text="@string/take"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/poppins_bold"
-                        android:textAllCaps="false"
-                        android:background="@drawable/bg_btn_color_primary"
-                        android:layout_marginEnd="@dimen/small_50"
-                        android:layout_weight="1"/>
-
-                    <Button
                         android:id="@+id/btn_chat"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/button_primary"
                         android:text="@string/chat"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/bg_btn_stroke_primary"
+                        android:layout_marginEnd="@dimen/small_50"
+                        android:layout_weight="1"/>
+
+                    <Button
+                        android:id="@+id/btn_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="@string/take"
                         android:textColor="@color/white"
                         android:fontFamily="@font/poppins_bold"
                         android:textAllCaps="false"
