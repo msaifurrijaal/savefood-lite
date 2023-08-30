@@ -125,6 +125,58 @@
                     android:padding="@dimen/normal_125"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_seller"
+                            android:layout_width="@dimen/image_54_custom"
+                            android:layout_height="@dimen/image_54_custom"
+                            tools:src="@tools:sample/avatars" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="@dimen/normal_150">
+
+                            <TextView
+                                android:id="@+id/tv_seller_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/default_text"
+                                tools:text="@tools:sample/full_names"
+                                android:fontFamily="@font/poppins_bold"
+                                android:textSize="@dimen/h6"
+                                android:textColor="@color/colorPrimaryDarkPro" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/online"
+                                android:fontFamily="@font/poppins"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/subtitle_2" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/small_100"
+                    android:background="@color/soft_green" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/normal_125"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,26 +195,14 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/subtitle_2" />
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_100"
-                    android:background="@color/soft_green" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/normal_125"
-                    android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expired_date"
                         android:fontFamily="@font/poppins_bold"
                         android:textSize="@dimen/h6"
-                        android:textColor="@color/colorPrimaryDarkPro" />
+                        android:textColor="@color/colorPrimaryDarkPro"
+                        android:layout_marginTop="@dimen/normal_75"/>
 
                     <TextView
                         android:id="@+id/tv_food_date_expired"

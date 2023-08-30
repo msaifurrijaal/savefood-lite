@@ -19,7 +19,6 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatViewModel: ChatViewModel
     private lateinit var chatAdapter: ChatAdapter
     private var chatPartner: User? = null
-    private var uidPartner: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,27 +28,11 @@ class ChatActivity : AppCompatActivity() {
         chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         getInformationFromIntent()
-        getDataChatPartner(uidPartner)
+        setInformationChat()
         setChatRv()
         onAction()
-        readChat(uidPartner!!)
+        readChat(chatPartner?.uidUser!!)
 
-    }
-
-    private fun getDataChatPartner(uidUser: String?) {
-        chatViewModel.getSpesificUser(uidUser!!).observe(this) { response ->
-            when (response) {
-                is Resource.Error -> {
-                    showDialogError(this, response.message.toString())
-                    finish()
-                }
-                is Resource.Loading -> {}
-                is Resource.Success -> {
-                    chatPartner = response.data
-                    setInformationChat()
-                }
-            }
-        }
     }
 
     private fun setChatRv() {
@@ -118,10 +101,10 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun getInformationFromIntent() {
-        uidPartner = intent.getStringExtra(ID_USER)
+        chatPartner = intent.getParcelableExtra(USER_ITEM)
     }
 
     companion object {
-        const val ID_USER = "id_user"
+        const val USER_ITEM = "user_item"
     }
 }
