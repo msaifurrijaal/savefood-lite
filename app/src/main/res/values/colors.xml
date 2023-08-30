@@ -7,7 +7,7 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="darker_gray">#393939</color>
+    <color name="colorPrimaryDarkPro">#0E5741</color>
     <color name="darker_green">#0E5741</color>
     <color name="gray">#BDBDBD</color>
     <color name="soft_gray">#E4E2E2</color>

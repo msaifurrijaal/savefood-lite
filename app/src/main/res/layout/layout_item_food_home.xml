@@ -59,7 +59,7 @@
                     android:id="@+id/view_lines_item_food"
                     android:layout_width="@dimen/small_75"
                     android:layout_height="1.5dp"
-                    android:background="@color/darker_gray"
+                    android:background="@color/colorPrimaryDarkPro"
                     android:layout_marginStart="@dimen/small_100" />
 
                 <TextView
@@ -98,7 +98,7 @@
                     tools:text="@string/lowokwaru"
                     android:textSize="@dimen/overline"
                     android:fontFamily="@font/poppins"
-                    android:textColor="@color/darker_gray"
+                    android:textColor="@color/colorPrimaryDarkPro"
                     android:layout_marginStart="@dimen/small_50" />
                 
             </LinearLayout>

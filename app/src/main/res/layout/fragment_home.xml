@@ -84,8 +84,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_chat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/image_50_custom"
+                android:layout_height="@dimen/image_50_custom"
                 android:src="@drawable/chat_icon"
                 app:layout_constraintTop_toTopOf="@id/container_header_text"
                 app:layout_constraintBottom_toBottomOf="@id/container_header_text"

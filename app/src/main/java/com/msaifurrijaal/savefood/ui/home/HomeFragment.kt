@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.adapter.ArticleAdapter
 import com.msaifurrijaal.savefood.adapter.FoodHomeAdapter
 import com.msaifurrijaal.savefood.data.Resource
@@ -20,9 +19,8 @@ import com.msaifurrijaal.savefood.data.model.Article
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.FragmentHomeBinding
 import com.msaifurrijaal.savefood.ui.additem.AddItemActivity
-import com.msaifurrijaal.savefood.utils.showDialogError
+import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.showDialogLoading
-import com.msaifurrijaal.savefood.utils.showDialogSuccess
 
 
 class HomeFragment : Fragment() {
@@ -63,7 +61,8 @@ class HomeFragment : Fragment() {
 
     private fun onItemFoodClick() {
         foodAdapter.onItemClick = { food ->
-            Toast.makeText(requireContext(), "${food.productName}", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(activity, DetailProductActivity::class.java)
+                .putExtra(DetailProductActivity.FOOD_ITEM, food))
         }
     }
 
@@ -80,19 +79,19 @@ class HomeFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     // binding.pgRvDokter.visibility = View.INVISIBLE
-                    setDokterRv(response.data)
+                    setFoodRv(response.data)
                     binding.rvFoods.visibility = View.VISIBLE
                 }
             }
         })
     }
 
-    private fun setDokterRv(data: List<Food>?) {
+    private fun setFoodRv(data: List<Food>?) {
         data?.let {
             foodAdapter.setFoodList(data)
         }
         binding.rvFoods.apply {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = foodAdapter
         }
     }

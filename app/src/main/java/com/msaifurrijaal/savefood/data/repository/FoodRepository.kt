@@ -67,6 +67,7 @@ class FoodRepository(application: Application) {
             foodDatabase.child(foodId).setValue(
                 Food(
                     idFood = foodId,
+                    idUploader = currentUser!!.uid.toString(),
                     productName = productName,
                     description = description,
                     category = categoryFood,
@@ -99,7 +100,7 @@ class FoodRepository(application: Application) {
         val foodLiveData = MutableLiveData<Resource<List<Food>>>()
         foodLiveData.value = Resource.Loading()
 
-        foodDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+        foodDatabase.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val foodList = mutableListOf<Food>()
 

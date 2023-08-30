@@ -2,6 +2,7 @@
 <resources>
     <dimen name="small_50">4dp</dimen>
     <dimen name="small_100">8dp</dimen>
+    <dimen name="small_125">10dp</dimen>
 
     <dimen name="normal_75">12dp</dimen>
     <dimen name="normal_100">16dp</dimen>
@@ -67,7 +68,6 @@
     <dimen name="rv_artikel_home">600dp</dimen>
     <dimen name="small_25">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="small_125">10dp</dimen>
     <dimen name="image_40_custom">40dp</dimen>
     <dimen name="subtitle_first">18sp</dimen>
     <dimen name="custom_130">130dp</dimen>

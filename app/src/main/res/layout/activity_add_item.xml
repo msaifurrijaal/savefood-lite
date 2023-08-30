@@ -68,7 +68,7 @@
                 android:id="@+id/container_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_bottom_white"
+                android:background="@drawable/bg_rounded_top_white"
                 android:orientation="vertical"
                 android:padding="@dimen/normal_125"
                 android:layout_marginTop="@dimen/normal_100"
@@ -138,7 +138,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_text"
                         android:paddingHorizontal="@dimen/normal_100"
-                        android:textColorHint="@color/text_color_hint" />
+                        android:textColorHint="@color/text_color_hint"
+                        android:inputType="textPersonName"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -169,7 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:text="Sale" />
+                        android:text="@string/sell" />
 
                 </RadioGroup>
 
@@ -217,7 +218,7 @@
                         android:text="@string/fill_if_not_donate"
                         android:fontFamily="@font/poppins"
                         android:textSize="@dimen/caption"
-                        android:textColor="@color/darker_gray"
+                        android:textColor="@color/colorPrimaryDarkPro"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/small_100" />
 

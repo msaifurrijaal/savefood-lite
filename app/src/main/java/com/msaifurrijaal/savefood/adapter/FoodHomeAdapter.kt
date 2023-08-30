@@ -41,7 +41,7 @@ class FoodHomeAdapter: RecyclerView.Adapter<FoodHomeAdapter.ViewHolder>() {
             .into(holder.binding.ivFoodPicture)
 
         holder.binding.tvFoodName.text = food.productName
-        holder.binding.tvFoodPrice.text = food.price.toString()
+        holder.binding.tvFoodPrice.text = "Rp ${food.price.toInt().toString()}"
         holder.binding.tvLocationFood.text = food.location
 
 

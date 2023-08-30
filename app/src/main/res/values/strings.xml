@@ -74,4 +74,11 @@
     <string name="please_take_product_photos">Please take product photos!</string>
     <string name="yesterday">Yesterday</string>
     <string name="fill_if_not_donate">* fill if not donate</string>
+    <string name="apel_fuji_premium">Apel Fuji Premium</string>
+    <string name="rp_0">Rp 0</string>
+    <string name="expired_date">Expired Date</string>
+    <string name="order">Order</string>
+    <string name="chat">Chat</string>
+    <string name="sell">Sell</string>
+    <string name="take">Take</string>
 </resources>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detailproduct.DetailProductActivity"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/iv_food"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                tools:src="@tools:sample/backgrounds/scenic"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/normal_200"
+                android:layout_height="@dimen/normal_200"
+                android:src="@drawable/baseline_keyboard_arrow_left_24"
+                app:tint="@color/white"
+                android:layout_margin="@dimen/normal_125"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_chat"
+                android:layout_width="@dimen/normal_200"
+                android:layout_height="@dimen/normal_200"
+                android:src="@drawable/icon_chat2"
+                app:tint="@color/white"
+                android:layout_margin="@dimen/normal_125"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/iv_food"
+                android:layout_marginTop="-25dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_rounded_top_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/normal_125"
+                    android:orientation="vertical">
+                    
+                    <TextView
+                        android:id="@+id/tv_food_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/default_text"
+                        tools:text="@string/apel_fuji_premium"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/h6"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_food_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/default_text"
+                            tools:text="@string/rp_0"
+                            android:fontFamily="@font/poppins_bold"
+                            android:textSize="@dimen/h6"
+                            android:textColor="@color/text_orange" />
+
+                        <View
+                            android:id="@+id/view_lines_item_food"
+                            android:layout_width="@dimen/small_100"
+                            android:layout_height="@dimen/small_25"
+                            android:background="@color/colorPrimaryDarkPro"
+                            android:layout_marginStart="@dimen/small_125" />
+
+                        <TextView
+                            android:id="@+id/tv_donate_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/donate"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/h6"
+                            android:layout_marginStart="@dimen/small_125" />
+                        
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/small_100"
+                    android:background="@color/soft_green" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/normal_125"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/h6"
+                        android:textColor="@color/colorPrimaryDarkPro" />
+
+                    <TextView
+                        android:id="@+id/tv_food_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/default_text"
+                        tools:text="@tools:sample/lorem"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/subtitle_2" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/small_100"
+                    android:background="@color/soft_green" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/normal_125"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/expired_date"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/h6"
+                        android:textColor="@color/colorPrimaryDarkPro" />
+
+                    <TextView
+                        android:id="@+id/tv_food_date_expired"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/default_text"
+                        tools:text="@tools:sample/date/ddmmyy"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/subtitle_2" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/small_100"
+                    android:background="@color/soft_green" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/normal_125"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/h6"
+                        android:textColor="@color/colorPrimaryDarkPro" />
+
+                    <TextView
+                        android:id="@+id/tv_food_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/default_text"
+                        tools:text="@tools:sample/cities"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/subtitle_2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/normal_125"
+                    android:paddingBottom="@dimen/normal_125">
+
+                    <Button
+                        android:id="@+id/btn_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="@string/take"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/bg_btn_color_primary"
+                        android:layout_marginEnd="@dimen/small_50"
+                        android:layout_weight="1"/>
+
+                    <Button
+                        android:id="@+id/btn_chat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="@string/chat"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/bg_btn_color_primary"
+                        android:layout_marginStart="@dimen/small_50"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
