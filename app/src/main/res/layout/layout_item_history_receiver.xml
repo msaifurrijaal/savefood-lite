@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/container_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rounder_soft_primary"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="@dimen/normal_125"
+    android:layout_marginBottom="@dimen/small_100"
+    android:layout_marginTop="@dimen/small_100"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/container_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/normal_125"
+        android:paddingVertical="@dimen/normal_75"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_title_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/receiver"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_process"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/normal_175"
+            android:text="Done"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_btn_stroke_primary"
+            android:textColor="@color/colorPrimary"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/normal_100"
+        android:layout_margin="@dimen/stroke_1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/normal_125"
+            android:paddingVertical="@dimen/normal_100"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/image_60_custom"
+                    android:layout_height="@dimen/image_60_custom"
+                    app:cardCornerRadius="@dimen/normal_75" >
+
+                    <ImageView
+                        android:id="@+id/iv_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:src="@tools:sample/avatars" />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/normal_75"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_food_seller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="@string/default_text"
+                        tools:text="@tools:sample/full_names"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/caption" />
+
+                    <TextView
+                        android:id="@+id/tv_food_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="@string/default_text"
+                        tools:text="@tools:sample/full_names"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/subtitle_2" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_food_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:text="@string/default_text"
+                            tools:text="Rp 0"
+                            android:fontFamily="@font/poppins_bold"
+                            android:textColor="@color/text_orange"
+                            android:textSize="@dimen/caption" />
+
+                        <View
+                            android:id="@+id/view_lines_item_food"
+                            android:layout_width="@dimen/small_75"
+                            android:layout_height="1.5dp"
+                            android:background="@color/colorPrimaryDarkPro"
+                            android:layout_marginStart="@dimen/small_100" />
+
+                        <TextView
+                            android:id="@+id/tv_donate_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/donate"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/caption"
+                            android:layout_marginStart="@dimen/small_100" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/stroke_1"
+                android:background="@color/colorPrimarySoft"
+                android:layout_marginTop="@dimen/small_100" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_100">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/transaction_date"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/caption"
+                    android:fontFamily="@font/poppins"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_text"
+                    tools:text="@tools:sample/date/ddmmyy"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/caption"
+                    android:fontFamily="@font/poppins" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_open_maps"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_200"
+                android:text="@string/open_maps"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_btn_color_primary"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingHorizontal="@dimen/normal_75"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/small_100" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

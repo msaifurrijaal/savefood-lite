@@ -19,5 +19,6 @@
     <color name="soft_green">#E8F7F2</color>
     <color name="success_green">#73E2A3</color>
     <color name="text_orange">#FFA033</color>
+    <color name="soft_orange">#FFF8E2</color>
 
 </resources>

@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.msaifurrijaal.savefood.adapter.TabsPagerAdapter
+import com.msaifurrijaal.savefood.adapter.TabsFoodAdapter
+import com.msaifurrijaal.savefood.adapter.TabsHistoryAdapter
 import com.msaifurrijaal.savefood.databinding.FragmentOrderBinding
 
 class OrderFragment : Fragment() {
@@ -18,6 +19,10 @@ class OrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentOrderBinding.inflate(inflater, container, false)
+
+        val adapter = TabsHistoryAdapter( requireContext(), childFragmentManager)
+//        binding.viewPager.adapter = adapter
+//        binding.tabs.setupWithViewPager(binding.viewPager)
 
         return binding.root
     }

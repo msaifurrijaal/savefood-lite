@@ -2,6 +2,7 @@ package com.msaifurrijaal.savefood.ui.additem
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -12,6 +13,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,6 +27,7 @@ import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityAddItemBinding
+import com.msaifurrijaal.savefood.databinding.LayoutCameraOrGalleryBinding
 import com.msaifurrijaal.savefood.ui.location.LocationActivity
 import com.msaifurrijaal.savefood.utils.createCustomTempFile
 import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
@@ -87,19 +90,11 @@ class AddItemActivity : AppCompatActivity() {
             }
 
             ivUploadImage.setOnClickListener {
-                if (!allPermissionsGranted()) {
-                    requestCameraPermission()
-                } else if (allPermissionsGranted()) {
-                    startTakePhoto()
-                }
+                showChooseDialog(this@AddItemActivity)
             }
 
             btnReuploadPhoto.setOnClickListener {
-                if (!allPermissionsGranted()) {
-                    requestCameraPermission()
-                } else if (allPermissionsGranted()) {
-                    startTakePhoto()
-                }
+                showChooseDialog(this@AddItemActivity)
             }
 
             ibBackAddProduct.setOnClickListener {
@@ -136,6 +131,35 @@ class AddItemActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun showChooseDialog(context: Context) {
+        val dialogView = LayoutCameraOrGalleryBinding.inflate(LayoutInflater.from(context))
+
+        val alertDialogBuilder = AlertDialog.Builder(context)
+            .setView(dialogView.root)
+
+        val alertDialog = alertDialogBuilder.create()
+
+        dialogView.btnCamera.setOnClickListener {
+            if (!allPermissionsGranted()) {
+                requestCameraPermission()
+            } else if (allPermissionsGranted()) {
+                startTakePhoto()
+            }
+            alertDialog.dismiss()
+        }
+
+        dialogView.btnGallery.setOnClickListener {
+            Toast.makeText(context, "Open Gallery", Toast.LENGTH_SHORT).show()
+            alertDialog.dismiss()
+        }
+
+        dialogView.btnCancelOrder.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     private fun uploadImageToServe(

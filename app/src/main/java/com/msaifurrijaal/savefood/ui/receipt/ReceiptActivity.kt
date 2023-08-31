@@ -1,25 +1,42 @@
 package com.msaifurrijaal.savefood.ui.receipt
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.R
+import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.ActivityReceiptBinding
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity.Companion.FOOD_ITEM
+import com.msaifurrijaal.savefood.ui.main.MainActivity
+import com.msaifurrijaal.savefood.ui.register.RegisterViewModel
+import com.msaifurrijaal.savefood.utils.showDialogError
+import com.msaifurrijaal.savefood.utils.showDialogLoading
+import com.msaifurrijaal.savefood.utils.showDialogSuccess
 
 class ReceiptActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReceiptBinding
     private var food: Food? = null
     private var paymentMethod: String? = null
+    private lateinit var receiptViewModel: ReceiptViewModel
+    private lateinit var dialogLoading: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReceiptBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        receiptViewModel = ViewModelProvider(this).get(ReceiptViewModel::class.java)
+        dialogLoading = showDialogLoading(this)
 
         getInformationFromIntent()
         setFoodInformation()
@@ -42,11 +59,118 @@ class ReceiptActivity : AppCompatActivity() {
             }
 
             btnOrder.setOnClickListener {
-                if (!binding.rbCash.isChecked && !binding.rbDana.isChecked && !binding.rbGopay.isChecked) {
-                    binding.rbCash.setError(getString(R.string.choose_an_option))
-                    binding.rbSaveFood.setError(getString(R.string.choose_an_option))
-                    binding.rbGopay.setError(getString(R.string.choose_an_option))
-                    binding.rbDana.setError(getString(R.string.choose_an_option))
+                if (food?.category == "Sell") {
+                    if (!binding.rbCash.isChecked && !binding.rbDana.isChecked && !binding.rbGopay.isChecked) {
+                        binding.rbCash.setError(getString(R.string.choose_an_option))
+                        binding.rbSaveFood.setError(getString(R.string.choose_an_option))
+                        binding.rbGopay.setError(getString(R.string.choose_an_option))
+                        binding.rbDana.setError(getString(R.string.choose_an_option))
+                    } else {
+                        food?.let {
+                            createTransaction(
+                                food?.idFood!!,
+                                food?.idUploader!!,
+                                food?.sellerName!!,
+                                food?.productName!!,
+                                food?.category!!,
+                                food?.price!!,
+                                food?.location!!,
+                                food?.imageUrl!!,
+                                food?.latitude!!,
+                                food?.longitude!!,
+                                paymentMethod!!
+                            )
+                        }
+                    }
+                    } else {
+                        food?.let {
+                            createTransaction(
+                                food?.idFood!!,
+                                food?.idUploader!!,
+                                food?.sellerName!!,
+                                food?.productName!!,
+                                food?.category!!,
+                                food?.price!!,
+                                food?.location!!,
+                                food?.imageUrl!!,
+                                food?.latitude!!,
+                                food?.longitude!!,
+                                "cash"
+                            )
+                        }
+                    }
+            }
+        }
+    }
+
+
+    private fun createTransaction(
+        idFood: String,
+        idUploader: String,
+        sellerName: String,
+        productName: String,
+        category: String,
+        price: Double,
+        location: String,
+        imageUrl: String,
+        latitude: String,
+        longitude: String,
+        paymentMethod: String
+    ) {
+        receiptViewModel.createTransaction(
+            idSeller = idUploader,
+            sellerName = sellerName,
+            productName = productName,
+            category = category,
+            price = price,
+            location = location,
+            latitude = latitude,
+            longitude = longitude,
+            imageUrl = imageUrl,
+            paymentMethod = paymentMethod
+        ).observe(this) { response ->
+            when (response) {
+                is Resource.Error -> {
+                    dialogLoading.dismiss()
+                    showDialogError(this@ReceiptActivity, response.message.toString())
+                }
+                is Resource.Loading -> {
+                    dialogLoading.show()
+                }
+                is Resource.Success -> {
+                    deactiveFood(idFood)
+                }
+            }
+        }
+    }
+
+    private fun deactiveFood(foodId: String) {
+        receiptViewModel.deactiveFood(foodId, getString(R.string.deactive)).observe(this) { response ->
+            when (response) {
+                is Resource.Error -> {
+                    dialogLoading.dismiss()
+                    showDialogError(this@ReceiptActivity, response.message.toString())
+                }
+                is Resource.Loading -> {
+                    dialogLoading.show()
+                }
+                is Resource.Success -> {
+                    dialogLoading.dismiss()
+                    val dialogSuccess =
+                        showDialogSuccess(
+                            this,
+                            getString(R.string.order_successful_please_go_to_the_transaction_page_to_check_the_status)
+                        )
+                    dialogSuccess.show()
+
+                    Handler(Looper.getMainLooper())
+                        .postDelayed({
+                            dialogSuccess.dismiss()
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.data = Uri.parse("app://main/history")
+                            startActivity(intent)
+                            finishAffinity()
+                        }, 2000)
                 }
             }
         }

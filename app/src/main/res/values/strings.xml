@@ -103,4 +103,21 @@
     <string name="congratulations_the_account_has_been_successfully_registered">Congratulations, the account has been successfully registered</string>
     <string name="failed_to_get_user_data_please_try_again">Failed to get user data, please try again</string>
     <string name="savefood_coins">SaveFood Coins</string>
+    <string name="order_successful_please_go_to_the_transaction_page_to_check_the_status">Order successful, please go to the Transaction page to check the status</string>
+    <string name="deactive">deactive</string>
+    <string name="receiver">Receiver</string>
+    <string name="sender">Sender</string>
+    <string name="transaction_date">Transaction Date</string>
+    <string name="transaction">Transaction</string>
+    <string name="delivery_details">Delivery details</string>
+    <string name="order_details">Order Details</string>
+    <string name="done">Done</string>
+    <string name="history_details">History Details</string>
+    <string name="cancel">Cancel</string>
+    <string name="payment_time">Payment Time</string>
+    <string name="seller">Seller</string>
+    <string name="open_maps">Open Maps</string>
+    <string name="please_install_gmaps_first">Please install Gmaps first</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 </resources>

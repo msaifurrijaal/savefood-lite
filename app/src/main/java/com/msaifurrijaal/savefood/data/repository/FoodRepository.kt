@@ -14,13 +14,18 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Food
+import com.msaifurrijaal.savefood.data.model.Transaction
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.math.log
 
 class FoodRepository(application: Application) {
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val foodDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("foods")
+    private val transactionDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("transactions")
     private val currentUser = firebaseAuth.currentUser
 
     fun uploadImage(bitmap: Bitmap): LiveData<Resource<String>> {
@@ -78,7 +83,8 @@ class FoodRepository(application: Application) {
                     latitude = latitude,
                     longitude = longitude,
                     imageUrl = imageUrl,
-                    sellerName = sellerName
+                    sellerName = sellerName,
+                    status = "active"
                 )
             )
                 .addOnCompleteListener { task ->
@@ -109,7 +115,9 @@ class FoodRepository(application: Application) {
                     for (foodSnapshot in dataSnapshot.children) {
                         val food = foodSnapshot.getValue(Food::class.java)
                         food?.let {
-                            foodList.add(it)
+                            if (it.status == "active") {
+                                foodList.add(it)
+                            }
                         }
                     }
                     foodLiveData.value = Resource.Success(foodList)
@@ -133,7 +141,7 @@ class FoodRepository(application: Application) {
                 for (foodSnapshot in dataSnapshot.children) {
                     val food = foodSnapshot.getValue(Food::class.java)
                     food?.let {
-                        if (it.category == category) {
+                        if (it.category == category && it.status == "active") {
                             foodList.add(it)
                         }
                     }
@@ -148,4 +156,139 @@ class FoodRepository(application: Application) {
 
         return foodLiveData
     }
+
+    fun createItemTransaction(
+        idSeller: String,
+        sellerName: String,
+        productName: String,
+        category: String?,
+        price: Double,
+        location: String,
+        imageUrl: String?,
+        latitude: String,
+        longitude: String,
+        paymentMethod: String
+    ): LiveData<Resource<Boolean>> {
+        val createItemTransactionLiveData = MutableLiveData<Resource<Boolean>>()
+        createItemTransactionLiveData.value = Resource.Loading()
+
+        val transactionId = transactionDatabase.push().key
+        val currentDate = Date()
+        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH)
+        val formattedDate = dateFormat.format(currentDate)
+
+        if (transactionId != null) {
+            transactionDatabase.child(transactionId).setValue(
+                Transaction(
+                    idTransaction = transactionId,
+                    idSeller = idSeller,
+                    sellerName = sellerName,
+                    productName = productName,
+                    category = category,
+                    price = price,
+                    location = location,
+                    latitude = latitude,
+                    longitude = longitude,
+                    imageUrl = imageUrl,
+                    status = "process",
+                    paymentMethod = paymentMethod,
+                    idBuyer = currentUser?.uid.toString(),
+                    date = formattedDate
+                )
+            )
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        createItemTransactionLiveData.value = Resource.Success(true)
+                    } else {
+                        createItemTransactionLiveData.value = Resource.Error("Failed to create transaction")
+                    }
+                }
+                .addOnFailureListener {
+                    val message = it.message.toString()
+                    createItemTransactionLiveData.value = Resource.Error(message)
+                }
+        } else {
+            createItemTransactionLiveData.value = Resource.Error("Failed to create transaction")
+        }
+        return createItemTransactionLiveData
+    }
+
+    fun updateFoodStatus(foodId: String, newStatus: String): LiveData<Resource<Unit>> {
+        val updateStatusResult = MutableLiveData<Resource<Unit>>()
+        updateStatusResult.value = Resource.Loading()
+
+        val foodRef = foodDatabase.child(foodId)
+        foodRef.child("status").setValue(newStatus)
+            .addOnSuccessListener {
+                updateStatusResult.value = Resource.Success(Unit)
+            }
+            .addOnFailureListener { error ->
+                updateStatusResult.value = Resource.Error(error.message)
+            }
+
+        return updateStatusResult
+    }
+
+    fun getListTransaction(): LiveData<Resource<List<Transaction>>> {
+        val transactionLiveData = MutableLiveData<Resource<List<Transaction>>>()
+        transactionLiveData.value = Resource.Loading()
+
+        transactionDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val transactionList = mutableListOf<Transaction>()
+
+                for (transactionSnapshot in dataSnapshot.children) {
+                    val transaction = transactionSnapshot.getValue(Transaction::class.java)
+                    transaction?.let {
+                        if (
+                            transaction.idSeller == currentUser?.uid || transaction.idBuyer == currentUser?.uid
+                        ) {
+                            transactionList.add(it)
+                        }
+                    }
+                }
+                transactionLiveData.value = Resource.Success(transactionList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                transactionLiveData.value = Resource.Error(databaseError.message)
+            }
+        })
+
+        return transactionLiveData
+    }
+
+    fun getListTransactionFilter(category: String): LiveData<Resource<List<Transaction>>> {
+        val transactionLiveData = MutableLiveData<Resource<List<Transaction>>>()
+        transactionLiveData.value = Resource.Loading()
+
+        transactionDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val transactionList = mutableListOf<Transaction>()
+
+                for (transactionSnapshot in dataSnapshot.children) {
+                    val transaction = transactionSnapshot.getValue(Transaction::class.java)
+                    transaction?.let {
+                        if (category == "receiver") {
+                            if (it.idBuyer == currentUser?.uid) {
+                                transactionList.add(it)
+                            }
+                        } else {
+                            if (it.idSeller == currentUser?.uid) {
+                                transactionList.add(it)
+                            }
+                        }
+                    }
+                }
+                transactionLiveData.value = Resource.Success(transactionList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                transactionLiveData.value = Resource.Error(databaseError.message)
+            }
+        })
+
+        return transactionLiveData
+    }
+
 }

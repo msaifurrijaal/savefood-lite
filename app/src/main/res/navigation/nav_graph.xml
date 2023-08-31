@@ -9,7 +9,13 @@
         android:id="@+id/homeFragment"
         android:name="com.msaifurrijaal.savefood.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_foodFragment"
+            app:destination="@id/foodFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.msaifurrijaal.savefood.ui.profile.ProfileFragment"
@@ -24,5 +30,7 @@
         android:id="@+id/historyFragment"
         android:name="com.msaifurrijaal.savefood.ui.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history">
+        <deepLink app:uri="app://main/history" />
+    </fragment>
 </navigation>

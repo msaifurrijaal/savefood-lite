@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.msaifurrijaal.savefood.adapter.TabsPagerAdapter
+import com.msaifurrijaal.savefood.adapter.TabsFoodAdapter
 import com.msaifurrijaal.savefood.databinding.FragmentFoodBinding
 
 class FoodFragment : Fragment() {
@@ -19,7 +19,7 @@ class FoodFragment : Fragment() {
     ): View? {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
 
-        val adapter = TabsPagerAdapter( requireContext(), childFragmentManager)
+        val adapter = TabsFoodAdapter( requireContext(), childFragmentManager)
         binding.viewPager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.viewPager)
 

@@ -6,17 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.msaifurrijaal.savefood.R
-import com.msaifurrijaal.savefood.ui.listproduct.ListProductFragment
+import com.msaifurrijaal.savefood.ui.listhistory.ListHistoryFragment
 
-class TabsPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class TabsHistoryAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
-//        return when (position) {
-//            0 -> ListProductFragment()
-//            1 -> ListProductFragment()
-//            2 -> ListProductFragment()
-//            else -> throw IllegalStateException("Invalid tab position")
-//        }
-        val fragment = ListProductFragment()
+        val fragment = ListHistoryFragment()
         val args = Bundle()
         args.putInt("slidePosition", position)
         fragment.arguments = args
@@ -30,8 +24,8 @@ class TabsPagerAdapter(private val context: Context, fm: FragmentManager) : Frag
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             0 -> context.getString(R.string.all)
-            1 -> context.getString(R.string.donation)
-            2 -> context.getString(R.string.sell)
+            1 -> context.getString(R.string.receiver)
+            2 -> context.getString(R.string.sender)
             else -> null
         }
     }

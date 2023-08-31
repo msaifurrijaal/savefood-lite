@@ -22,7 +22,6 @@ import com.msaifurrijaal.savefood.ui.additem.AddItemActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
-
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -123,12 +122,6 @@ class HomeFragment : Fragment() {
             fabAddItem.setOnClickListener {
                 startActivity(Intent(requireContext(), AddItemActivity::class.java))
             }
-        }
-    }
-
-    private fun setAllFoodsV() {
-        binding.rvFoods.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
