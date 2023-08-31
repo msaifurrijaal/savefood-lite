@@ -34,6 +34,7 @@ import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
+import com.msaifurrijaal.savefood.utils.uriToFile
 import java.io.File
 
 class AddItemActivity : AppCompatActivity() {
@@ -76,6 +77,8 @@ class AddItemActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     dataUser = response.data
                 }
+
+                else -> {}
             }
         }
     }
@@ -151,7 +154,7 @@ class AddItemActivity : AppCompatActivity() {
         }
 
         dialogView.btnGallery.setOnClickListener {
-            Toast.makeText(context, "Open Gallery", Toast.LENGTH_SHORT).show()
+            openGallery()
             alertDialog.dismiss()
         }
 
@@ -160,6 +163,33 @@ class AddItemActivity : AppCompatActivity() {
         }
 
         alertDialog.show()
+    }
+
+    private fun openGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            selectedImg?.let {
+                val imageBitmap: Bitmap = getBitmapFromUri(selectedImg)
+                afterTakePhoto()
+                binding.ivImageUpload.setImageBitmap(imageBitmap)
+                imageProduct = imageBitmap
+            }
+        }
+    }
+
+    private fun getBitmapFromUri(uri: Uri): Bitmap {
+        val inputStream = contentResolver.openInputStream(uri)
+        return BitmapFactory.decodeStream(inputStream)
     }
 
     private fun uploadImageToServe(
@@ -197,6 +227,8 @@ class AddItemActivity : AppCompatActivity() {
                         longitude
                     )
                 }
+
+                else -> {}
             }
         }
     }
@@ -246,6 +278,8 @@ class AddItemActivity : AppCompatActivity() {
                             finish()
                         }, 1500)
                 }
+
+                else -> {}
             }
         }
     }
