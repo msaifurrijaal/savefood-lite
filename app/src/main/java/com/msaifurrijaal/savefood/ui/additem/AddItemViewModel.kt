@@ -9,6 +9,9 @@ import com.msaifurrijaal.savefood.data.repository.UserRepository
 class AddItemViewModel(application: Application): AndroidViewModel(application) {
 
     val foodRepository = FoodRepository(application)
+    val userRepository = UserRepository(application)
+
+    fun getDataUser() = userRepository.getCurrentUser()
 
     fun uploadImage(bitmap: Bitmap) = foodRepository.uploadImage(bitmap)
 
@@ -21,7 +24,8 @@ class AddItemViewModel(application: Application): AndroidViewModel(application) 
         location: String,
         imageUrl: String,
         latitude: String,
-        longitude: String
+        longitude: String,
+        sellerName: String
     ) = foodRepository.createItemFood(
         productName,
         description,
@@ -31,6 +35,7 @@ class AddItemViewModel(application: Application): AndroidViewModel(application) 
         location,
         imageUrl,
         latitude,
-        longitude
+        longitude,
+        sellerName
     )
 }

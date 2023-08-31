@@ -36,8 +36,9 @@ fun showDialogLoading(context: Context): AlertDialog {
         .create()
 }
 
-fun showDialogSuccess(context: Context): AlertDialog {
+fun showDialogSuccess(context: Context, message: String): AlertDialog {
     val binding = LayoutDialogSuccessBinding.inflate(LayoutInflater.from(context))
+    binding.tvMessage.text = message
 
     return AlertDialog
         .Builder(context)

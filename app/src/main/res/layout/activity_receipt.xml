@@ -51,7 +51,8 @@
                     android:background="@android:color/transparent"
                     android:layout_marginEnd="@dimen/small_50"
                     android:layout_gravity="center_vertical"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="null"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,6 +98,7 @@
                             app:tint="@color/colorPrimaryDark" />
 
                         <TextView
+                            android:id="@+id/tv_seller_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/default_text"
@@ -127,6 +129,7 @@
                                     android:id="@+id/iv_product"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
                                     tools:src="@tools:sample/avatars" />
 
                             </androidx.cardview.widget.CardView>
@@ -310,6 +313,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/container_payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_rounder_soft_primary"
@@ -334,79 +338,139 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/normal_125">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="@dimen/image_60_custom"
-                                android:layout_height="@dimen/image_60_custom"
-                                app:cardCornerRadius="@dimen/normal_75" >
-
-                                <ImageView
-                                    android:id="@+id/iv_product"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    tools:src="@tools:sample/avatars" />
-
-                            </androidx.cardview.widget.CardView>
+                            android:padding="@dimen/normal_125"
+                            android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginStart="@dimen/normal_75"
-                                android:orientation="vertical"
-                                android:layout_gravity="center_vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_food_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:maxLines="1"
-                                    android:ellipsize="end"
-                                    android:text="@string/default_text"
-                                    tools:text="@tools:sample/full_names"
-                                    android:fontFamily="@font/poppins_bold"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/subtitle_2" />
+                                android:gravity="center_vertical">
 
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical">
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1">
 
-                                    <TextView
-                                        android:id="@+id/tv_food_price"
-                                        android:layout_width="wrap_content"
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:maxLines="1"
-                                        android:ellipsize="end"
-                                        android:text="@string/default_text"
-                                        tools:text="Rp 0"
-                                        android:fontFamily="@font/poppins_bold"
-                                        android:textColor="@color/text_orange"
-                                        android:textSize="@dimen/caption" />
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="1">
 
-                                    <View
-                                        android:id="@+id/view_lines_item_food"
-                                        android:layout_width="@dimen/small_75"
-                                        android:layout_height="1.5dp"
-                                        android:background="@color/colorPrimaryDarkPro"
-                                        android:layout_marginStart="@dimen/small_100" />
+                                        <ImageView
+                                            android:layout_width="@dimen/normal_125"
+                                            android:layout_height="@dimen/normal_125"
+                                            android:src="@drawable/icon_cash" />
 
-                                    <TextView
-                                        android:id="@+id/tv_donate_item"
-                                        android:layout_width="wrap_content"
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/cash"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/black"
+                                            android:layout_marginStart="@dimen/small_100"
+                                            android:layout_weight="1"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/donate"
-                                        android:fontFamily="@font/poppins"
-                                        android:textColor="@color/colorPrimary"
-                                        android:textSize="@dimen/caption"
-                                        android:layout_marginStart="@dimen/small_100" />
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="1">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/normal_125"
+                                            android:layout_height="@dimen/normal_125"
+                                            android:src="@drawable/coin_icon" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/savefood_coins"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/black"
+                                            android:layout_marginStart="@dimen/small_100"
+                                            android:layout_weight="1"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="1">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/normal_125"
+                                            android:layout_height="@dimen/normal_125"
+                                            android:src="@drawable/icon_gopay" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/gopay"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/black"
+                                            android:layout_marginStart="@dimen/small_100"
+                                            android:layout_weight="1"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="1">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/normal_125"
+                                            android:layout_height="@dimen/normal_125"
+                                            android:src="@drawable/icon_dana" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/dana"
+                                            android:fontFamily="@font/poppins_medium"
+                                            android:textColor="@color/black"
+                                            android:layout_marginStart="@dimen/small_100"
+                                            android:layout_weight="1"/>
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
-                            </LinearLayout>
+                                <RadioGroup
+                                    android:id="@+id/radioGroup1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
+                                    <RadioButton
+                                        android:id="@+id/rb_cash"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_save_food"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_gopay"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_dana"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -414,7 +478,16 @@
 
                 </LinearLayout>
 
-
+                <Button
+                    android:id="@+id/btn_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_primary"
+                    android:background="@drawable/bg_btn_color_primary"
+                    android:text="@string/order"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/normal_200" />
 
             </LinearLayout>
 

@@ -12,8 +12,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
-import android.util.Log
-import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,11 +19,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
+import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityAddItemBinding
 import com.msaifurrijaal.savefood.ui.location.LocationActivity
 import com.msaifurrijaal.savefood.utils.createCustomTempFile
@@ -40,10 +38,11 @@ class AddItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
     private var location: String? = null
     private var currentLocation: LatLng? = null
-    private var imageUser: Bitmap? = null
+    private var imageProduct: Bitmap? = null
     private var categoryFood: String? = null
     private lateinit var addItemViewModel: AddItemViewModel
     private lateinit var dialogLoading: AlertDialog
+    private var dataUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +52,29 @@ class AddItemActivity : AppCompatActivity() {
         addItemViewModel = ViewModelProvider(this).get(AddItemViewModel::class.java)
         dialogLoading = showDialogLoading(this)
 
+        getDataUser()
         beforeTakePhoto()
         onAction()
+
+    }
+
+    private fun removeErrorNotif() {
+        binding.rbSell.setError(null)
+        binding.rbDonation.setError(null)
+    }
+
+    private fun getDataUser() {
+        addItemViewModel.getDataUser().observe(this) { response ->
+            when (response) {
+                is Resource.Error -> {
+                    showDialogError(this, getString(R.string.failed_to_get_user_data_please_try_again))
+                }
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    dataUser = response.data
+                }
+            }
+        }
     }
 
     private fun onAction() {
@@ -97,19 +117,21 @@ class AddItemActivity : AppCompatActivity() {
                     binding.rbSell.setError(getString(R.string.choose_an_option))
                     binding.rbDonation.setError(getString(R.string.choose_an_option))
                 } else {
-                    if (checkValidation(productName, description, categoryFood, expirationDate, price, location, imageUser)) {
+                    if (checkValidation(productName, description, categoryFood, expirationDate, price, location, imageProduct)) {
                         hideSoftKeyboard(this@AddItemActivity, binding.root)
-                        uploadImageToServe(
-                            productName,
-                            description,
-                            categoryFood,
-                            expirationDate,
-                            price.toDouble(),
-                            location,
-                            imageUser,
-                            currentLocation!!.latitude.toString(),
-                            currentLocation!!.longitude.toString()
-                        )
+                        if (dataUser != null) {
+                            uploadImageToServe(
+                                productName,
+                                description,
+                                categoryFood,
+                                expirationDate,
+                                price.toDouble(),
+                                location,
+                                imageProduct,
+                                currentLocation!!.latitude.toString(),
+                                currentLocation!!.longitude.toString()
+                            )
+                        }
                     }
                 }
             }
@@ -175,7 +197,8 @@ class AddItemActivity : AppCompatActivity() {
             location = location,
             imageUrl = imageUrl as String,
             latitude = latitude,
-            longitude = longitude
+            longitude = longitude,
+            dataUser!!.nameUser!!
         ).observe(this) { response ->
             when(response) {
                 is Resource.Error -> {
@@ -188,7 +211,8 @@ class AddItemActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     dialogLoading.dismiss()
                     val dialogSuccess = showDialogSuccess(
-                        this
+                        this,
+                        getString(R.string.congratulations_the_food_has_been_successfully_posted)
                     )
                     dialogSuccess.show()
 
@@ -255,9 +279,9 @@ class AddItemActivity : AppCompatActivity() {
         if (it.resultCode == RESULT_OK) {
             val myFile = File(currentPhotoPath)
 
-            imageUser =  BitmapFactory.decodeFile(myFile.path)
+            imageProduct =  BitmapFactory.decodeFile(myFile.path)
             afterTakePhoto()
-            binding.ivImageUpload.setImageBitmap(imageUser)
+            binding.ivImageUpload.setImageBitmap(imageProduct)
         }
     }
 
@@ -304,9 +328,11 @@ class AddItemActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.rb_sell -> {
                     categoryFood = "Sell"
+                    removeErrorNotif()
                 }
                 R.id.rb_donation -> {
                     categoryFood = "Donation"
+                    removeErrorNotif()
                 }
             }
         }

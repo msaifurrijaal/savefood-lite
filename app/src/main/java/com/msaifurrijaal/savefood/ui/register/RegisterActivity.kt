@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +33,12 @@ class RegisterActivity : AppCompatActivity() {
         dialogLoading = showDialogLoading(this)
 
         onAction()
+    }
+
+    private fun removeErrorNotif() {
+        binding.rbNgo.setError(null)
+        binding.rbFnb.setError(null)
+        binding.rbCustomer.setError(null)
     }
 
     private fun onAction() {
@@ -103,7 +108,11 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 is Resource.Success -> {
                     dialogLoading.dismiss()
-                    val dialogSuccess = showDialogSuccess(this)
+                    val dialogSuccess =
+                        showDialogSuccess(
+                            this,
+                            getString(R.string.congratulations_the_account_has_been_successfully_registered)
+                        )
                     dialogSuccess.show()
 
                     Handler(Looper.getMainLooper())
@@ -121,13 +130,15 @@ class RegisterActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.rb_customer -> {
                     roleUser = "Customer"
+                    removeErrorNotif()
                 }
                 R.id.rb_fnb -> {
                     roleUser = "FNB"
-
+                    removeErrorNotif()
                 }
                 R.id.rb_ngo -> {
                     roleUser = "NGO"
+                    removeErrorNotif()
                 }
             }
         }

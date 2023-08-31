@@ -15,6 +15,7 @@ import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityDetailProductBinding
 import com.msaifurrijaal.savefood.ui.chat.ChatActivity
 import com.msaifurrijaal.savefood.ui.chat.ChatActivity.Companion.USER_ITEM
+import com.msaifurrijaal.savefood.ui.receipt.ReceiptActivity
 import com.msaifurrijaal.savefood.utils.showDialogError
 
 class DetailProductActivity : AppCompatActivity() {
@@ -68,6 +69,13 @@ class DetailProductActivity : AppCompatActivity() {
 
             ivBack.setOnClickListener {
                 finish()
+            }
+
+            btnOrder.setOnClickListener {
+                food?.let {
+                    startActivity(Intent(this@DetailProductActivity, ReceiptActivity::class.java)
+                        .putExtra(FOOD_ITEM, food))
+                }
             }
         }
     }

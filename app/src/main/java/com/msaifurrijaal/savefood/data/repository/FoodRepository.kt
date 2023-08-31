@@ -55,7 +55,8 @@ class FoodRepository(application: Application) {
         location: String,
         imageUrl: String?,
         latitude: String,
-        longitude: String
+        longitude: String,
+        sellerName: String
     ): LiveData<Resource<Boolean>>
     {
         val createItemFoodLiveData = MutableLiveData<Resource<Boolean>>()
@@ -76,7 +77,8 @@ class FoodRepository(application: Application) {
                     location = location,
                     latitude = latitude,
                     longitude = longitude,
-                    imageUrl = imageUrl
+                    imageUrl = imageUrl,
+                    sellerName = sellerName
                 )
             )
                 .addOnCompleteListener { task ->

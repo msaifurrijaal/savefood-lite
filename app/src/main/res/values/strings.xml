@@ -94,4 +94,13 @@
     <string name="payment_method">Payment Method</string>
     <string name="shipping_cost">Shipping Cost</string>
     <string name="total_payment">Total payment</string>
+    <string name="cash">Cash</string>
+    <string name="gopay">Gopay</string>
+    <string name="dana">Dana</string>
+    <string name="rp_1_000">Rp 1.000</string>
+    <string name="_0">0</string>
+    <string name="congratulations_the_food_has_been_successfully_posted">Congratulations, the food has been successfully posted</string>
+    <string name="congratulations_the_account_has_been_successfully_registered">Congratulations, the account has been successfully registered</string>
+    <string name="failed_to_get_user_data_please_try_again">Failed to get user data, please try again</string>
+    <string name="savefood_coins">SaveFood Coins</string>
 </resources>

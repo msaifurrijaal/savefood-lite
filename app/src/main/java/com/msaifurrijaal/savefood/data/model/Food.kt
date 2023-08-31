@@ -39,4 +39,7 @@ data class Food(
     @get:PropertyName("image_url")
     @set:PropertyName("image_url")
     var imageUrl: String? = null,
+    @get:PropertyName("seller_name")
+    @set:PropertyName("seller_name")
+    var sellerName: String? = null,
 ): Parcelable
