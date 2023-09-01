@@ -47,9 +47,9 @@
                     android:id="@+id/ib_back_regis"
                     android:layout_width="@dimen/normal_200"
                     android:layout_height="@dimen/normal_200"
-                    android:src="@drawable/baseline_arrow_back_24"
+                    android:src="@drawable/baseline_keyboard_arrow_left_24"
                     android:background="@android:color/transparent"
-                    android:layout_marginEnd="@dimen/normal_100"
+                    android:layout_marginEnd="@dimen/small_50"
                     android:layout_gravity="center_vertical"
                     app:tint="@color/white" />
 
@@ -68,7 +68,7 @@
                 android:id="@+id/container_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_white"
+                android:background="@drawable/bg_rounded_top_white"
                 android:layout_marginTop="@dimen/normal_125"
                 android:orientation="vertical"
                 android:padding="@dimen/normal_125"
@@ -217,6 +217,7 @@
                     android:layout_height="@dimen/edit_text"
                     app:hintEnabled="false"
                     app:endIconMode="password_toggle"
+                    app:endIconTint="@color/colorPrimaryDark"
                     android:layout_marginTop="@dimen/small_25">
 
                     <EditText
@@ -225,7 +226,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColorHint="@color/text_color_hint"
-                        android:paddingHorizontal="@dimen/normal_100" />
+                        android:paddingHorizontal="@dimen/normal_100"
+                        android:inputType="textPassword"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -243,6 +245,7 @@
                     android:layout_height="@dimen/edit_text"
                     app:hintEnabled="false"
                     app:endIconMode="password_toggle"
+                    app:endIconTint="@color/colorPrimaryDark"
                     android:layout_marginTop="@dimen/small_25">
 
                     <EditText
@@ -251,7 +254,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColorHint="@color/text_color_hint"
-                        android:paddingHorizontal="@dimen/normal_100" />
+                        android:paddingHorizontal="@dimen/normal_100"
+                        android:inputType="textPassword"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

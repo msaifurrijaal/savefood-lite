@@ -9,20 +9,28 @@
         android:id="@+id/homeFragment"
         android:name="com.msaifurrijaal.savefood.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/orderFragment"
-        android:name="com.msaifurrijaal.savefood.ui.order.OrderFragment"
-        android:label="fragment_order"
-        tools:layout="@layout/fragment_order" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_foodFragment"
+            app:destination="@id/foodFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.msaifurrijaal.savefood.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.msaifurrijaal.savefood.ui.search.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        android:id="@+id/foodFragment"
+        android:name="com.msaifurrijaal.savefood.ui.food.FoodFragment"
+        android:label="fragment_food"
+        tools:layout="@layout/fragment_food" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.msaifurrijaal.savefood.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history">
+        <deepLink app:uri="app://main/history" />
+    </fragment>
 </navigation>

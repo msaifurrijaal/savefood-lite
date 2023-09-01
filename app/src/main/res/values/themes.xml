@@ -6,7 +6,7 @@
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Status bar color. -->
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
@@ -20,7 +20,7 @@
 
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <!-- Customize your theme here. -->
     </style>
 

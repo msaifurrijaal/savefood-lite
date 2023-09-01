@@ -1,8 +1,10 @@
 package com.msaifurrijaal.savefood.utils
 
+import android.content.ContentResolver
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +18,10 @@ import com.msaifurrijaal.savefood.databinding.LayoutDialogSuccessBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -36,8 +41,9 @@ fun showDialogLoading(context: Context): AlertDialog {
         .create()
 }
 
-fun showDialogSuccess(context: Context): AlertDialog {
+fun showDialogSuccess(context: Context, message: String): AlertDialog {
     val binding = LayoutDialogSuccessBinding.inflate(LayoutInflater.from(context))
+    binding.tvMessage.text = message
 
     return AlertDialog
         .Builder(context)

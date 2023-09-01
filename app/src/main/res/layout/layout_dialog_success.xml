@@ -19,7 +19,16 @@
         android:text="Success"
         android:textColor="@color/black"
         android:textSize="@dimen/h6"
-        android:fontFamily="@font/poppins_bold"
-        android:layout_marginTop="@dimen/normal_100"/>
+        android:fontFamily="@font/poppins_bold" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_1"
+        android:fontFamily="@font/poppins" />
 
 </LinearLayout>

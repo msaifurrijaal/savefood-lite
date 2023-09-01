@@ -133,6 +133,28 @@ class UserRepository(application: Application) {
         return currentUserLiveData
     }
 
+    fun getSpesificUser(uidUser: String): LiveData<Resource<User>> {
+        val currentUserLiveData = MutableLiveData<Resource<User>>()
+        currentUserLiveData.value = Resource.Loading()
+
+        val userReference = userDatabase.child(uidUser)
+
+        userReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val user = dataSnapshot.getValue(User::class.java)
+                if (user != null) {
+                    currentUserLiveData.value = Resource.Success(user)
+                } else {
+                    currentUserLiveData.value = Resource.Error("User data not found")
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                currentUserLiveData.value = Resource.Error(databaseError.message)
+            }
+        })
+        return currentUserLiveData
+    }
+
     fun getAllUsers(): LiveData<Resource<List<User>>> {
         val usersLiveData = MutableLiveData<Resource<List<User>>>()
         usersLiveData.value = Resource.Loading()

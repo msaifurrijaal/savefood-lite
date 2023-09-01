@@ -2,6 +2,7 @@
 <resources>
     <dimen name="small_50">4dp</dimen>
     <dimen name="small_100">8dp</dimen>
+    <dimen name="small_125">10dp</dimen>
 
     <dimen name="normal_75">12dp</dimen>
     <dimen name="normal_100">16dp</dimen>
@@ -25,11 +26,18 @@
     <dimen name="large_250">80dp</dimen>
     <dimen name="large_275">90dp</dimen>
 
+    <dimen name="custom_210">210dp</dimen>
+    <dimen name="custom_250">250dp</dimen>
+    <dimen name="custom_230">230dp</dimen>
+    <dimen name="custom_200">200dp</dimen>
+    <dimen name="custom_220">220dp</dimen>
+    <dimen name="custom_180">180dp</dimen>
 
     <dimen name="image_border_height">80dp</dimen>
     <dimen name="image_user_profile_normal">40dp</dimen>
     <dimen name="image_user_profile_large">100dp</dimen>
     <dimen name="image_75">150dp</dimen>
+    <dimen name="image_60_custom">60dp</dimen>
     <dimen name="image_75_custom">75dp</dimen>
     <dimen name="image_90_custom">90dp</dimen>
     <dimen name="image_50_custom">50dp</dimen>
@@ -61,6 +69,12 @@
     <dimen name="rv_artikel_home">600dp</dimen>
     <dimen name="small_25">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="small_125">10dp</dimen>
     <dimen name="image_40_custom">40dp</dimen>
+    <dimen name="subtitle_first">18sp</dimen>
+    <dimen name="custom_130">130dp</dimen>
+    <dimen name="custom_image_120">120dp</dimen>
+    <dimen name="custom_360">360dp</dimen>
+    <dimen name="stroke_1">1dp</dimen>
+    <dimen name="custom_image_110">110dp</dimen>
+
 </resources>

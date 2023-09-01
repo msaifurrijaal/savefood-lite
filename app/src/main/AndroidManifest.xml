@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -11,16 +12,33 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_app_circle"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaveFood"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.detailtransaction.DetailTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.receipt.ReceiptActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detailproduct.DetailProductActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaveFood2" />
+        <activity
+            android:name=".ui.additem.AddItemActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.forgotpassword.ForgotPassActivity"
             android:exported="false" />
@@ -32,11 +50,11 @@
         <activity
             android:name=".ui.location.LocationActivity"
             android:exported="true"
-            android:label="@string/title_activity_location" />
+            android:label="@string/title_activity_location"
+            android:theme="@style/Theme.SaveFood2" />
         <activity
             android:name=".ui.splash.Splashctivity"
-            android:exported="true"
-            android:theme="@style/Theme.SaveFood2">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,9 +74,27 @@
             android:name=".ui.main.MainActivity"
             android:exported="true" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.msaifurrijaal.savefood"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 
 </manifest>

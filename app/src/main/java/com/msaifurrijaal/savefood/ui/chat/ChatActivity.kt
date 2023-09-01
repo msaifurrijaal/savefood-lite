@@ -2,7 +2,6 @@ package com.msaifurrijaal.savefood.ui.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +19,6 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatViewModel: ChatViewModel
     private lateinit var chatAdapter: ChatAdapter
     private var chatPartner: User? = null
-    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,23 +29,10 @@ class ChatActivity : AppCompatActivity() {
 
         getInformationFromIntent()
         setInformationChat()
-        dataUserObserve()
         setChatRv()
         onAction()
-        readChat(chatPartner!!.uidUser!!)
+        readChat(chatPartner?.uidUser!!)
 
-    }
-
-    private fun dataUserObserve() {
-        chatViewModel.getDataUser().observe(this) { response ->
-            when(response) {
-                is Resource.Error -> { }
-                is Resource.Loading -> { }
-                is Resource.Success -> {
-                    user = response.data
-                }
-            }
-        }
     }
 
     private fun setChatRv() {
@@ -116,8 +101,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun getInformationFromIntent() {
-        chatPartner = intent.getParcelableExtra<User>(ChatActivity.USER_ITEM)
-        Log.d("ChatActivity", chatPartner.toString())
+        chatPartner = intent.getParcelableExtra(USER_ITEM)
     }
 
     companion object {
