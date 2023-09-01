@@ -34,7 +34,6 @@ import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
-import com.msaifurrijaal.savefood.utils.uriToFile
 import java.io.File
 
 class AddItemActivity : AppCompatActivity() {
