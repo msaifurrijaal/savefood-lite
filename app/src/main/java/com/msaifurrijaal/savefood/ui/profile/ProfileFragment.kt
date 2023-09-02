@@ -16,6 +16,8 @@ import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.FragmentProfileBinding
+import com.msaifurrijaal.savefood.ui.edit_profile.EditProfileActivity
+import com.msaifurrijaal.savefood.ui.edit_profile.EditProfileActivity.Companion.USER_ITEM_PROFILE
 import com.msaifurrijaal.savefood.ui.login.LoginActivity
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
@@ -65,6 +67,11 @@ class ProfileFragment : Fragment() {
                 startActivity(Intent(requireContext(), LoginActivity::class.java))
                 requireActivity().finishAffinity()
             }
+
+            btnEdit.setOnClickListener {
+                startActivity(Intent(requireContext(), EditProfileActivity::class.java)
+                    .putExtra(USER_ITEM_PROFILE, user))
+            }
         }
     }
 
@@ -79,7 +86,7 @@ class ProfileFragment : Fragment() {
                     loadingResponse()
                 }
                 is Resource.Success -> {
-                    Glide.with(this)
+                    Glide.with(requireContext())
                         .load(response.data?.avatarUser)
                         .into(binding.ivUser)
 
