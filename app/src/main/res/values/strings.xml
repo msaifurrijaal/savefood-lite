@@ -124,4 +124,6 @@
     <string name="the_transaction_has_been_successfully_cancelled">The transaction has been successfully cancelled</string>
     <string name="there_are_no_transactions_yet">There are no transactions yet</string>
     <string name="there_are_no_products_yet">There are no products yet</string>
+    <string name="voucher">Voucher</string>
+    <string name="the_voucher_feature_is_still_not_available">Sorry, the voucher feature is still not available</string>
 </resources>

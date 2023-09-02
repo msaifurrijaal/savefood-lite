@@ -354,10 +354,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_primary"
                     android:text="@string/open_maps"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
                     android:fontFamily="@font/poppins_bold"
                     android:textAllCaps="false"
-                    android:background="@drawable/bg_btn_color_primary"
+                    android:background="@drawable/bg_btn_stroke_primary"
                     android:layout_marginTop="@dimen/normal_150"
                     android:layout_marginHorizontal="@dimen/normal_125"
                     android:layout_weight="1"/>

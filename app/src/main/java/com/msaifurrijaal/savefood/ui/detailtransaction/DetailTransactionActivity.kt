@@ -78,17 +78,21 @@ class DetailTransactionActivity : AppCompatActivity() {
                                 }
                                 is Resource.Success -> {
                                     dialogLoading.dismiss()
-                                    val dialogSuccess = showDialogSuccess(
-                                        this@DetailTransactionActivity,
-                                        getString(R.string.congratulations_the_transaction_has_been_successful)
-                                    )
-                                    dialogSuccess.show()
+                                    if (transaction?.category == "Donation") {
+                                        updateUserPoint(transaction?.idSeller)
+                                    } else {
+                                        val dialogSuccess = showDialogSuccess(
+                                            this@DetailTransactionActivity,
+                                            getString(R.string.congratulations_the_transaction_has_been_successful)
+                                        )
+                                        dialogSuccess.show()
 
-                                    Handler(Looper.getMainLooper())
-                                        .postDelayed({
-                                            dialogSuccess.dismiss()
-                                            finish()
-                                        }, 1500)
+                                        Handler(Looper.getMainLooper())
+                                            .postDelayed({
+                                                dialogSuccess.dismiss()
+                                                finish()
+                                            }, 1500)
+                                    }
                                 }
                             }
                         }
@@ -129,6 +133,34 @@ class DetailTransactionActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun updateUserPoint(idSeller: String?) {
+        detailTransactionViewModel.updateUserPoint(idSeller!!).observe(this) { response ->
+            when (response) {
+                is Resource.Error -> {
+                    dialogLoading.dismiss()
+                    showDialogError(this@DetailTransactionActivity, response.message.toString())
+                }
+                is Resource.Loading -> {
+                    dialogLoading.show()
+                }
+                is Resource.Success -> {
+                    dialogLoading.dismiss()
+                    val dialogSuccess = showDialogSuccess(
+                        this@DetailTransactionActivity,
+                        getString(R.string.the_transaction_has_been_successfully_cancelled)
+                    )
+                    dialogSuccess.show()
+
+                    Handler(Looper.getMainLooper())
+                        .postDelayed({
+                            dialogSuccess.dismiss()
+                            finish()
+                        }, 1500)
+                }
+            }
+        }
     }
 
     private fun setTransactionInformation() {

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.adapter.ArticleAdapter
 import com.msaifurrijaal.savefood.adapter.FoodHomeAdapter
 import com.msaifurrijaal.savefood.data.Resource
@@ -121,6 +122,10 @@ class HomeFragment : Fragment() {
         binding.apply {
             fabAddItem.setOnClickListener {
                 startActivity(Intent(requireContext(), AddItemActivity::class.java))
+            }
+
+            btnVoucher.setOnClickListener {
+                Toast.makeText(requireContext(), getString(R.string.the_voucher_feature_is_still_not_available), Toast.LENGTH_SHORT).show()
             }
         }
     }
