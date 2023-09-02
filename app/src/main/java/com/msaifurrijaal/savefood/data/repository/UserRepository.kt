@@ -216,4 +216,45 @@ class UserRepository(application: Application) {
         return userResult
     }
 
+    fun updateUserData(
+        uid: String,
+        name: String?,
+        email: String?,
+        phoneNumber: String?,
+        avatarUser: String?,
+        roleUser: String?
+    ): LiveData<Resource<Boolean>> {
+        val updateResult = MutableLiveData<Resource<Boolean>>()
+        updateResult.value = Resource.Loading()
+
+        val updates = HashMap<String, Any>()
+
+        if (name != null) {
+            updates["name_user"] = name
+        }
+        if (email != null) {
+            updates["email_user"] = email
+        }
+        if (phoneNumber != null) {
+            updates["phone_number"] = phoneNumber
+        }
+        if (avatarUser != null) {
+            updates["avatar_user"] = avatarUser
+        }
+        if (roleUser != null) {
+            updates["role_user"] = roleUser
+        }
+
+        userDatabase.child(uid).updateChildren(updates)
+            .addOnSuccessListener {
+                updateResult.value = Resource.Success(true)
+            }
+            .addOnFailureListener { error ->
+                val message = error.message
+                updateResult.value = Resource.Error(message)
+            }
+
+        return updateResult
+    }
+
 }
