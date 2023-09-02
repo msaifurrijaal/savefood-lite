@@ -33,7 +33,7 @@ class FoodRepository(application: Application) {
         uploadResult.value = Resource.Loading()
 
         val storageRef = Firebase.storage.reference
-        val imageRef = storageRef.child("images/${currentUser?.uid}.jpg")
+        val imageRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val imageData = baos.toByteArray()

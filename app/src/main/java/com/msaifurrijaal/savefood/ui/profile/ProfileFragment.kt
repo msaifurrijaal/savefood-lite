@@ -46,18 +46,18 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        setDataUser()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setDataUser()
         onAction()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setDataUser()
     }
 
     private fun onAction() {
