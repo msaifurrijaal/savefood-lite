@@ -24,7 +24,7 @@ class HistoryAdapter(private val context: Context): RecyclerView.Adapter<History
 
     fun setHistoryList(newTransactionList: List<Transaction>) {
         transactionList.clear()
-        transactionList.addAll(newTransactionList)
+        transactionList.addAll(newTransactionList.reversed())
         notifyDataSetChanged()
     }
 
@@ -61,8 +61,18 @@ class HistoryAdapter(private val context: Context): RecyclerView.Adapter<History
                 btnProcess.setText("Process")
                 btnProcess.setTextColor(context.resources.getColor(R.color.text_orange))
             }
-        } else {
+        }
+        if (transaction.status == "done"){
             holder.binding.btnOpenMaps.visibility = View.GONE
+        }
+        if (transaction.status == "cancel"){
+            holder.binding.apply {
+                btnProcess.setBackgroundResource(R.drawable.bg_btn_stroke_danger)
+                btnProcess.setText("Cancel")
+                btnProcess.setTextColor(context.resources.getColor(R.color.danger_dark))
+                btnOpenMaps.visibility = View.GONE
+            }
+
         }
 
         if (transaction.category == "Donation") {

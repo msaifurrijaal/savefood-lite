@@ -120,4 +120,8 @@
     <string name="please_install_gmaps_first">Please install Gmaps first</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
+    <string name="congratulations_the_transaction_has_been_successful">Congratulations, the transaction has been successful</string>
+    <string name="the_transaction_has_been_successfully_cancelled">The transaction has been successfully cancelled</string>
+    <string name="there_are_no_transactions_yet">There are no transactions yet</string>
+    <string name="there_are_no_products_yet">There are no products yet</string>
 </resources>
