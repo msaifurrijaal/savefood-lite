@@ -126,7 +126,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColorHint="@color/text_color_hint"
-                        android:paddingHorizontal="@dimen/normal_100" />
+                        android:paddingHorizontal="@dimen/normal_100"
+                        android:inputType="textEmailAddress"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,7 +152,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColorHint="@color/text_color_hint"
-                        android:paddingHorizontal="@dimen/normal_100" />
+                        android:paddingHorizontal="@dimen/normal_100"
+                        android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
