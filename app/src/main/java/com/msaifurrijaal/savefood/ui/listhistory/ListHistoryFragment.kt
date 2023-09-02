@@ -143,7 +143,13 @@ class ListHistoryFragment : Fragment() {
     private fun setHistoryRv(data: List<Transaction>?) {
         data?.let {
             historyTransactionRv.setHistoryList(data)
+            if (data.isEmpty()) {
+                actionEmpty()
+            } else {
+                actionNoEmpty()
+            }
         }
+
         binding.rvHistory.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = historyTransactionRv
@@ -154,6 +160,22 @@ class ListHistoryFragment : Fragment() {
         binding.apply {
             pgListHistory.visibility = View.VISIBLE
             rvHistory.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun actionEmpty() {
+        binding.apply {
+            pgListHistory.visibility = View.GONE
+            rvHistory.visibility = View.VISIBLE
+            tvTransactionEmpty.visibility = View.VISIBLE
+        }
+    }
+
+    private fun actionNoEmpty() {
+        binding.apply {
+            pgListHistory.visibility = View.GONE
+            rvHistory.visibility = View.VISIBLE
+            tvTransactionEmpty.visibility = View.GONE
         }
     }
 

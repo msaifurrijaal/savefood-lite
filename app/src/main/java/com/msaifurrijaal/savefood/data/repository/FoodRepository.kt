@@ -291,4 +291,20 @@ class FoodRepository(application: Application) {
         return transactionLiveData
     }
 
+    fun updateStatus(transactionId: String, newStatus: String): LiveData<Resource<Unit>> {
+        val editResult = MutableLiveData<Resource<Unit>>()
+        editResult.value = Resource.Loading()
+
+        val userRef = transactionDatabase.child(transactionId)
+        userRef.child("status").setValue(newStatus)
+            .addOnSuccessListener {
+                editResult.value = Resource.Success(Unit)
+            }
+            .addOnFailureListener { error ->
+                editResult.value = Resource.Error(error.message)
+            }
+
+        return editResult
+    }
+
 }

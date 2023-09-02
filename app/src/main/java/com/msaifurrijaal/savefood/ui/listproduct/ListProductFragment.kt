@@ -132,7 +132,13 @@ class ListProductFragment() : Fragment() {
         private fun setFoodRV(data: List<Food>?) {
             data?.let {
                 foodOrderAdapter.setFoodList(data)
+                if (data.isEmpty()) {
+                    actionEmpty()
+                } else {
+                    actionNoEmpty()
+                }
             }
+
             binding.rvFoods.apply {
                 layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
                 adapter = foodOrderAdapter
@@ -159,6 +165,22 @@ class ListProductFragment() : Fragment() {
                 rvFoods.visibility = View.GONE
             }
         }
+
+    private fun actionEmpty() {
+        binding.apply {
+            pgListFood.visibility = View.GONE
+            rvFoods.visibility = View.VISIBLE
+            tvProductEmpty.visibility = View.VISIBLE
+        }
+    }
+
+    private fun actionNoEmpty() {
+        binding.apply {
+            pgListFood.visibility = View.GONE
+            rvFoods.visibility = View.VISIBLE
+            tvProductEmpty.visibility = View.GONE
+        }
+    }
 
         override fun onDestroyView() {
             super.onDestroyView()

@@ -96,7 +96,8 @@
                 android:id="@+id/container_point_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/normal_75"
+                android:paddingVertical="@dimen/normal_75"
+                android:paddingHorizontal="@dimen/normal_100"
                 android:background="@drawable/bg_rounded_white"
                 android:elevation="@dimen/small_25"
                 app:layout_constraintTop_toBottomOf="@id/container_header"
@@ -145,16 +146,31 @@
                     android:layout_width="@dimen/small_25"
                     android:layout_height="match_parent"
                     android:background="@color/soft_gray"
-                    android:layout_marginStart="@dimen/normal_200"
-                    android:layout_marginEnd="@dimen/normal_200" />
+                    android:layout_marginVertical="@dimen/small_50"
+                    android:layout_marginHorizontal="@dimen/normal_175"/>
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="@dimen/normal_200"
-                    android:layout_height="@dimen/normal_200"
-                    android:src="@drawable/more_orange_icon"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/normal_150" />
+                <LinearLayout
+                    android:id="@+id/btn_voucher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/normal_150"
+                        android:layout_height="@dimen/normal_150"
+                        android:src="@drawable/voucher_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/caption"
+                        android:text="@string/voucher"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/small_25" />
+                </LinearLayout>
 
             </LinearLayout>
 

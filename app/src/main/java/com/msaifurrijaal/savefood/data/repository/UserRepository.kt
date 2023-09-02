@@ -183,4 +183,37 @@ class UserRepository(application: Application) {
         return usersLiveData
     }
 
+    fun updateUserPoint(uid: String): LiveData<Resource<Boolean>> {
+        val userResult = MutableLiveData<Resource<Boolean>>()
+        userResult.postValue(Resource.Loading())
+
+        userDatabase.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val user = dataSnapshot.getValue(User::class.java)
+                    user?.let {
+                        val currentPoints = it.userPoint
+                        val updatedPoints = currentPoints?.plus(100.0)
+
+                        userDatabase.child(uid).child("user_point").setValue(updatedPoints)
+                            .addOnSuccessListener {
+                                userResult.postValue(Resource.Success(true))
+                            }
+                            .addOnFailureListener { error ->
+                                val message = error.message
+                                userResult.postValue(Resource.Error(message))
+                            }
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                val message = databaseError.message
+                userResult.postValue(Resource.Error(message))
+            }
+        })
+
+        return userResult
+    }
+
 }

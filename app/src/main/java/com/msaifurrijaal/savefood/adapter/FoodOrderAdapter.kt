@@ -18,7 +18,7 @@ class FoodOrderAdapter: RecyclerView.Adapter<FoodOrderAdapter.ViewHolder>() {
 
     fun setFoodList(newListFood: List<Food>) {
         listFood.clear()
-        listFood.addAll(newListFood)
+        listFood.addAll(newListFood.reversed())
         notifyDataSetChanged()
     }
 

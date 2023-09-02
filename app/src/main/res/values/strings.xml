@@ -120,4 +120,13 @@
     <string name="please_install_gmaps_first">Please install Gmaps first</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
+    <string name="congratulations_the_transaction_has_been_successful">Congratulations, the transaction has been successful</string>
+    <string name="the_transaction_has_been_successfully_cancelled">The transaction has been successfully cancelled</string>
+    <string name="there_are_no_transactions_yet">There are no transactions yet</string>
+    <string name="there_are_no_products_yet">There are no products yet</string>
+    <string name="voucher">Voucher</string>
+    <string name="the_voucher_feature_is_still_not_available">Sorry, the voucher feature is still not available</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="sorry_the_edit_user_feature_is_still_not_available">Sorry, the edit user feature is still not available</string>
 </resources>
