@@ -113,6 +113,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_text"
                         android:paddingHorizontal="@dimen/normal_100"
+                        android:fontFamily="@font/poppins"
                         android:textColorHint="@color/text_color_hint" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +139,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_text"
                         android:paddingHorizontal="@dimen/normal_100"
+                        android:fontFamily="@font/poppins"
                         android:textColorHint="@color/text_color_hint"
                         android:inputType="textPersonName"/>
 
@@ -175,6 +177,7 @@
                 </RadioGroup>
 
                 <TextView
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normal_75"
@@ -183,21 +186,46 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/subtitle_1" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_text"
-                    android:layout_marginTop="@dimen/small_25"
-                    app:hintEnabled="false">
+                    android:layout_height="wrap_content" >
 
-                    <EditText
-                        android:id="@+id/et_expiration_date"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/iv_calendar"
+                        android:layout_width="@dimen/edit_text"
+                        android:layout_height="@dimen/edit_text"
+                        android:background="@drawable/bg_edit_text" >
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_calendar_month_24"
+                            app:tint="@color/colorPrimaryDark"
+                            android:layout_gravity="center" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_edit_text"
-                        android:paddingHorizontal="@dimen/normal_100"
-                        android:textColorHint="@color/text_color_hint" />
+                        android:layout_height="@dimen/edit_text"
+                        android:layout_marginTop="@dimen/small_25"
+                        android:layout_marginStart="@dimen/normal_75"
+                        app:hintEnabled="false">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <EditText
+                            android:id="@+id/et_expiration_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_edit_text"
+                            android:paddingHorizontal="@dimen/normal_100"
+                            android:enabled="false"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textEmailAddress"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -234,6 +262,7 @@
                         android:id="@+id/et_price"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins"
                         android:background="@drawable/bg_edit_text"
                         android:paddingHorizontal="@dimen/normal_100"
                         android:inputType="numberDecimal"/>
@@ -282,6 +311,8 @@
                             android:background="@drawable/bg_edit_text"
                             android:paddingHorizontal="@dimen/normal_100"
                             android:enabled="false"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins"
                             android:inputType="textEmailAddress"/>
 
                     </com.google.android.material.textfield.TextInputLayout>

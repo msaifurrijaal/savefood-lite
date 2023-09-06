@@ -2,6 +2,7 @@ package com.msaifurrijaal.savefood.ui.additem
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,6 +36,9 @@ import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AddItemActivity : AppCompatActivity() {
 
@@ -46,6 +50,7 @@ class AddItemActivity : AppCompatActivity() {
     private lateinit var addItemViewModel: AddItemViewModel
     private lateinit var dialogLoading: AlertDialog
     private var dataUser: User? = null
+    private lateinit var myCalendar: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +59,7 @@ class AddItemActivity : AppCompatActivity() {
 
         addItemViewModel = ViewModelProvider(this).get(AddItemViewModel::class.java)
         dialogLoading = showDialogLoading(this)
+        myCalendar = Calendar.getInstance()
 
         getDataUser()
         beforeTakePhoto()
@@ -103,6 +109,10 @@ class AddItemActivity : AppCompatActivity() {
                 finish()
             }
 
+            ivCalendar.setOnClickListener {
+                showDatePicker()
+            }
+
             btnPost.setOnClickListener {
                 val productName = etProductName.text.toString().trim()
                 val description = etDescription.text.toString().trim()
@@ -133,6 +143,30 @@ class AddItemActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showDatePicker() {
+        val datePickerDialog = DatePickerDialog(
+            this,
+            dateCalendar, // Gunakan DatePickerDialog.OnDateSetListener di sini
+            myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
+    }
+
+    private val dateCalendar = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        myCalendar.set(Calendar.YEAR, year)
+        myCalendar.set(Calendar.MONTH, month)
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        updateLable(myCalendar)
+    }
+
+    private fun updateLable(myCalendar: Calendar) {
+        val myFormat = "dd-MM-yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.UK)
+        binding.etExpirationDate.setText(sdf.format(myCalendar.time))
     }
 
     fun showChooseDialog(context: Context) {

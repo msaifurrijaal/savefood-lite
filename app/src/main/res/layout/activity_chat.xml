@@ -109,7 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/message"
-                android:fontFamily="@font/poppins_light"
+                android:textSize="@dimen/caption"
+                android:fontFamily="@font/poppins"
                 android:textColorHint="@color/text_color_hint"
                 android:paddingHorizontal="@dimen/normal_100" />
 
