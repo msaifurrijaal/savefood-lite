@@ -422,6 +422,7 @@ class AddItemActivity : AppCompatActivity() {
                     binding.etPrice.isEnabled = true
                     removeErrorNotif()
                 }
+
                 R.id.rb_donation -> {
                     categoryFood = "Donation"
                     binding.etPrice.isEnabled = false
@@ -431,48 +432,62 @@ class AddItemActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkValidation(
-        productName: String,
-        description: String,
-        categoryFood: String?,
-        expirationDate: String,
-        price: String,
-        location: String,
-        imageUser: Bitmap?
-    ): Boolean {
-        binding.apply {
-            when{
-                productName.isEmpty() -> {
-                    etProductName.error = getString(R.string.please_fill_in_the_name_of_the_food)
-                    etProductName.requestFocus()
+        private fun checkValidation(
+            productName: String,
+            description: String,
+            categoryFood: String?,
+            expirationDate: String,
+            price: String,
+            location: String,
+            imageUser: Bitmap?
+        ): Boolean {
+            binding.apply {
+                when {
+                    productName.isEmpty() -> {
+                        etProductName.error =
+                            getString(R.string.please_fill_in_the_name_of_the_food)
+                        etProductName.requestFocus()
+                    }
+
+                    description.isEmpty() -> {
+                        etDescription.error =
+                            getString(R.string.please_fill_in_the_food_description)
+                        etDescription.requestFocus()
+                    }
+
+                    expirationDate.isEmpty() -> {
+                        etExpirationDate.error =
+                            getString(R.string.please_fill_in_the_food_expiration_date)
+                        etExpirationDate.requestFocus()
+                    }
+
+                    price.isEmpty() -> {
+                        etPrice.error = getString(R.string.please_fill_in_the_price_of_the_food)
+                        etPrice.requestFocus()
+                    }
+
+                    location.isEmpty() -> {
+                        Toast.makeText(
+                            this@AddItemActivity,
+                            getString(R.string.please_press_the_location_logo_on_the_left),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    (imageUser == null) -> {
+                        Toast.makeText(
+                            this@AddItemActivity,
+                            getString(R.string.please_take_product_photos),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    else -> return true
                 }
-                description.isEmpty() -> {
-                    etDescription.error = getString(R.string.please_fill_in_the_food_description)
-                    etDescription.requestFocus()
-                }
-                expirationDate.isEmpty() -> {
-                    etExpirationDate.error = getString(R.string.please_fill_in_the_food_expiration_date)
-                    etExpirationDate.requestFocus()
-                }
-                price.isEmpty() -> {
-                    etPrice.error = getString(R.string.please_fill_in_the_price_of_the_food)
-                    etPrice.requestFocus()
-                }
-                location.isEmpty() -> {
-                    Toast.makeText(
-                        this@AddItemActivity,
-                        getString(R.string.please_press_the_location_logo_on_the_left),
-                        Toast.LENGTH_SHORT).
-                    show()
-                }
-                (imageUser == null) -> {
-                    Toast.makeText(this@AddItemActivity, getString(R.string.please_take_product_photos), Toast.LENGTH_SHORT).show()
-                }
-                else -> return true
             }
+            return false
         }
-        return false
-    }
+
 
     companion object {
         const val REQUEST_CODE_INTENT = 101
