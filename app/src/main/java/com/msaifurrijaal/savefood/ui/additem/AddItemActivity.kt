@@ -164,8 +164,8 @@ class AddItemActivity : AppCompatActivity() {
     }
 
     private fun updateLable(myCalendar: Calendar) {
-        val myFormat = "dd-MM-yyyy"
-        val sdf = SimpleDateFormat(myFormat, Locale.UK)
+        val myFormat = "MMM dd, yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
         binding.etExpirationDate.setText(sdf.format(myCalendar.time))
     }
 
@@ -419,10 +419,12 @@ class AddItemActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.rb_sell -> {
                     categoryFood = "Sell"
+                    binding.etPrice.isEnabled = true
                     removeErrorNotif()
                 }
                 R.id.rb_donation -> {
                     categoryFood = "Donation"
+                    binding.etPrice.isEnabled = false
                     removeErrorNotif()
                 }
             }
