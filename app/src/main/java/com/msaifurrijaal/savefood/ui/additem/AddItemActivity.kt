@@ -2,6 +2,7 @@ package com.msaifurrijaal.savefood.ui.additem
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,6 +36,9 @@ import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AddItemActivity : AppCompatActivity() {
 
@@ -46,6 +50,7 @@ class AddItemActivity : AppCompatActivity() {
     private lateinit var addItemViewModel: AddItemViewModel
     private lateinit var dialogLoading: AlertDialog
     private var dataUser: User? = null
+    private lateinit var myCalendar: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +59,7 @@ class AddItemActivity : AppCompatActivity() {
 
         addItemViewModel = ViewModelProvider(this).get(AddItemViewModel::class.java)
         dialogLoading = showDialogLoading(this)
+        myCalendar = Calendar.getInstance()
 
         getDataUser()
         beforeTakePhoto()
@@ -103,6 +109,10 @@ class AddItemActivity : AppCompatActivity() {
                 finish()
             }
 
+            ivCalendar.setOnClickListener {
+                showDatePicker()
+            }
+
             btnPost.setOnClickListener {
                 val productName = etProductName.text.toString().trim()
                 val description = etDescription.text.toString().trim()
@@ -133,6 +143,30 @@ class AddItemActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showDatePicker() {
+        val datePickerDialog = DatePickerDialog(
+            this,
+            dateCalendar, // Gunakan DatePickerDialog.OnDateSetListener di sini
+            myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
+    }
+
+    private val dateCalendar = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        myCalendar.set(Calendar.YEAR, year)
+        myCalendar.set(Calendar.MONTH, month)
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        updateLable(myCalendar)
+    }
+
+    private fun updateLable(myCalendar: Calendar) {
+        val myFormat = "MMM dd, yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+        binding.etExpirationDate.setText(sdf.format(myCalendar.time))
     }
 
     fun showChooseDialog(context: Context) {
@@ -385,58 +419,75 @@ class AddItemActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.rb_sell -> {
                     categoryFood = "Sell"
+                    binding.etPrice.isEnabled = true
                     removeErrorNotif()
                 }
+
                 R.id.rb_donation -> {
                     categoryFood = "Donation"
+                    binding.etPrice.isEnabled = false
                     removeErrorNotif()
                 }
             }
         }
     }
 
-    private fun checkValidation(
-        productName: String,
-        description: String,
-        categoryFood: String?,
-        expirationDate: String,
-        price: String,
-        location: String,
-        imageUser: Bitmap?
-    ): Boolean {
-        binding.apply {
-            when{
-                productName.isEmpty() -> {
-                    etProductName.error = getString(R.string.please_fill_in_the_name_of_the_food)
-                    etProductName.requestFocus()
+        private fun checkValidation(
+            productName: String,
+            description: String,
+            categoryFood: String?,
+            expirationDate: String,
+            price: String,
+            location: String,
+            imageUser: Bitmap?
+        ): Boolean {
+            binding.apply {
+                when {
+                    productName.isEmpty() -> {
+                        etProductName.error =
+                            getString(R.string.please_fill_in_the_name_of_the_food)
+                        etProductName.requestFocus()
+                    }
+
+                    description.isEmpty() -> {
+                        etDescription.error =
+                            getString(R.string.please_fill_in_the_food_description)
+                        etDescription.requestFocus()
+                    }
+
+                    expirationDate.isEmpty() -> {
+                        etExpirationDate.error =
+                            getString(R.string.please_fill_in_the_food_expiration_date)
+                        etExpirationDate.requestFocus()
+                    }
+
+                    price.isEmpty() -> {
+                        etPrice.error = getString(R.string.please_fill_in_the_price_of_the_food)
+                        etPrice.requestFocus()
+                    }
+
+                    location.isEmpty() -> {
+                        Toast.makeText(
+                            this@AddItemActivity,
+                            getString(R.string.please_press_the_location_logo_on_the_left),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    (imageUser == null) -> {
+                        Toast.makeText(
+                            this@AddItemActivity,
+                            getString(R.string.please_take_product_photos),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    else -> return true
                 }
-                description.isEmpty() -> {
-                    etDescription.error = getString(R.string.please_fill_in_the_food_description)
-                    etDescription.requestFocus()
-                }
-                expirationDate.isEmpty() -> {
-                    etExpirationDate.error = getString(R.string.please_fill_in_the_food_expiration_date)
-                    etExpirationDate.requestFocus()
-                }
-                price.isEmpty() -> {
-                    etPrice.error = getString(R.string.please_fill_in_the_price_of_the_food)
-                    etPrice.requestFocus()
-                }
-                location.isEmpty() -> {
-                    Toast.makeText(
-                        this@AddItemActivity,
-                        getString(R.string.please_press_the_location_logo_on_the_left),
-                        Toast.LENGTH_SHORT).
-                    show()
-                }
-                (imageUser == null) -> {
-                    Toast.makeText(this@AddItemActivity, getString(R.string.please_take_product_photos), Toast.LENGTH_SHORT).show()
-                }
-                else -> return true
             }
+            return false
         }
-        return false
-    }
+
 
     companion object {
         const val REQUEST_CODE_INTENT = 101
