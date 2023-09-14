@@ -1,5 +1,6 @@
 package com.msaifurrijaal.savefood.ui.food
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.msaifurrijaal.savefood.adapter.TabsFoodAdapter
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.FragmentFoodBinding
+import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.ui.home.HomeViewModel
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
@@ -47,6 +49,7 @@ class FoodFragment : Fragment() {
 
         binding.rbAll.isChecked = true;
         observerFoodData()
+        onItemFoodClick()
 
     }
 
@@ -66,6 +69,14 @@ class FoodFragment : Fragment() {
                     getDataByCategory("Donation")
                 }
             }
+        }
+    }
+
+    private fun onItemFoodClick() {
+        foodOrderAdapter.onItemClick = { food ->
+            startActivity(
+                Intent(activity, DetailProductActivity::class.java)
+                    .putExtra(DetailProductActivity.FOOD_ITEM, food))
         }
     }
 
