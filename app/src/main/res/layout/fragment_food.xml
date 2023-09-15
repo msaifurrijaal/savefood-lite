@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.food.FoodFragment">
+    tools:context=".ui.food.FoodFragment"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_search"
