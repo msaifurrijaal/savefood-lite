@@ -6,6 +6,7 @@
 
     <dimen name="normal_75">12dp</dimen>
     <dimen name="normal_100">16dp</dimen>
+    <dimen name="normal_115">18dp</dimen>
     <dimen name="normal_125">20dp</dimen>
     <dimen name="normal_150">24dp</dimen>
     <dimen name="normal_175">28dp</dimen>

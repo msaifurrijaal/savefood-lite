@@ -172,7 +172,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                 if (transaction?.category == "Donation") {
                     tvPaymentMethod.text = getString(R.string.donation)
                     tvShippingCost.text = "Rp ${getString(R.string._0)}"
-                    tvTotalPayment.text = transaction?.price?.toInt().toString()
+                    tvTotalPayment.text = "Rp ${transaction?.price?.toInt().toString()}"
                 } else {
                     tvPaymentMethod.text = transaction?.paymentMethod
                     tvShippingCost.text = getString(R.string.rp_1_000)
@@ -181,7 +181,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                 tvOrderNumber.text = "Order number : ${transaction?.idTransaction}"
                 tvDetailDelivery.text = transaction?.location
                 tvFoodName.text = transaction?.productName
-                tvFoodPrice.text = transaction?.price?.toInt().toString()
+                tvFoodPrice.text = "Rp ${transaction?.price?.toInt().toString()}"
                 tvSellerName.text = transaction?.sellerName
                 tvPaymentTime.text = transaction?.date
             }

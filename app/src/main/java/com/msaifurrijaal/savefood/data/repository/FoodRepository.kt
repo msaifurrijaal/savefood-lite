@@ -45,7 +45,7 @@ class FoodRepository(application: Application) {
                     uploadResult.value = Resource.Success(uri.toString())
                 }
             } else {
-                uploadResult.value = Resource.Error("Failed to upload image")
+                uploadResult.value = Resource.Error("Gagal mengunggah gambar")
             }
         }
         return uploadResult
@@ -91,7 +91,7 @@ class FoodRepository(application: Application) {
                     if (task.isSuccessful) {
                         createItemFoodLiveData.value = Resource.Success(true)
                     } else {
-                        createItemFoodLiveData.value = Resource.Error("Failed to upload food product")
+                        createItemFoodLiveData.value = Resource.Error("Gagal mengunggah produk makanan")
                     }
                 }
                 .addOnFailureListener {
@@ -99,7 +99,7 @@ class FoodRepository(application: Application) {
                     createItemFoodLiveData.value = Resource.Error(message)
                 }
         }  else {
-            createItemFoodLiveData.value = Resource.Error("Failed to upload food product")
+            createItemFoodLiveData.value = Resource.Error("Gagal mengunggah produk makanan")
         }
         return createItemFoodLiveData
     }
@@ -200,7 +200,7 @@ class FoodRepository(application: Application) {
                     if (task.isSuccessful) {
                         createItemTransactionLiveData.value = Resource.Success(true)
                     } else {
-                        createItemTransactionLiveData.value = Resource.Error("Failed to create transaction")
+                        createItemTransactionLiveData.value = Resource.Error("Gagal membuat transaksi")
                     }
                 }
                 .addOnFailureListener {
@@ -208,7 +208,7 @@ class FoodRepository(application: Application) {
                     createItemTransactionLiveData.value = Resource.Error(message)
                 }
         } else {
-            createItemTransactionLiveData.value = Resource.Error("Failed to create transaction")
+            createItemTransactionLiveData.value = Resource.Error("Gagal membuat transaksi")
         }
         return createItemTransactionLiveData
     }

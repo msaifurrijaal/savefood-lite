@@ -58,17 +58,19 @@ class HistoryAdapter(private val context: Context): RecyclerView.Adapter<History
         if (transaction.status == "process") {
             holder.binding.apply {
                 btnProcess.setBackgroundResource(R.drawable.bg_btn_stroke_warning)
-                btnProcess.setText("Process")
+                btnProcess.setText("Proses")
                 btnProcess.setTextColor(context.resources.getColor(R.color.text_orange))
             }
         }
         if (transaction.status == "done"){
-            holder.binding.btnOpenMaps.visibility = View.GONE
+            holder.binding.apply {
+                btnOpenMaps.visibility = View.GONE
+            }
         }
         if (transaction.status == "cancel"){
             holder.binding.apply {
                 btnProcess.setBackgroundResource(R.drawable.bg_btn_stroke_danger)
-                btnProcess.setText("Cancel")
+                btnProcess.setText("Dibatalkan")
                 btnProcess.setTextColor(context.resources.getColor(R.color.danger_dark))
                 btnOpenMaps.visibility = View.GONE
             }
