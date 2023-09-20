@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.msaifurrijaal.savefood.adapter.TabsFoodAdapter
 import com.msaifurrijaal.savefood.adapter.TabsHistoryAdapter
 import com.msaifurrijaal.savefood.databinding.FragmentOrderBinding
 

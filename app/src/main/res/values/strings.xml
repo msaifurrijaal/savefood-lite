@@ -128,7 +128,11 @@
     <string name="the_voucher_feature_is_still_not_available">Maaf, fitur voucher masih belum tersedia</string>
     <string name="save_changes">Simpan perubahan</string>
     <string name="edit_profile">Edit profil</string>
+    <string name="edit">Edit</string>
     <string name="sorry_the_edit_user_feature_is_still_not_available">Maaf, fitur edit pengguna masih belum tersedia</string>
     <string name="congratulations_the_profile_has_been_successfully_changed">Selamat, profil telah berhasil diubah</string>
     <string name="message_is_empty">Pesan masih kosong</string>
+    <string name="my_product">Produk Saya</string>
+    <string name="see_my_product">Produk Saya</string>
+    <string name="delete">Hapus</string>
 </resources>
