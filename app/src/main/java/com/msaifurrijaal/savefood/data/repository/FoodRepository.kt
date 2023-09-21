@@ -130,6 +130,32 @@ class FoodRepository(application: Application) {
         return foodLiveData
     }
 
+    fun getListMyFood(): LiveData<Resource<List<Food>>> {
+        val foodLiveData = MutableLiveData<Resource<List<Food>>>()
+        foodLiveData.value = Resource.Loading()
+
+        foodDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val foodList = mutableListOf<Food>()
+
+                for (foodSnapshot in dataSnapshot.children) {
+                    val food = foodSnapshot.getValue(Food::class.java)
+                    food?.let {
+                        if (it.status == "active" && it.idUploader == currentUser?.uid.toString()) {
+                            foodList.add(it)
+                        }
+                    }
+                }
+                foodLiveData.value = Resource.Success(foodList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                foodLiveData.value = Resource.Error(databaseError.message)
+            }
+        })
+        return foodLiveData
+    }
+
     fun getListFoodByCategory(category: String): LiveData<Resource<List<Food>>> {
         val foodLiveData = MutableLiveData<Resource<List<Food>>>()
         foodLiveData.value = Resource.Loading()

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:background="@drawable/bg_rounded_white_max"
+        android:padding="@dimen/normal_125"
+        android:layout_marginHorizontal="@dimen/normal_125" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/image_90_custom"
+            android:src="@drawable/icon_cancel"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_sure"
+            android:textColor="@color/danger_dark"
+            android:textSize="@dimen/h6"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="@dimen/normal_150"/>
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_sure_you_want_to_cancel_your_order"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_1"
+            android:fontFamily="@font/poppins" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_150"
+            android:paddingHorizontal="@dimen/normal_200">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_primary"
+                android:layout_marginEnd="@dimen/small_75"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_stroke_danger"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/danger_dark"
+                android:textSize="@dimen/subtitle_1" />
+
+            <Button
+                android:id="@+id/btn_keep"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_primary"
+                android:layout_marginStart="@dimen/small_75"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_color_primary"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/keep"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/subtitle_1" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -14,10 +14,8 @@ import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.ActivityReceiptBinding
-import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity.Companion.FOOD_ITEM
 import com.msaifurrijaal.savefood.ui.main.MainActivity
-import com.msaifurrijaal.savefood.ui.register.RegisterViewModel
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
@@ -159,7 +157,7 @@ class ReceiptActivity : AppCompatActivity() {
                     val dialogSuccess =
                         showDialogSuccess(
                             this,
-                            getString(R.string.order_successful_please_go_to_the_transaction_page_to_check_the_status)
+                            getString(R.string.order_successful_please_go_to_the_transaction_page_to_check_the_status),
                         )
                     dialogSuccess.show()
 

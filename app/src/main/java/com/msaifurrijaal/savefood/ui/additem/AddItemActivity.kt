@@ -301,7 +301,7 @@ class AddItemActivity : AppCompatActivity() {
                     dialogLoading.dismiss()
                     val dialogSuccess = showDialogSuccess(
                         this,
-                        getString(R.string.congratulations_the_food_has_been_successfully_posted)
+                        getString(R.string.congratulations_the_food_has_been_successfully_posted),
                     )
                     dialogSuccess.show()
 

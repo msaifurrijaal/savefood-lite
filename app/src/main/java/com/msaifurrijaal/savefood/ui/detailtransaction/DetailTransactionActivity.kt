@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Transaction
 import com.msaifurrijaal.savefood.databinding.ActivityDetailTransactionBinding
+import com.msaifurrijaal.savefood.databinding.LayoutDialogCancelBinding
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
@@ -83,7 +85,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                                     } else {
                                         val dialogSuccess = showDialogSuccess(
                                             this@DetailTransactionActivity,
-                                            getString(R.string.congratulations_the_transaction_has_been_successful)
+                                            getString(R.string.congratulations_the_transaction_has_been_successful),
                                         )
                                         dialogSuccess.show()
 
@@ -101,33 +103,48 @@ class DetailTransactionActivity : AppCompatActivity() {
 
             btnCancelOrder.setOnClickListener {
                 transaction?.let {
-                    detailTransactionViewModel
-                        .updateStatus(transaction?.idTransaction!!, "cancel")
-                        .observe(this@DetailTransactionActivity) { response ->
-                            when (response) {
-                                is Resource.Error -> {
-                                    dialogLoading.dismiss()
-                                    showDialogError(this@DetailTransactionActivity, response.message.toString())
-                                }
-                                is Resource.Loading -> {
-                                    dialogLoading.show()
-                                }
-                                is Resource.Success -> {
-                                    dialogLoading.dismiss()
-                                    val dialogSuccess = showDialogSuccess(
-                                        this@DetailTransactionActivity,
-                                        getString(R.string.the_transaction_has_been_successfully_cancelled)
-                                    )
-                                    dialogSuccess.show()
+                    val binding = LayoutDialogCancelBinding.inflate(LayoutInflater.from(this@DetailTransactionActivity))
+                    var alertDialog = AlertDialog
+                        .Builder(this@DetailTransactionActivity)
+                        .setView(binding.root)
+                        .setCancelable(false)
+                        .create()
 
-                                    Handler(Looper.getMainLooper())
-                                        .postDelayed({
-                                            dialogSuccess.dismiss()
-                                            finish()
-                                        }, 1500)
+                    binding.btnCancel.setOnClickListener {
+                        alertDialog.dismiss()
+                        detailTransactionViewModel
+                            .updateStatus(transaction?.idTransaction!!, "cancel")
+                            .observe(this@DetailTransactionActivity) { response ->
+                                when (response) {
+                                    is Resource.Error -> {
+                                        dialogLoading.dismiss()
+                                        showDialogError(this@DetailTransactionActivity, response.message.toString())
+                                    }
+                                    is Resource.Loading -> {
+                                        dialogLoading.show()
+                                    }
+                                    is Resource.Success -> {
+                                        dialogLoading.dismiss()
+                                        val dialogSuccess = showDialogSuccess(
+                                            this@DetailTransactionActivity,
+                                            getString(R.string.the_transaction_has_been_successfully_cancelled),
+                                        )
+                                        dialogSuccess.show()
+
+                                        Handler(Looper.getMainLooper())
+                                            .postDelayed({
+                                                dialogSuccess.dismiss()
+                                                finish()
+                                            }, 2000)
+                                    }
                                 }
                             }
-                        }
+                    }
+
+                    binding.btnKeep.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                    alertDialog.show()
                 }
             }
 
@@ -149,8 +166,8 @@ class DetailTransactionActivity : AppCompatActivity() {
                     dialogLoading.dismiss()
                     val dialogSuccess = showDialogSuccess(
                         this@DetailTransactionActivity,
-                        getString(R.string.the_transaction_has_been_successfully_cancelled)
-                    )
+                        getString(R.string.congratulations_the_transaction_has_been_successful),
+                        )
                     dialogSuccess.show()
 
                     Handler(Looper.getMainLooper())

@@ -11,21 +11,22 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:background="@drawable/bg_rounded_white_max"
-        android:padding="@dimen/normal_100"
+        android:padding="@dimen/normal_125"
         android:layout_marginHorizontal="@dimen/normal_125" >
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/image_75_custom"
+            android:layout_height="@dimen/image_90_custom"
             android:src="@drawable/icon_success"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Success"
-            android:textColor="@color/black"
+            android:text="@string/success"
+            android:textColor="@color/colorPrimaryDarkPro"
             android:textSize="@dimen/h6"
-            android:fontFamily="@font/poppins_bold" />
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="@dimen/normal_75"/>
 
         <TextView
             android:id="@+id/tv_message"
@@ -36,6 +37,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/body_1"
             android:fontFamily="@font/poppins" />
+
 
     </LinearLayout>
 

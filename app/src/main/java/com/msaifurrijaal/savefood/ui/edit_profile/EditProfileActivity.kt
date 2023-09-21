@@ -129,7 +129,7 @@ class EditProfileActivity : AppCompatActivity() {
                     dialogLoading.dismiss()
                     val dialogSuccess = showDialogSuccess(
                         this@EditProfileActivity,
-                        getString(R.string.congratulations_the_profile_has_been_successfully_changed)
+                        getString(R.string.congratulations_the_profile_has_been_successfully_changed),
                     )
                     dialogSuccess.show()
 

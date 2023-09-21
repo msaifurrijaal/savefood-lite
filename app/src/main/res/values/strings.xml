@@ -123,6 +123,7 @@
     <string name="congratulations_the_transaction_has_been_successful">Selamat, transaksi telah berhasil</string>
     <string name="the_transaction_has_been_successfully_cancelled">Transaksi telah berhasil dibatalkan</string>
     <string name="there_are_no_transactions_yet">Belum ada transaksi</string>
+    <string name="there_are_no_my_product_yet">Belum ada produk</string>
     <string name="there_are_no_products_yet">Belum ada produk</string>
     <string name="voucher">Voucher</string>
     <string name="the_voucher_feature_is_still_not_available">Maaf, fitur voucher masih belum tersedia</string>
@@ -135,4 +136,8 @@
     <string name="my_product">Produk Saya</string>
     <string name="see_my_product">Produk Saya</string>
     <string name="delete">Hapus</string>
+    <string name="success">Sukses</string>
+    <string name="are_you_sure">Apa anda yakin?</string>
+    <string name="are_you_sure_you_want_to_cancel_your_order">Apa anda yakin ingin membatalkan order?</string>
+    <string name="keep">Teruskan</string>
 </resources>
