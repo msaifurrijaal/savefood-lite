@@ -183,6 +183,48 @@ class FoodRepository(application: Application) {
         return foodLiveData
     }
 
+    fun deleteFood(foodId: String): LiveData<Resource<Boolean>> {
+        val deleteResultLiveData = MutableLiveData<Resource<Boolean>>()
+        deleteResultLiveData.value = Resource.Loading()
+
+        foodDatabase.child(foodId).removeValue()
+            .addOnSuccessListener {
+                deleteResultLiveData.value = Resource.Success(true)
+            }
+            .addOnFailureListener { exception ->
+                deleteResultLiveData.value = Resource.Error(exception.message)
+            }
+
+        return deleteResultLiveData
+    }
+
+    fun updateFoodData(updatedFood: Food): LiveData<Resource<Boolean>> {
+        val updateResult = MutableLiveData<Resource<Boolean>>()
+        updateResult.value = Resource.Loading()
+
+        val updatedFoodMap = HashMap<String, Any?>()
+        updatedFoodMap["product_name"] = updatedFood.productName
+        updatedFoodMap["description"] = updatedFood.description
+        updatedFoodMap["category"] = updatedFood.category
+        updatedFoodMap["expiration_date"] = updatedFood.expirationDate
+        updatedFoodMap["price"] = updatedFood.price
+        updatedFoodMap["location"] = updatedFood.location
+        updatedFoodMap["latitude"] = updatedFood.latitude
+        updatedFoodMap["longitude"] = updatedFood.longitude
+        updatedFoodMap["image_url"] = updatedFood.imageUrl
+
+        foodDatabase.child(updatedFood.idFood.toString()).updateChildren(updatedFoodMap)
+            .addOnSuccessListener {
+                updateResult.value = Resource.Success(true)
+            }
+            .addOnFailureListener { error ->
+                val message = error.message
+                updateResult.value = Resource.Error(message)
+            }
+
+        return updateResult
+    }
+
     fun createItemTransaction(
         idSeller: String,
         sellerName: String,

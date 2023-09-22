@@ -37,6 +37,9 @@
         android:theme="@style/Theme.SaveFood"
         tools:targetApi="31">
         <activity
+            android:name=".ui.chat.ListChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.myproduct.MyProductActivity"
             android:exported="false" />
         <activity

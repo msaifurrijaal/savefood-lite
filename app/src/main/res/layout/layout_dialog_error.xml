@@ -10,7 +10,8 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="@drawable/bg_rounded_white_max"
-        android:padding="@dimen/normal_100"
+        android:paddingHorizontal="@dimen/normal_125"
+        android:paddingVertical="@dimen/normal_125"
         android:layout_marginHorizontal="@dimen/normal_150">
 
         <ImageView

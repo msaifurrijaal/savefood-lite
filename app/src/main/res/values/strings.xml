@@ -140,4 +140,7 @@
     <string name="are_you_sure">Apa anda yakin?</string>
     <string name="are_you_sure_you_want_to_cancel_your_order">Apa anda yakin ingin membatalkan order?</string>
     <string name="keep">Teruskan</string>
+    <string name="are_you_sure_to_delete_this_product">Apa anda yakin menghapus produk ini?</string>
+    <string name="congratulations_your_product_has_been_successfully_deleted">Selamat produk anda berhasil dihapus</string>
+    <string name="congratulations_the_food_information_has_been_updated_successfully">Selamat, informasi makanan berhasil diperbarui</string>
 </resources>

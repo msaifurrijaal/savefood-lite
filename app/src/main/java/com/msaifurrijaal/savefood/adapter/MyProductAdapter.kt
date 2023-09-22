@@ -9,6 +9,7 @@ import com.msaifurrijaal.savefood.databinding.LayoutItemMyProductBinding
 
 class MyProductAdapter(): RecyclerView.Adapter<MyProductAdapter.ViewHolder>()  {
 
+    lateinit var onItemClick: ((Food) -> Unit)
     lateinit var btnDeleteClick: ((Food) -> Unit)
     lateinit var btnEditClick: ((Food) -> Unit)
 
@@ -45,6 +46,10 @@ class MyProductAdapter(): RecyclerView.Adapter<MyProductAdapter.ViewHolder>()  {
             btnEditProduct.setOnClickListener {
                 btnEditClick.invoke(food)
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(food)
         }
 
         Glide.with(holder.itemView)

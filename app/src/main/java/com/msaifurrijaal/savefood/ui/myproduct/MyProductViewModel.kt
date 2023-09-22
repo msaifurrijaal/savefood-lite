@@ -10,4 +10,6 @@ class MyProductViewModel(application: Application): AndroidViewModel(application
 
     fun getListMyFood() = foodRepository.getListMyFood()
 
+    fun deleteMyProduct(foodId: String) = foodRepository.deleteFood(foodId)
+
 }

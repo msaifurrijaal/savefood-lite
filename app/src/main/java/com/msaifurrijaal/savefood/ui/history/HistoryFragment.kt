@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.adapter.TabsHistoryAdapter
 import com.msaifurrijaal.savefood.databinding.FragmentHistoryBinding
-import com.msaifurrijaal.savefood.databinding.FragmentOrderBinding
 import com.msaifurrijaal.savefood.ui.additem.AddItemActivity
 
 

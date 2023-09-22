@@ -1,6 +1,8 @@
 package com.msaifurrijaal.savefood.ui.detailtransaction
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -93,7 +95,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                                             .postDelayed({
                                                 dialogSuccess.dismiss()
                                                 finish()
-                                            }, 1500)
+                                            }, 2000)
                                     }
                                 }
                             }
@@ -103,14 +105,16 @@ class DetailTransactionActivity : AppCompatActivity() {
 
             btnCancelOrder.setOnClickListener {
                 transaction?.let {
-                    val binding = LayoutDialogCancelBinding.inflate(LayoutInflater.from(this@DetailTransactionActivity))
+                    val bindingAlert = LayoutDialogCancelBinding.inflate(LayoutInflater.from(this@DetailTransactionActivity))
                     var alertDialog = AlertDialog
                         .Builder(this@DetailTransactionActivity)
-                        .setView(binding.root)
+                        .setView(bindingAlert.root)
                         .setCancelable(false)
                         .create()
 
-                    binding.btnCancel.setOnClickListener {
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    bindingAlert.btnCancel.setOnClickListener {
                         alertDialog.dismiss()
                         detailTransactionViewModel
                             .updateStatus(transaction?.idTransaction!!, "cancel")
@@ -141,7 +145,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                             }
                     }
 
-                    binding.btnKeep.setOnClickListener {
+                    bindingAlert.btnKeep.setOnClickListener {
                         alertDialog.dismiss()
                     }
                     alertDialog.show()
