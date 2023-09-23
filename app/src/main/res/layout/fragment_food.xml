@@ -29,13 +29,13 @@
             android:inputType="text"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_chat"
+            app:layout_constraintEnd_toStartOf="@+id/iv_chat"
             android:layout_marginStart="@dimen/normal_125"
             android:layout_marginEnd="@dimen/normal_100"
             android:layout_marginTop="@dimen/normal_175"/>
 
         <ImageView
-            android:id="@+id/btn_chat"
+            android:id="@+id/iv_chat"
             android:layout_width="@dimen/normal_200"
             android:layout_height="@dimen/normal_200"
             android:src="@drawable/icon_chat2"

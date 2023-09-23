@@ -22,9 +22,11 @@ class ListChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_chat)
+        binding = ActivityListChatBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
+        chatAdapter = ListChatAdapter()
 
         listUserObserve()
         onAction()

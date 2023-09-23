@@ -21,6 +21,7 @@ import com.msaifurrijaal.savefood.adapter.FoodOrderAdapter
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.FragmentFoodBinding
+import com.msaifurrijaal.savefood.ui.chat.ListChatActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
 import com.msaifurrijaal.savefood.utils.showDialogError
@@ -62,6 +63,10 @@ class FoodFragment : Fragment() {
         binding.apply {
             etSearchMain.addTextChangedListener {
                 foodOrderAdapter.filter.filter(it.toString())
+            }
+
+            ivChat.setOnClickListener {
+                startActivity(Intent(requireContext(), ListChatActivity::class.java))
             }
 
             root.setOnTouchListener { _, event ->
