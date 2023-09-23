@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -23,9 +24,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.model.LatLng
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
+import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityAddItemBinding
 import com.msaifurrijaal.savefood.databinding.LayoutCameraOrGalleryBinding
@@ -47,6 +50,8 @@ class AddItemActivity : AppCompatActivity() {
     private var currentLocation: LatLng? = null
     private var imageProduct: Bitmap? = null
     private var categoryFood: String? = null
+    private var intentType = ""
+    private var food: Food? = null
     private lateinit var addItemViewModel: AddItemViewModel
     private lateinit var dialogLoading: AlertDialog
     private var dataUser: User? = null
@@ -61,10 +66,58 @@ class AddItemActivity : AppCompatActivity() {
         dialogLoading = showDialogLoading(this)
         myCalendar = Calendar.getInstance()
 
+        getInformationFromIntent()
+        setDataInformationFromIntent()
         getDataUser()
         beforeTakePhoto()
         onAction()
 
+    }
+
+    private fun setDataInformationFromIntent() {
+        if (intentType.equals(getString(R.string.edit))) {
+            food.let {
+                binding.apply {
+                    etProductName.setText(food?.productName)
+                    etDescription.setText(food?.description)
+                    etExpirationDate.setText(food?.expirationDate)
+                    etPrice.setText(food?.price?.toInt().toString())
+                    etLocation.setText(food?.location)
+                    if (food?.category.equals("Sell")) {
+                        rbSell.isChecked = true
+                    } else {
+                        rbDonation.isChecked = true
+                        etPrice.isEnabled = false
+                    }
+
+                    Glide.with(this@AddItemActivity)
+                        .load(food?.imageUrl)
+                        .into(ivImageUpload)
+
+                    currentLocation = LatLng(
+                        food?.latitude!!.toDouble(),
+                        food?.longitude!!.toDouble()
+                    )
+
+                    categoryFood = food?.category
+
+                    containerUploadImage.visibility = View.GONE
+                    containerImageUpload.visibility = View.VISIBLE
+                    btnReuploadPhoto.visibility = View.VISIBLE
+
+                    btnPost.setText(R.string.save_changes)
+
+                }
+            }
+        }
+    }
+
+    private fun getInformationFromIntent() {
+        food = intent.getParcelableExtra(FOOD_ITEM)
+        intentType = intent.getStringExtra(INTENT_TYPE).toString()
+
+        Log.d("AddItemActivity", "food : $food")
+        Log.d("AddItemActivity", "intentType : $intentType")
     }
 
     private fun removeErrorNotif() {
@@ -90,7 +143,9 @@ class AddItemActivity : AppCompatActivity() {
 
     private fun onAction() {
         binding.apply {
-            etPrice.setText("0")
+            if (!intentType.equals(getString(R.string.edit))) {
+                etPrice.setText("0")
+            }
             radioDataChange()
             ivLocation.setOnClickListener {
                 val intent = Intent(this@AddItemActivity, LocationActivity::class.java)
@@ -127,19 +182,96 @@ class AddItemActivity : AppCompatActivity() {
                     if (checkValidation(productName, description, categoryFood, expirationDate, price, location, imageProduct)) {
                         hideSoftKeyboard(this@AddItemActivity, binding.root)
                         if (dataUser != null) {
-                            uploadImageToServe(
-                                productName,
-                                description,
-                                categoryFood,
-                                expirationDate,
-                                price.toDouble(),
-                                location,
-                                imageProduct,
-                                currentLocation!!.latitude.toString(),
-                                currentLocation!!.longitude.toString()
-                            )
+                            if (!intentType.equals(getString(R.string.edit))) {
+                                uploadImageToServe(
+                                    productName,
+                                    description,
+                                    categoryFood,
+                                    expirationDate,
+                                    price.toDouble(),
+                                    location,
+                                    currentLocation!!.latitude.toString(),
+                                    currentLocation!!.longitude.toString()
+                                )
+                            } else {
+                                if (imageProduct != null) {
+                                    uploadImageToServe(
+                                        productName,
+                                        description,
+                                        categoryFood,
+                                        expirationDate,
+                                        price.toDouble(),
+                                        location,
+                                        currentLocation!!.latitude.toString(),
+                                        currentLocation!!.longitude.toString()
+                                    )
+                                } else {
+                                    updatedFood(
+                                        productName,
+                                        description,
+                                        categoryFood,
+                                        expirationDate,
+                                        price.toDouble(),
+                                        location,
+                                        food?.imageUrl,
+                                        currentLocation!!.latitude.toString(),
+                                        currentLocation!!.longitude.toString()
+                                    )
+                                }
+                            }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private fun updatedFood(
+        productName: String,
+        description: String,
+        categoryFood: String?,
+        expirationDate: String,
+        price: Double,
+        location: String,
+        imageUrl: String?,
+        latitude: String,
+        longitude: String
+    ) {
+        addItemViewModel.updatedFood(
+            Food(
+                idFood = food?.idFood,
+                productName = productName,
+                description = description,
+                category = categoryFood,
+                expirationDate = expirationDate,
+                price = price,
+                location = location,
+                imageUrl = imageUrl,
+                latitude = latitude,
+                longitude = longitude
+            )
+        ).observe(this) { response ->
+            when (response) {
+                is Resource.Error -> {
+                    dialogLoading.dismiss()
+                    showDialogError(this@AddItemActivity, response.message.toString())
+                }
+                is Resource.Loading -> {
+                    dialogLoading.show()
+                }
+                is Resource.Success -> {
+                    dialogLoading.dismiss()
+                    val dialogSuccess = showDialogSuccess(
+                        this,
+                        getString(R.string.congratulations_the_food_information_has_been_updated_successfully),
+                    )
+                    dialogSuccess.show()
+
+                    Handler(Looper.getMainLooper())
+                        .postDelayed({
+                            dialogSuccess.dismiss()
+                            finish()
+                        }, 2000)
                 }
             }
         }
@@ -232,11 +364,10 @@ class AddItemActivity : AppCompatActivity() {
         expirationDate: String,
         price: Double,
         location: String,
-        imageUser: Bitmap?,
         latitude: String,
         longitude: String
     ) {
-        addItemViewModel.uploadImage(imageUser!!).observe(this) { response ->
+        addItemViewModel.uploadImage(imageProduct!!).observe(this) { response ->
             when(response) {
                 is Resource.Error -> {
                     dialogLoading.dismiss()
@@ -248,17 +379,31 @@ class AddItemActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     dialogLoading.dismiss()
                     val imageUrl = response.data
-                    createItemFood(
-                        productName,
-                        description,
-                        categoryFood as String,
-                        expirationDate,
-                        price,
-                        location,
-                        imageUrl,
-                        latitude,
-                        longitude
-                    )
+                    if (!intentType.equals(getString(R.string.edit))) {
+                        createItemFood(
+                            productName,
+                            description,
+                            categoryFood as String,
+                            expirationDate,
+                            price,
+                            location,
+                            imageUrl,
+                            latitude,
+                            longitude
+                        )
+                    } else {
+                        updatedFood(
+                            productName,
+                            description,
+                            categoryFood,
+                            expirationDate,
+                            price.toDouble(),
+                            location,
+                            imageUrl,
+                            currentLocation!!.latitude.toString(),
+                            currentLocation!!.longitude.toString()
+                        )
+                    }
                 }
 
                 else -> {}
@@ -301,7 +446,7 @@ class AddItemActivity : AppCompatActivity() {
                     dialogLoading.dismiss()
                     val dialogSuccess = showDialogSuccess(
                         this,
-                        getString(R.string.congratulations_the_food_has_been_successfully_posted)
+                        getString(R.string.congratulations_the_food_has_been_successfully_posted),
                     )
                     dialogSuccess.show()
 
@@ -394,22 +539,19 @@ class AddItemActivity : AppCompatActivity() {
 
     private fun beforeTakePhoto() {
         binding.apply {
-            containerUploadImage.visibility = View.VISIBLE
-            ivUploadImage.visibility = View.VISIBLE
-            containerImageUpload.visibility = View.GONE
-            cvImageUpload.visibility = View.GONE
-            ivImageUpload.visibility = View.GONE
-            btnReuploadPhoto.visibility = View.GONE
+            if (!intentType.equals(getString(R.string.edit))) {
+                containerUploadImage.visibility = View.VISIBLE
+                containerImageUpload.visibility = View.GONE
+                btnReuploadPhoto.visibility = View.GONE
+            }
+
         }
     }
 
     private fun afterTakePhoto() {
         binding.apply {
             containerUploadImage.visibility = View.GONE
-            ivUploadImage.visibility = View.GONE
             containerImageUpload.visibility = View.VISIBLE
-            cvImageUpload.visibility = View.VISIBLE
-            ivImageUpload.visibility = View.VISIBLE
             btnReuploadPhoto.visibility = View.VISIBLE
         }
     }
@@ -425,6 +567,7 @@ class AddItemActivity : AppCompatActivity() {
 
                 R.id.rb_donation -> {
                     categoryFood = "Donation"
+                    binding.etPrice.setText("0")
                     binding.etPrice.isEnabled = false
                     removeErrorNotif()
                 }
@@ -475,11 +618,15 @@ class AddItemActivity : AppCompatActivity() {
                     }
 
                     (imageUser == null) -> {
-                        Toast.makeText(
-                            this@AddItemActivity,
-                            getString(R.string.please_take_product_photos),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        if (intentType.equals(getString(R.string.edit))) {
+                            return true
+                        } else {
+                            Toast.makeText(
+                                this@AddItemActivity,
+                                getString(R.string.please_take_product_photos),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                     else -> return true
@@ -493,6 +640,8 @@ class AddItemActivity : AppCompatActivity() {
         const val REQUEST_CODE_INTENT = 101
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS_CAMERA = 10
+        const val INTENT_TYPE = "intent_type"
+        const val FOOD_ITEM = "food_item"
     }
 
 }

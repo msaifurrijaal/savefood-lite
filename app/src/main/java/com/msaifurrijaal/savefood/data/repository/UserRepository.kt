@@ -120,7 +120,7 @@ class UserRepository(application: Application) {
                     if (user != null) {
                         currentUserLiveData.value = Resource.Success(user)
                     } else {
-                        currentUserLiveData.value = Resource.Error("User data not found")
+                        currentUserLiveData.value = Resource.Error("Data pengguna tidak ditemukan")
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -128,7 +128,7 @@ class UserRepository(application: Application) {
                 }
             })
         } else {
-            currentUserLiveData.value = Resource.Error("User not authenticated")
+            currentUserLiveData.value = Resource.Error("Pengguna tidak diautentikasi")
         }
         return currentUserLiveData
     }
@@ -145,7 +145,7 @@ class UserRepository(application: Application) {
                 if (user != null) {
                     currentUserLiveData.value = Resource.Success(user)
                 } else {
-                    currentUserLiveData.value = Resource.Error("User data not found")
+                    currentUserLiveData.value = Resource.Error("Data pengguna tidak ditemukan")
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {

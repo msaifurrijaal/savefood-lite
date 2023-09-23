@@ -143,7 +143,7 @@ class ListHistoryFragment : Fragment() {
     private fun setHistoryRv(data: List<Transaction>?) {
         data?.let {
             historyTransactionRv.setHistoryList(data)
-            if (data.isEmpty()) {
+            if (data.size == 0) {
                 actionEmpty()
             } else {
                 actionNoEmpty()

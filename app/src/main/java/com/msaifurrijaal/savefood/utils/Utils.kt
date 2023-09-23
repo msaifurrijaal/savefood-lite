@@ -2,12 +2,15 @@ package com.msaifurrijaal.savefood.utils
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -34,34 +37,42 @@ val timeStamp: String = SimpleDateFormat(
 
 fun showDialogLoading(context: Context): AlertDialog {
     val binding = LayoutDialogLoadingBinding.inflate(LayoutInflater.from(context))
-    return AlertDialog
+    var alertDialog = AlertDialog
         .Builder(context)
         .setView(binding.root)
         .setCancelable(false)
         .create()
+
+    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    return alertDialog
 }
 
 fun showDialogSuccess(context: Context, message: String): AlertDialog {
     val binding = LayoutDialogSuccessBinding.inflate(LayoutInflater.from(context))
     binding.tvMessage.text = message
 
-    return AlertDialog
+    val alertDialog = AlertDialog
         .Builder(context)
         .setView(binding.root)
         .setCancelable(true)
         .create()
+
+    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    return alertDialog
 }
 
 fun showDialogError(context: Context, message: String){
     val binding = LayoutDialogErrorBinding.inflate(LayoutInflater.from(context))
     binding.tvMessage.text = message
 
-    AlertDialog
+    val alertDialog = AlertDialog
         .Builder(context)
         .setView(binding.root)
         .setCancelable(true)
         .create()
-        .show()
+
+    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    alertDialog.show()
 }
 
 suspend fun LatLng.convertToAddressAsync(context: Context): String? = withContext(

@@ -69,7 +69,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/image_user_profile_large"
+                    android:layout_marginTop="@dimen/image_75_custom"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/normal_100">
 
@@ -109,7 +109,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/normal_150"
+                    android:layout_marginTop="@dimen/normal_125"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/normal_100">
 
@@ -149,7 +149,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/normal_150"
+                    android:layout_marginTop="@dimen/normal_125"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/normal_100">
 
@@ -189,7 +189,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/normal_150"
+                    android:layout_marginTop="@dimen/normal_125"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/normal_100">
 
@@ -231,23 +231,23 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/normal_125"
                     android:layout_marginTop="@dimen/normal_200"
-                    android:paddingBottom="@dimen/normal_125">
+                    android:paddingBottom="@dimen/small_100">
 
                     <Button
-                        android:id="@+id/btn_logout"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/btn_my_product"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/button_primary"
-                        android:text="@string/logout"
-                        android:textColor="@color/danger_dark"
+                        android:text="@string/see_my_product"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/poppins_bold"
                         android:textAllCaps="false"
-                        android:background="@drawable/bg_btn_stroke_danger"
+                        android:background="@drawable/bg_btn_color_primary"
                         android:layout_marginEnd="@dimen/small_50"
                         android:layout_weight="1"/>
 
                     <Button
                         android:id="@+id/btn_edit"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/button_primary"
                         android:text="Edit"
                         android:textColor="@color/white"
@@ -258,6 +258,17 @@
                         android:layout_weight="1"/>
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_primary"
+                    android:text="@string/logout"
+                    android:textColor="@color/danger_dark"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textAllCaps="false"
+                    android:background="@drawable/bg_btn_stroke_danger"
+                    android:layout_marginHorizontal="@dimen/normal_125" />
 
             </LinearLayout>
 

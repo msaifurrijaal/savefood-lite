@@ -20,6 +20,7 @@ import com.msaifurrijaal.savefood.data.model.Article
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.FragmentHomeBinding
 import com.msaifurrijaal.savefood.ui.additem.AddItemActivity
+import com.msaifurrijaal.savefood.ui.chat.ListChatActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
@@ -126,6 +127,10 @@ class HomeFragment : Fragment() {
 
             btnVoucher.setOnClickListener {
                 Toast.makeText(requireContext(), getString(R.string.the_voucher_feature_is_still_not_available), Toast.LENGTH_SHORT).show()
+            }
+
+            ivChat.setOnClickListener {
+                startActivity(Intent(requireContext(), ListChatActivity::class.java))
             }
         }
     }

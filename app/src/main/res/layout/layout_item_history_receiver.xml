@@ -33,7 +33,7 @@
             android:id="@+id/btn_process"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/normal_175"
-            android:text="Done"
+            android:text="Selesai"
             android:textAllCaps="false"
             android:background="@drawable/bg_btn_stroke_primary"
             android:textColor="@color/colorPrimary"

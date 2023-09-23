@@ -47,7 +47,7 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
         holder.binding.tvNameWriter.text = artikel.nameWriter
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Sorry, the article feature is still not available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.itemView.context, "Maaf, fitur artikel masih belum tersedia", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -45,7 +45,7 @@ class FoodRepository(application: Application) {
                     uploadResult.value = Resource.Success(uri.toString())
                 }
             } else {
-                uploadResult.value = Resource.Error("Failed to upload image")
+                uploadResult.value = Resource.Error("Gagal mengunggah gambar")
             }
         }
         return uploadResult
@@ -91,7 +91,7 @@ class FoodRepository(application: Application) {
                     if (task.isSuccessful) {
                         createItemFoodLiveData.value = Resource.Success(true)
                     } else {
-                        createItemFoodLiveData.value = Resource.Error("Failed to upload food product")
+                        createItemFoodLiveData.value = Resource.Error("Gagal mengunggah produk makanan")
                     }
                 }
                 .addOnFailureListener {
@@ -99,7 +99,7 @@ class FoodRepository(application: Application) {
                     createItemFoodLiveData.value = Resource.Error(message)
                 }
         }  else {
-            createItemFoodLiveData.value = Resource.Error("Failed to upload food product")
+            createItemFoodLiveData.value = Resource.Error("Gagal mengunggah produk makanan")
         }
         return createItemFoodLiveData
     }
@@ -130,6 +130,32 @@ class FoodRepository(application: Application) {
         return foodLiveData
     }
 
+    fun getListMyFood(): LiveData<Resource<List<Food>>> {
+        val foodLiveData = MutableLiveData<Resource<List<Food>>>()
+        foodLiveData.value = Resource.Loading()
+
+        foodDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val foodList = mutableListOf<Food>()
+
+                for (foodSnapshot in dataSnapshot.children) {
+                    val food = foodSnapshot.getValue(Food::class.java)
+                    food?.let {
+                        if (it.status == "active" && it.idUploader == currentUser?.uid.toString()) {
+                            foodList.add(it)
+                        }
+                    }
+                }
+                foodLiveData.value = Resource.Success(foodList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                foodLiveData.value = Resource.Error(databaseError.message)
+            }
+        })
+        return foodLiveData
+    }
+
     fun getListFoodByCategory(category: String): LiveData<Resource<List<Food>>> {
         val foodLiveData = MutableLiveData<Resource<List<Food>>>()
         foodLiveData.value = Resource.Loading()
@@ -155,6 +181,48 @@ class FoodRepository(application: Application) {
         })
 
         return foodLiveData
+    }
+
+    fun deleteFood(foodId: String): LiveData<Resource<Boolean>> {
+        val deleteResultLiveData = MutableLiveData<Resource<Boolean>>()
+        deleteResultLiveData.value = Resource.Loading()
+
+        foodDatabase.child(foodId).removeValue()
+            .addOnSuccessListener {
+                deleteResultLiveData.value = Resource.Success(true)
+            }
+            .addOnFailureListener { exception ->
+                deleteResultLiveData.value = Resource.Error(exception.message)
+            }
+
+        return deleteResultLiveData
+    }
+
+    fun updateFoodData(updatedFood: Food): LiveData<Resource<Boolean>> {
+        val updateResult = MutableLiveData<Resource<Boolean>>()
+        updateResult.value = Resource.Loading()
+
+        val updatedFoodMap = HashMap<String, Any?>()
+        updatedFoodMap["product_name"] = updatedFood.productName
+        updatedFoodMap["description"] = updatedFood.description
+        updatedFoodMap["category"] = updatedFood.category
+        updatedFoodMap["expiration_date"] = updatedFood.expirationDate
+        updatedFoodMap["price"] = updatedFood.price
+        updatedFoodMap["location"] = updatedFood.location
+        updatedFoodMap["latitude"] = updatedFood.latitude
+        updatedFoodMap["longitude"] = updatedFood.longitude
+        updatedFoodMap["image_url"] = updatedFood.imageUrl
+
+        foodDatabase.child(updatedFood.idFood.toString()).updateChildren(updatedFoodMap)
+            .addOnSuccessListener {
+                updateResult.value = Resource.Success(true)
+            }
+            .addOnFailureListener { error ->
+                val message = error.message
+                updateResult.value = Resource.Error(message)
+            }
+
+        return updateResult
     }
 
     fun createItemTransaction(
@@ -200,7 +268,7 @@ class FoodRepository(application: Application) {
                     if (task.isSuccessful) {
                         createItemTransactionLiveData.value = Resource.Success(true)
                     } else {
-                        createItemTransactionLiveData.value = Resource.Error("Failed to create transaction")
+                        createItemTransactionLiveData.value = Resource.Error("Gagal membuat transaksi")
                     }
                 }
                 .addOnFailureListener {
@@ -208,7 +276,7 @@ class FoodRepository(application: Application) {
                     createItemTransactionLiveData.value = Resource.Error(message)
                 }
         } else {
-            createItemTransactionLiveData.value = Resource.Error("Failed to create transaction")
+            createItemTransactionLiveData.value = Resource.Error("Gagal membuat transaksi")
         }
         return createItemTransactionLiveData
     }

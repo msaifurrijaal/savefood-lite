@@ -3,6 +3,7 @@ package com.msaifurrijaal.savefood.ui.additem
 import android.app.Application
 import android.graphics.Bitmap
 import androidx.lifecycle.AndroidViewModel
+import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.data.repository.FoodRepository
 import com.msaifurrijaal.savefood.data.repository.UserRepository
 
@@ -38,4 +39,6 @@ class AddItemViewModel(application: Application): AndroidViewModel(application) 
         longitude,
         sellerName
     )
+
+    fun updatedFood(food: Food) = foodRepository.updateFoodData(food)
 }

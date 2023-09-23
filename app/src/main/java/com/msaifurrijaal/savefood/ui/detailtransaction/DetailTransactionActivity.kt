@@ -1,11 +1,14 @@
 package com.msaifurrijaal.savefood.ui.detailtransaction
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +18,7 @@ import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Transaction
 import com.msaifurrijaal.savefood.databinding.ActivityDetailTransactionBinding
+import com.msaifurrijaal.savefood.databinding.LayoutDialogCancelBinding
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
@@ -83,7 +87,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                                     } else {
                                         val dialogSuccess = showDialogSuccess(
                                             this@DetailTransactionActivity,
-                                            getString(R.string.congratulations_the_transaction_has_been_successful)
+                                            getString(R.string.congratulations_the_transaction_has_been_successful),
                                         )
                                         dialogSuccess.show()
 
@@ -91,7 +95,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                                             .postDelayed({
                                                 dialogSuccess.dismiss()
                                                 finish()
-                                            }, 1500)
+                                            }, 2000)
                                     }
                                 }
                             }
@@ -101,33 +105,50 @@ class DetailTransactionActivity : AppCompatActivity() {
 
             btnCancelOrder.setOnClickListener {
                 transaction?.let {
-                    detailTransactionViewModel
-                        .updateStatus(transaction?.idTransaction!!, "cancel")
-                        .observe(this@DetailTransactionActivity) { response ->
-                            when (response) {
-                                is Resource.Error -> {
-                                    dialogLoading.dismiss()
-                                    showDialogError(this@DetailTransactionActivity, response.message.toString())
-                                }
-                                is Resource.Loading -> {
-                                    dialogLoading.show()
-                                }
-                                is Resource.Success -> {
-                                    dialogLoading.dismiss()
-                                    val dialogSuccess = showDialogSuccess(
-                                        this@DetailTransactionActivity,
-                                        getString(R.string.the_transaction_has_been_successfully_cancelled)
-                                    )
-                                    dialogSuccess.show()
+                    val bindingAlert = LayoutDialogCancelBinding.inflate(LayoutInflater.from(this@DetailTransactionActivity))
+                    var alertDialog = AlertDialog
+                        .Builder(this@DetailTransactionActivity)
+                        .setView(bindingAlert.root)
+                        .setCancelable(false)
+                        .create()
 
-                                    Handler(Looper.getMainLooper())
-                                        .postDelayed({
-                                            dialogSuccess.dismiss()
-                                            finish()
-                                        }, 1500)
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    bindingAlert.btnCancel.setOnClickListener {
+                        alertDialog.dismiss()
+                        detailTransactionViewModel
+                            .updateStatus(transaction?.idTransaction!!, "cancel")
+                            .observe(this@DetailTransactionActivity) { response ->
+                                when (response) {
+                                    is Resource.Error -> {
+                                        dialogLoading.dismiss()
+                                        showDialogError(this@DetailTransactionActivity, response.message.toString())
+                                    }
+                                    is Resource.Loading -> {
+                                        dialogLoading.show()
+                                    }
+                                    is Resource.Success -> {
+                                        dialogLoading.dismiss()
+                                        val dialogSuccess = showDialogSuccess(
+                                            this@DetailTransactionActivity,
+                                            getString(R.string.the_transaction_has_been_successfully_cancelled),
+                                        )
+                                        dialogSuccess.show()
+
+                                        Handler(Looper.getMainLooper())
+                                            .postDelayed({
+                                                dialogSuccess.dismiss()
+                                                finish()
+                                            }, 2000)
+                                    }
                                 }
                             }
-                        }
+                    }
+
+                    bindingAlert.btnKeep.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                    alertDialog.show()
                 }
             }
 
@@ -149,8 +170,8 @@ class DetailTransactionActivity : AppCompatActivity() {
                     dialogLoading.dismiss()
                     val dialogSuccess = showDialogSuccess(
                         this@DetailTransactionActivity,
-                        getString(R.string.the_transaction_has_been_successfully_cancelled)
-                    )
+                        getString(R.string.congratulations_the_transaction_has_been_successful),
+                        )
                     dialogSuccess.show()
 
                     Handler(Looper.getMainLooper())
@@ -172,7 +193,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                 if (transaction?.category == "Donation") {
                     tvPaymentMethod.text = getString(R.string.donation)
                     tvShippingCost.text = "Rp ${getString(R.string._0)}"
-                    tvTotalPayment.text = transaction?.price?.toInt().toString()
+                    tvTotalPayment.text = "Rp ${transaction?.price?.toInt().toString()}"
                 } else {
                     tvPaymentMethod.text = transaction?.paymentMethod
                     tvShippingCost.text = getString(R.string.rp_1_000)
@@ -181,7 +202,7 @@ class DetailTransactionActivity : AppCompatActivity() {
                 tvOrderNumber.text = "Order number : ${transaction?.idTransaction}"
                 tvDetailDelivery.text = transaction?.location
                 tvFoodName.text = transaction?.productName
-                tvFoodPrice.text = transaction?.price?.toInt().toString()
+                tvFoodPrice.text = "Rp ${transaction?.price?.toInt().toString()}"
                 tvSellerName.text = transaction?.sellerName
                 tvPaymentTime.text = transaction?.date
             }

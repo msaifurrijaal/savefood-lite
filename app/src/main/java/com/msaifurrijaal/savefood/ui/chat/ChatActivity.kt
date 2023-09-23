@@ -52,7 +52,7 @@ class ChatActivity : AppCompatActivity() {
             btnIconSend.setOnClickListener {
                 var message = etMessage.text.toString()
                 if (message.isEmpty()) {
-                    Toast.makeText(applicationContext, "message is empty", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, getString(R.string.message_is_empty), Toast.LENGTH_SHORT).show()
                     etMessage.setText("")
                 } else {
                     sendMessage(chatPartner!!.uidUser, message)

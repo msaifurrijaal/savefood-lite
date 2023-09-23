@@ -19,6 +19,7 @@ import com.msaifurrijaal.savefood.databinding.FragmentProfileBinding
 import com.msaifurrijaal.savefood.ui.edit_profile.EditProfileActivity
 import com.msaifurrijaal.savefood.ui.edit_profile.EditProfileActivity.Companion.USER_ITEM_PROFILE
 import com.msaifurrijaal.savefood.ui.login.LoginActivity
+import com.msaifurrijaal.savefood.ui.myproduct.MyProductActivity
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
 class ProfileFragment : Fragment() {
@@ -71,6 +72,10 @@ class ProfileFragment : Fragment() {
             btnEdit.setOnClickListener {
                 startActivity(Intent(requireContext(), EditProfileActivity::class.java)
                     .putExtra(USER_ITEM_PROFILE, user))
+            }
+
+            btnMyProduct.setOnClickListener {
+                startActivity(Intent(requireContext(), MyProductActivity::class.java))
             }
         }
     }
