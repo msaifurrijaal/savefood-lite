@@ -129,19 +129,22 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_text"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_25"
                     app:hintEnabled="false">
 
                     <EditText
                         android:id="@+id/et_description"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_edit_text"
+                        android:paddingVertical="@dimen/normal_100"
                         android:paddingHorizontal="@dimen/normal_100"
                         android:fontFamily="@font/poppins"
                         android:textColorHint="@color/text_color_hint"
-                        android:inputType="textPersonName"/>
+                        android:inputType="textMultiLine"
+                        android:minLines="4"
+                        android:gravity="top" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
