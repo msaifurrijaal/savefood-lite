@@ -18,10 +18,15 @@ import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.dummy.ArticlesData
 import com.msaifurrijaal.savefood.data.model.Article
 import com.msaifurrijaal.savefood.data.model.Food
+import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.FragmentHomeBinding
 import com.msaifurrijaal.savefood.ui.additem.AddItemActivity
+import com.msaifurrijaal.savefood.ui.article.ArticleActivity
+import com.msaifurrijaal.savefood.ui.article.ArticleActivity.Companion.ARTICLE_ITEM
 import com.msaifurrijaal.savefood.ui.chat.ListChatActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
+import com.msaifurrijaal.savefood.ui.voucher.VoucherActivity
+import com.msaifurrijaal.savefood.ui.voucher.VoucherActivity.Companion.USER_ITEM
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
 class HomeFragment : Fragment() {
@@ -32,6 +37,7 @@ class HomeFragment : Fragment() {
     private lateinit var foodAdapter: FoodHomeAdapter
     private lateinit var articleAdapter: ArticleAdapter
     private var list: ArrayList<Article> = arrayListOf()
+    private var user: User? = null
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
@@ -55,15 +61,20 @@ class HomeFragment : Fragment() {
 
         observeUserData()
         observeListFood()
-        onItemFoodClick()
+        onItemClick()
         onAction()
         setArticleRV()
     }
 
-    private fun onItemFoodClick() {
+    private fun onItemClick() {
         foodAdapter.onItemClick = { food ->
             startActivity(Intent(activity, DetailProductActivity::class.java)
                 .putExtra(DetailProductActivity.FOOD_ITEM, food))
+        }
+
+        articleAdapter.onItemClick = { article ->
+            startActivity(Intent(activity, ArticleActivity::class.java)
+                .putExtra(ARTICLE_ITEM, article))
         }
     }
 
@@ -103,6 +114,7 @@ class HomeFragment : Fragment() {
                 is Resource.Error -> {}
                 is Resource.Loading -> {}
                 is Resource.Success -> {
+                    user = response.data
                     binding.tvUserFullName.text = "Hai, ${response.data?.nameUser}"
                     binding.tvPointUser.text = response.data?.userPoint?.toInt().toString()
                 }
@@ -131,6 +143,13 @@ class HomeFragment : Fragment() {
 
             ivChat.setOnClickListener {
                 startActivity(Intent(requireContext(), ListChatActivity::class.java))
+            }
+
+            containerPointUser.setOnClickListener {
+                if (user != null) {
+                    startActivity(Intent(requireContext(), VoucherActivity::class.java)
+                        .putExtra(USER_ITEM, user))
+                }
             }
         }
     }

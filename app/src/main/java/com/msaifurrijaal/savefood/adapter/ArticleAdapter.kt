@@ -6,9 +6,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.data.model.Article
+import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.LayoutItemArticleBinding
 
 class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
+
+    lateinit var onItemClick: ((Article) -> Unit)
 
     private var articleList = ArrayList<Article>()
 
@@ -47,7 +50,7 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
         holder.binding.tvNameWriter.text = artikel.nameWriter
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Maaf, fitur artikel masih belum tersedia", Toast.LENGTH_SHORT).show()
+           onItemClick.invoke(artikel)
         }
     }
 }
