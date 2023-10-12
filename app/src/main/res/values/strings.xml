@@ -143,4 +143,18 @@
     <string name="are_you_sure_to_delete_this_product">Apa anda yakin menghapus produk ini?</string>
     <string name="congratulations_your_product_has_been_successfully_deleted">Selamat produk anda berhasil dihapus</string>
     <string name="congratulations_the_food_information_has_been_updated_successfully">Selamat, informasi makanan berhasil diperbarui</string>
+    <string name="gojek">Gojek</string>
+    <string name="free_5x_go_ride">Free 5x GO RIDE</string>
+    <string name="_2750">2750</string>
+    <string name="free_1_ticket">Free 1 Ticket</string>
+    <string name="_950">950</string>
+    <string name="saldo_rp_30_000">Saldo Rp 30.000</string>
+    <string name="_3300">3300</string>
+    <string name="tix_id">TIX.ID</string>
+    <string name="voucher_rp_50_000">Voucher Rp 50.000</string>
+    <string name="_4650">4650</string>
+    <string name="free_10x_go_ride">Free 10x GO RIDE</string>
+    <string name="_5000">5000</string>
+    <string name="free_2_ticket">Free 2 Ticket</string>
+    <string name="_1800">1800</string>
 </resources>
