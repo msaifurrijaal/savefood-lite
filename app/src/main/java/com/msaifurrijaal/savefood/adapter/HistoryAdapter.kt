@@ -48,7 +48,7 @@ class HistoryAdapter(private val context: Context): RecyclerView.Adapter<History
         if (transaction.idSeller == firebaseUser?.uid) {
             holder.binding.apply {
                 containerHeader.setBackgroundResource(R.drawable.bg_rounded_soft_orange)
-                containerTop.setBackgroundColor(context.resources.getColor(R.color.soft_orange))
+                containerTop.setBackgroundResource(R.drawable.bg_rounded_soft_orange)
                 tvTitleCard.text = "Sender"
                 tvTitleCard.setTextColor(context.resources.getColor(R.color.text_orange))
                 btnOpenMaps.visibility = View.GONE
