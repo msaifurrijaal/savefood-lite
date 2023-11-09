@@ -249,7 +249,7 @@
                         android:id="@+id/btn_edit"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/button_primary"
-                        android:text="Edit"
+                        android:text="@string/edit"
                         android:textColor="@color/white"
                         android:fontFamily="@font/poppins_bold"
                         android:textAllCaps="false"
@@ -259,16 +259,45 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_logout"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/button_primary"
-                    android:text="@string/logout"
-                    android:textColor="@color/danger_dark"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textAllCaps="false"
-                    android:background="@drawable/bg_btn_stroke_danger"
-                    android:layout_marginHorizontal="@dimen/normal_125" />
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/normal_125">
+
+                    <Button
+                        android:id="@+id/btn_delete_account"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="@string/hapus_akun"
+                        android:textColor="@color/danger_dark"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:layout_marginEnd="@dimen/small_50"
+                        android:background="@drawable/bg_btn_stroke_danger"
+                        android:layout_weight="1"/>
+
+                    <Button
+                        android:id="@+id/btn_logout"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_primary"
+                        android:text="@string/logout"
+                        android:textColor="@color/danger_dark"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textAllCaps="false"
+                        android:layout_marginStart="@dimen/small_50"
+                        android:background="@drawable/bg_btn_stroke_danger"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_url_privacy_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lihat_kebijakan_privasi_untuk_savefood"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/normal_175"
+                    android:layout_marginBottom="@dimen/normal_175"/>
 
             </LinearLayout>
 

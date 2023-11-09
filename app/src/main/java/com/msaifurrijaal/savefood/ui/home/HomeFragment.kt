@@ -25,8 +25,6 @@ import com.msaifurrijaal.savefood.ui.article.ArticleActivity
 import com.msaifurrijaal.savefood.ui.article.ArticleActivity.Companion.ARTICLE_ITEM
 import com.msaifurrijaal.savefood.ui.chat.ListChatActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
-import com.msaifurrijaal.savefood.ui.voucher.VoucherActivity
-import com.msaifurrijaal.savefood.ui.voucher.VoucherActivity.Companion.USER_ITEM
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 
 class HomeFragment : Fragment() {
@@ -146,10 +144,7 @@ class HomeFragment : Fragment() {
             }
 
             containerPointUser.setOnClickListener {
-                if (user != null) {
-                    startActivity(Intent(requireContext(), VoucherActivity::class.java)
-                        .putExtra(USER_ITEM, user))
-                }
+                Toast.makeText(requireContext(), getString(R.string.the_voucher_feature_is_still_not_available), Toast.LENGTH_SHORT).show()
             }
         }
     }

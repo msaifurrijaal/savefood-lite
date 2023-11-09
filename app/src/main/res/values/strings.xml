@@ -157,4 +157,9 @@
     <string name="_5000">5000</string>
     <string name="free_2_ticket">Free 2 Ticket</string>
     <string name="_1800">1800</string>
+    <string name="lihat_kebijakan_privasi_untuk_savefood">Lihat kebijakan privasi untuk Savefood</string>
+    <string name="hapus_akun">Hapus Akun</string>
+    <string name="apa_anda_yakin">Apa anda yakin?</string>
+    <string name="apa_anda_yakin_ingin_mengahpus_akun">Apa anda yakin ingin mengahpus akun?</string>
+    <string name="selamat_akun_anda_berhasil_dihapus">Selamat akun anda berhasil dihapus</string>
 </resources>

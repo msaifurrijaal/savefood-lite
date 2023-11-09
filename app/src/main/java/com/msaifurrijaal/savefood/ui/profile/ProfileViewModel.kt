@@ -10,4 +10,8 @@ class ProfileViewModel(application: Application): AndroidViewModel(application) 
 
     fun getCurrentUser() = repository.getCurrentUser()
 
+    fun deleteUser() = repository.deleteUser()
+
+    fun deleteUserData(uid: String) = repository.deleteUserData(uid)
+
 }

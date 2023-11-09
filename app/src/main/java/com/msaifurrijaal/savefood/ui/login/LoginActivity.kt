@@ -1,6 +1,7 @@
 package com.msaifurrijaal.savefood.ui.login
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -51,6 +52,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onAction() {
         binding.apply {
+            tvUrlPrivacyPolicy.setOnClickListener {
+                var linkPrivacy =
+                    "https://doc-hosting.flycricket.io/savefood-privacy-policy/7bbf5d7e-e926-40f5-9123-4091607c85d0/privacy"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkPrivacy))
+                startActivity(intent)
+            }
+
             etDontAccount.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
             }

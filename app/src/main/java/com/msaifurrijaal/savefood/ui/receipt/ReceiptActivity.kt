@@ -45,9 +45,6 @@ class ReceiptActivity : AppCompatActivity() {
 
     private fun removeErrorNotif() {
         binding.rbCash.setError(null)
-        binding.rbSaveFood.setError(null)
-        binding.rbGopay.setError(null)
-        binding.rbDana.setError(null)
     }
 
     private fun onAction() {
@@ -58,11 +55,8 @@ class ReceiptActivity : AppCompatActivity() {
 
             btnOrder.setOnClickListener {
                 if (food?.category == "Sell") {
-                    if (!binding.rbCash.isChecked && !binding.rbDana.isChecked && !binding.rbGopay.isChecked) {
+                    if (!binding.rbCash.isChecked) {
                         binding.rbCash.setError(getString(R.string.choose_an_option))
-                        binding.rbSaveFood.setError(getString(R.string.choose_an_option))
-                        binding.rbGopay.setError(getString(R.string.choose_an_option))
-                        binding.rbDana.setError(getString(R.string.choose_an_option))
                     } else {
                         food?.let {
                             createTransaction(
@@ -180,18 +174,6 @@ class ReceiptActivity : AppCompatActivity() {
             when (checkedId) {
                 R.id.rb_cash -> {
                     paymentMethod = "cash"
-                    removeErrorNotif()
-                }
-                R.id.rb_save_food -> {
-                    paymentMethod = "savefood"
-                    removeErrorNotif()
-                }
-                R.id.rb_gopay -> {
-                    paymentMethod = "gopay"
-                    removeErrorNotif()
-                }
-                R.id.rb_dana -> {
-                    paymentMethod = "dana"
                     removeErrorNotif()
                 }
             }

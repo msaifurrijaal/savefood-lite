@@ -210,6 +210,14 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_url_privacy_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lihat_kebijakan_privasi_untuk_savefood"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/normal_175"
+                    android:layout_marginBottom="@dimen/normal_175"/>
 
             </LinearLayout>
 

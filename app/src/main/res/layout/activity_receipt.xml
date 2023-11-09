@@ -374,72 +374,6 @@
 
                                     </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:layout_weight="1">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/normal_125"
-                                            android:layout_height="@dimen/normal_125"
-                                            android:src="@drawable/coin_icon" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/savefood_coins"
-                                            android:fontFamily="@font/poppins_medium"
-                                            android:textColor="@color/black"
-                                            android:layout_marginStart="@dimen/small_100"
-                                            android:layout_weight="1"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:layout_weight="1">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/normal_125"
-                                            android:layout_height="@dimen/normal_125"
-                                            android:src="@drawable/icon_gopay" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/gopay"
-                                            android:fontFamily="@font/poppins_medium"
-                                            android:textColor="@color/black"
-                                            android:layout_marginStart="@dimen/small_100"
-                                            android:layout_weight="1"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:layout_weight="1">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/normal_125"
-                                            android:layout_height="@dimen/normal_125"
-                                            android:src="@drawable/icon_dana" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/dana"
-                                            android:fontFamily="@font/poppins_medium"
-                                            android:textColor="@color/black"
-                                            android:layout_marginStart="@dimen/small_100"
-                                            android:layout_weight="1"/>
-
-                                    </LinearLayout>
-
                                 </LinearLayout>
 
                                 <RadioGroup
@@ -450,21 +384,6 @@
 
                                     <RadioButton
                                         android:id="@+id/rb_cash"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_save_food"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_gopay"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_dana"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" />
 

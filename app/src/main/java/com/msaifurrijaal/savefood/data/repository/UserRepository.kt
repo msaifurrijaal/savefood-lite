@@ -257,4 +257,37 @@ class UserRepository(application: Application) {
         return updateResult
     }
 
+    fun deleteUser(): LiveData<Resource<String>> {
+        val deleteAccountLiveData = MutableLiveData<Resource<String>>()
+        deleteAccountLiveData.value = Resource.Loading()
+
+        currentUser?.delete()
+            ?.addOnCompleteListener { deleteTask ->
+                if (deleteTask.isSuccessful) {
+                    deleteAccountLiveData.value = Resource.Success("Akun berhasil dihapus")
+                } else {
+                    deleteAccountLiveData.value = Resource.Error("Gagal menghapus akun")
+                }
+            }
+
+        return deleteAccountLiveData
+    }
+
+    fun deleteUserData(uid: String) : LiveData<Resource<Boolean>> {
+        val deleteUserLiveData = MutableLiveData<Resource<Boolean>>()
+        deleteUserLiveData.value = Resource.Loading()
+
+        val userReference = userDatabase.child(uid)
+
+        userReference.removeValue()
+            .addOnSuccessListener {
+                deleteUserLiveData.value = Resource.Success(true)
+            }
+            .addOnFailureListener { exception ->
+                deleteUserLiveData.value = Resource.Error(exception.message)
+            }
+
+        return deleteUserLiveData
+    }
+
 }
