@@ -26,16 +26,11 @@ class ArticleActivity : AppCompatActivity() {
         binding.apply {
             if (article != null) {
                 tvTitleArticle.text = article!!.title
-                tvWriter.text = article!!.nameWriter
                 tvDescArticle.text = article!!.desc
 
                 Glide.with(this@ArticleActivity)
                     .load(article!!.photo)
                     .into(ivArticle)
-
-                Glide.with(this@ArticleActivity)
-                    .load(article!!.imgProfileUser)
-                    .into(ivUser)
             }
         }
     }

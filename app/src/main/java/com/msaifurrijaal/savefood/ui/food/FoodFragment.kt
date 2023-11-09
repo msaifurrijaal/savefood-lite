@@ -63,6 +63,11 @@ class FoodFragment : Fragment() {
         binding.apply {
             etSearchMain.addTextChangedListener {
                 foodOrderAdapter.filter.filter(it.toString())
+                if (foodOrderAdapter.itemCount != 0) {
+                    actionNoEmpty()
+                } else {
+                    actionEmpty()
+                }
             }
 
             ivChat.setOnClickListener {
@@ -83,6 +88,11 @@ class FoodFragment : Fragment() {
                     val dataSearch = etSearchMain.text.toString().trim()
                     foodOrderAdapter.filter.filter(dataSearch)
                     hideSoftKeyboard(requireContext(), binding.root)
+                    if (foodOrderAdapter.itemCount != 0) {
+                        actionNoEmpty()
+                    } else {
+                        actionEmpty()
+                    }
                     return@setOnEditorActionListener true
                 }
                 return@setOnEditorActionListener true

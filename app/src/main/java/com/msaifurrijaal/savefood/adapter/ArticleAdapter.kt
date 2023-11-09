@@ -42,12 +42,7 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
             .load(artikel.photo)
             .into(holder.binding.ivArtikel)
 
-        Glide.with(holder.itemView)
-            .load(artikel.imgProfileUser)
-            .into(holder.binding.ivWriter)
-
         holder.binding.tvTitle.text = artikel.title
-        holder.binding.tvNameWriter.text = artikel.nameWriter
 
         holder.itemView.setOnClickListener {
            onItemClick.invoke(artikel)
