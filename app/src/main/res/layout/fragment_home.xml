@@ -198,24 +198,6 @@
                         android:textSize="@dimen/subtitle_1"
                         android:layout_weight="1"/>
 
-                    <TextView
-                        android:id="@+id/tv_see_all_foods"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_all"
-                        android:fontFamily="@font/poppins"
-                        android:textColor="@color/darker_green"
-                        android:textSize="@dimen/subtitle_1"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0"/>
-
-                    <ImageView
-                        android:layout_width="@dimen/normal_125"
-                        android:layout_height="@dimen/normal_125"
-                        android:src="@drawable/baseline_chevron_right_24"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="-2dp"
-                        app:tint="@color/darker_green"/>
 
                 </LinearLayout>
 
@@ -262,24 +244,6 @@
                         android:textSize="@dimen/subtitle_1"
                         android:layout_weight="1"/>
 
-                    <TextView
-                        android:id="@+id/tv_see_all_article"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_all"
-                        android:fontFamily="@font/poppins"
-                        android:textColor="@color/darker_green"
-                        android:textSize="@dimen/subtitle_1"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0"/>
-
-                    <ImageView
-                        android:layout_width="@dimen/normal_125"
-                        android:layout_height="@dimen/normal_125"
-                        android:src="@drawable/baseline_chevron_right_24"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="-2dp"
-                        app:tint="@color/darker_green"/>
 
                 </LinearLayout>
 
