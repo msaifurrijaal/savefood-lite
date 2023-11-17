@@ -162,35 +162,6 @@
                     android:background="@drawable/bg_btn_color_primary"
                     android:layout_marginTop="@dimen/normal_200" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/or_continue_with"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/normal_200" />
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/normal_200">
-
-                    <ImageView
-                        android:layout_width="@dimen/image_50_custom"
-                        android:layout_height="@dimen/image_50_custom"
-                        android:src="@drawable/google_icon"
-                        android:layout_marginEnd="@dimen/small_75"/>
-
-                    <ImageView
-                        android:layout_width="@dimen/image_50_custom"
-                        android:layout_height="@dimen/image_50_custom"
-                        android:src="@drawable/fb_icon"
-                        android:layout_marginStart="@dimen/small_75"/>
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/et_dont_account"
                     android:layout_width="wrap_content"
