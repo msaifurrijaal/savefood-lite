@@ -2,16 +2,20 @@ package com.msaifurrijaal.savefood.ui.profile
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.msaifurrijaal.savefood.data.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ProfileViewModel(application: Application): AndroidViewModel(application) {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val userRepository: UserRepository
+): ViewModel() {
 
-    private val repository = UserRepository(application)
+    fun getCurrentUser() = userRepository.getCurrentUser()
 
-    fun getCurrentUser() = repository.getCurrentUser()
+    fun deleteUser() = userRepository.deleteUser()
 
-    fun deleteUser() = repository.deleteUser()
-
-    fun deleteUserData(uid: String) = repository.deleteUserData(uid)
+    fun deleteUserData(uid: String) = userRepository.deleteUserData(uid)
 
 }

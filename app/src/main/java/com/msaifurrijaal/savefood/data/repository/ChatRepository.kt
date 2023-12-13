@@ -6,25 +6,29 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.Chat
+import javax.inject.Inject
 
-class ChatRepository(application: Application) {
+class ChatRepository @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val databaseInstance: FirebaseDatabase
+) {
+    private val chatDatabaseRef: DatabaseReference = databaseInstance.reference.child("chats")
 
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val currentUser = firebaseAuth.currentUser
 
     fun sendChat(receiverId: String, message: String): LiveData<Resource<Boolean>> {
         val sendChatLiveData = MutableLiveData<Resource<Boolean>>()
         sendChatLiveData.value = Resource.Loading()
 
-        val chatRef = FirebaseDatabase.getInstance().getReference("chats")
-        val chatId = chatRef.push().key
+        val chatId = chatDatabaseRef.push().key
 
         if (chatId != null) {
-            chatRef.child(chatId).setValue(
+            chatDatabaseRef.child(chatId).setValue(
                 Chat(
                     uidChat = chatId,
                     senderId = currentUser!!.uid,
@@ -49,9 +53,7 @@ class ChatRepository(application: Application) {
         val chatsLiveData = MutableLiveData<Resource<List<Chat>>>()
         chatsLiveData.value = Resource.Loading()
 
-        val chatRef = FirebaseDatabase.getInstance().getReference("chats")
-
-        chatRef.addValueEventListener(object : ValueEventListener {
+        chatDatabaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val chatList = mutableListOf<Chat>()
 

@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.LayoutItemChatBinding
+import javax.inject.Inject
 
-class ListChatAdapter: RecyclerView.Adapter<ListChatAdapter.ViewHolder>() {
+class ListChatAdapter @Inject constructor(): RecyclerView.Adapter<ListChatAdapter.ViewHolder>() {
 
     lateinit var onItemClick: ((User) -> Unit)
 

@@ -3,6 +3,7 @@ package com.msaifurrijaal.savefood.ui.chat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -12,20 +13,22 @@ import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityChatBinding
 import com.msaifurrijaal.savefood.utils.showDialogError
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChatBinding
-    private lateinit var chatViewModel: ChatViewModel
-    private lateinit var chatAdapter: ChatAdapter
+    private val chatViewModel: ChatViewModel by viewModels()
+    @Inject
+    lateinit var chatAdapter: ChatAdapter
     private var chatPartner: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         getInformationFromIntent()
         setInformationChat()
@@ -36,7 +39,6 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun setChatRv() {
-        chatAdapter = ChatAdapter()
         binding.rvChat.apply {
             layoutManager = LinearLayoutManager(this@ChatActivity)
             adapter = chatAdapter

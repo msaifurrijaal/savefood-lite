@@ -24,21 +24,23 @@ import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MyProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyProductBinding
     private lateinit var dialogLoading: AlertDialog
-    private lateinit var myProductViewModel: MyProductViewModel
-    private lateinit var myProductAdapter: MyProductAdapter
+    private val myProductViewModel: MyProductViewModel by viewModels()
+    @Inject
+    lateinit var myProductAdapter: MyProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        myProductViewModel = ViewModelProvider(this).get(MyProductViewModel::class.java)
-        myProductAdapter = MyProductAdapter()
         dialogLoading = showDialogLoading(this)
 
         observeListMyFood()

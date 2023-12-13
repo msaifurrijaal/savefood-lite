@@ -12,11 +12,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
+import javax.inject.Inject
 
-class UserRepository(application: Application) {
+class UserRepository @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val databaseInstance: FirebaseDatabase
+) {
 
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val userDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    private val userDatabaseRef: DatabaseReference = databaseInstance.reference.child("users")
     private val currentUser = firebaseAuth.currentUser
 
     fun createAuth(email: String, password: String): LiveData<Resource<FirebaseUser>> {
@@ -40,7 +43,7 @@ class UserRepository(application: Application) {
     ): LiveData<Resource<Boolean>> {
         val userResult = MutableLiveData<Resource<Boolean>>()
         userResult.postValue(Resource.Loading())
-        userDatabase.child(uid.toString())
+        userDatabaseRef.child(uid.toString())
             .setValue(
                 User(
                     uidUser = uid,
@@ -112,7 +115,7 @@ class UserRepository(application: Application) {
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             val uid = currentUser.uid
-            val userReference = userDatabase.child(uid)
+            val userReference = userDatabaseRef.child(uid)
 
             userReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -137,7 +140,7 @@ class UserRepository(application: Application) {
         val currentUserLiveData = MutableLiveData<Resource<User>>()
         currentUserLiveData.value = Resource.Loading()
 
-        val userReference = userDatabase.child(uidUser)
+        val userReference = userDatabaseRef.child(uidUser)
 
         userReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -159,7 +162,7 @@ class UserRepository(application: Application) {
         val usersLiveData = MutableLiveData<Resource<List<User>>>()
         usersLiveData.value = Resource.Loading()
 
-        userDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+        userDatabaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val userList = mutableListOf<User>()
 
@@ -187,7 +190,7 @@ class UserRepository(application: Application) {
         val userResult = MutableLiveData<Resource<Boolean>>()
         userResult.postValue(Resource.Loading())
 
-        userDatabase.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+        userDatabaseRef.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val user = dataSnapshot.getValue(User::class.java)
@@ -195,7 +198,7 @@ class UserRepository(application: Application) {
                         val currentPoints = it.userPoint
                         val updatedPoints = currentPoints?.plus(100.0)
 
-                        userDatabase.child(uid).child("user_point").setValue(updatedPoints)
+                        userDatabaseRef.child(uid).child("user_point").setValue(updatedPoints)
                             .addOnSuccessListener {
                                 userResult.postValue(Resource.Success(true))
                             }
@@ -245,7 +248,7 @@ class UserRepository(application: Application) {
             updates["role_user"] = roleUser
         }
 
-        userDatabase.child(uid).updateChildren(updates)
+        userDatabaseRef.child(uid).updateChildren(updates)
             .addOnSuccessListener {
                 updateResult.value = Resource.Success(true)
             }
@@ -277,7 +280,7 @@ class UserRepository(application: Application) {
         val deleteUserLiveData = MutableLiveData<Resource<Boolean>>()
         deleteUserLiveData.value = Resource.Loading()
 
-        val userReference = userDatabase.child(uid)
+        val userReference = userDatabaseRef.child(uid)
 
         userReference.removeValue()
             .addOnSuccessListener {

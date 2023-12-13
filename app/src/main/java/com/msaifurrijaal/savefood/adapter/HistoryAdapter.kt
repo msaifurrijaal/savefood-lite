@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.model.Transaction
 import com.msaifurrijaal.savefood.databinding.LayoutItemHistoryReceiverBinding
+import javax.inject.Inject
 
 class HistoryAdapter(private val context: Context): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 

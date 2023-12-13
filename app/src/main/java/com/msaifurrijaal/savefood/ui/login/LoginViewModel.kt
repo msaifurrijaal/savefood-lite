@@ -2,13 +2,17 @@ package com.msaifurrijaal.savefood.ui.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.msaifurrijaal.savefood.data.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
 
-    private val repository = UserRepository(application)
+    fun loginUser(email: String, password: String) = userRepository.loginUser(email, password)
 
-    fun loginUser(email: String, password: String) = repository.loginUser(email, password)
-
-    fun isAuth() = repository.isAuth()
+    fun isAuth() = userRepository.isAuth()
 }

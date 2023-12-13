@@ -19,13 +19,16 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 import kotlin.math.log
 
-class FoodRepository(application: Application) {
+class FoodRepository @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val databaseInstance: FirebaseDatabase
+) {
 
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val foodDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("foods")
-    private val transactionDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference.child("transactions")
+    private val foodDatabaseRef: DatabaseReference = databaseInstance.reference.child("foods")
+    private val transactionDatabaseRef: DatabaseReference = databaseInstance.reference.child("transactions")
     private val currentUser = firebaseAuth.currentUser
 
     fun uploadImage(bitmap: Bitmap): LiveData<Resource<String>> {
@@ -67,10 +70,10 @@ class FoodRepository(application: Application) {
         val createItemFoodLiveData = MutableLiveData<Resource<Boolean>>()
         createItemFoodLiveData.value = Resource.Loading()
 
-        val foodId = foodDatabase.push().key
+        val foodId = foodDatabaseRef.push().key
 
         if (foodId != null) {
-            foodDatabase.child(foodId).setValue(
+            foodDatabaseRef.child(foodId).setValue(
                 Food(
                     idFood = foodId,
                     idUploader = currentUser!!.uid.toString(),
@@ -108,7 +111,7 @@ class FoodRepository(application: Application) {
         val foodLiveData = MutableLiveData<Resource<List<Food>>>()
         foodLiveData.value = Resource.Loading()
 
-        foodDatabase.addValueEventListener(object : ValueEventListener {
+        foodDatabaseRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val foodList = mutableListOf<Food>()
 
@@ -134,7 +137,7 @@ class FoodRepository(application: Application) {
         val foodLiveData = MutableLiveData<Resource<List<Food>>>()
         foodLiveData.value = Resource.Loading()
 
-        foodDatabase.addValueEventListener(object : ValueEventListener {
+        foodDatabaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val foodList = mutableListOf<Food>()
 
@@ -160,7 +163,7 @@ class FoodRepository(application: Application) {
         val foodLiveData = MutableLiveData<Resource<List<Food>>>()
         foodLiveData.value = Resource.Loading()
 
-        foodDatabase.addValueEventListener(object : ValueEventListener {
+        foodDatabaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val foodList = mutableListOf<Food>()
 
@@ -187,7 +190,7 @@ class FoodRepository(application: Application) {
         val deleteResultLiveData = MutableLiveData<Resource<Boolean>>()
         deleteResultLiveData.value = Resource.Loading()
 
-        foodDatabase.child(foodId).removeValue()
+        foodDatabaseRef.child(foodId).removeValue()
             .addOnSuccessListener {
                 deleteResultLiveData.value = Resource.Success(true)
             }
@@ -213,7 +216,7 @@ class FoodRepository(application: Application) {
         updatedFoodMap["longitude"] = updatedFood.longitude
         updatedFoodMap["image_url"] = updatedFood.imageUrl
 
-        foodDatabase.child(updatedFood.idFood.toString()).updateChildren(updatedFoodMap)
+        foodDatabaseRef.child(updatedFood.idFood.toString()).updateChildren(updatedFoodMap)
             .addOnSuccessListener {
                 updateResult.value = Resource.Success(true)
             }
@@ -240,13 +243,13 @@ class FoodRepository(application: Application) {
         val createItemTransactionLiveData = MutableLiveData<Resource<Boolean>>()
         createItemTransactionLiveData.value = Resource.Loading()
 
-        val transactionId = transactionDatabase.push().key
+        val transactionId = transactionDatabaseRef.push().key
         val currentDate = Date()
         val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH)
         val formattedDate = dateFormat.format(currentDate)
 
         if (transactionId != null) {
-            transactionDatabase.child(transactionId).setValue(
+            transactionDatabaseRef.child(transactionId).setValue(
                 Transaction(
                     idTransaction = transactionId,
                     idSeller = idSeller,
@@ -285,7 +288,7 @@ class FoodRepository(application: Application) {
         val updateStatusResult = MutableLiveData<Resource<Unit>>()
         updateStatusResult.value = Resource.Loading()
 
-        val foodRef = foodDatabase.child(foodId)
+        val foodRef = foodDatabaseRef.child(foodId)
         foodRef.child("status").setValue(newStatus)
             .addOnSuccessListener {
                 updateStatusResult.value = Resource.Success(Unit)
@@ -301,7 +304,7 @@ class FoodRepository(application: Application) {
         val transactionLiveData = MutableLiveData<Resource<List<Transaction>>>()
         transactionLiveData.value = Resource.Loading()
 
-        transactionDatabase.addValueEventListener(object : ValueEventListener {
+        transactionDatabaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val transactionList = mutableListOf<Transaction>()
 
@@ -330,7 +333,7 @@ class FoodRepository(application: Application) {
         val transactionLiveData = MutableLiveData<Resource<List<Transaction>>>()
         transactionLiveData.value = Resource.Loading()
 
-        transactionDatabase.addValueEventListener(object : ValueEventListener {
+        transactionDatabaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val transactionList = mutableListOf<Transaction>()
 
@@ -363,7 +366,7 @@ class FoodRepository(application: Application) {
         val editResult = MutableLiveData<Resource<Unit>>()
         editResult.value = Resource.Loading()
 
-        val userRef = transactionDatabase.child(transactionId)
+        val userRef = transactionDatabaseRef.child(transactionId)
         userRef.child("status").setValue(newStatus)
             .addOnSuccessListener {
                 editResult.value = Resource.Success(Unit)

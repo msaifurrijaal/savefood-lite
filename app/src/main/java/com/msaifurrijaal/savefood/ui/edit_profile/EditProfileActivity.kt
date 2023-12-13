@@ -16,6 +16,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,8 +35,10 @@ import com.msaifurrijaal.savefood.utils.createCustomTempFile
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding
@@ -44,14 +47,13 @@ class EditProfileActivity : AppCompatActivity() {
     private var imageUser: Bitmap? = null
     private var imageUrl: String? = null
     private lateinit var dialogLoading: AlertDialog
-    private lateinit var editProfileViewModel: EditProfileViewModel
+    private val editProfileViewModel: EditProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        editProfileViewModel = ViewModelProvider(this).get(EditProfileViewModel::class.java)
         dialogLoading = showDialogLoading(this)
 
         getInformationFromIntent()

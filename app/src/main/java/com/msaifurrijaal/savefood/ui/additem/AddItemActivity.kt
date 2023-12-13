@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -38,11 +39,13 @@ import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+@AndroidEntryPoint
 class AddItemActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddItemBinding
@@ -52,7 +55,7 @@ class AddItemActivity : AppCompatActivity() {
     private var categoryFood: String? = null
     private var intentType = ""
     private var food: Food? = null
-    private lateinit var addItemViewModel: AddItemViewModel
+    private val addItemViewModel: AddItemViewModel by viewModels()
     private lateinit var dialogLoading: AlertDialog
     private var dataUser: User? = null
     private lateinit var myCalendar: Calendar
@@ -62,7 +65,6 @@ class AddItemActivity : AppCompatActivity() {
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        addItemViewModel = ViewModelProvider(this).get(AddItemViewModel::class.java)
         dialogLoading = showDialogLoading(this)
         myCalendar = Calendar.getInstance()
 

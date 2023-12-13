@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,17 +27,23 @@ import com.msaifurrijaal.savefood.ui.article.ArticleActivity.Companion.ARTICLE_I
 import com.msaifurrijaal.savefood.ui.chat.ListChatActivity
 import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.showDialogLoading
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var dialogLoading: AlertDialog
-    private lateinit var foodAdapter: FoodHomeAdapter
-    private lateinit var articleAdapter: ArticleAdapter
+    @Inject
+    lateinit var foodAdapter: FoodHomeAdapter
+    @Inject
+    lateinit var articleAdapter: ArticleAdapter
     private var list: ArrayList<Article> = arrayListOf()
     private var user: User? = null
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +52,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         dialogLoading = showDialogLoading(requireContext())
-        articleAdapter = ArticleAdapter()
-        foodAdapter = FoodHomeAdapter()
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         list.addAll(ArticlesData.listData)
 

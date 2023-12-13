@@ -9,8 +9,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.msaifurrijaal.savefood.R
 import com.msaifurrijaal.savefood.data.model.Chat
+import javax.inject.Inject
 
-class ChatAdapter: RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter @Inject constructor(): RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     private val MESSAGE_TYPE_LEFT = 0
     private val MESSAGE_TYPE_RIGHT = 1

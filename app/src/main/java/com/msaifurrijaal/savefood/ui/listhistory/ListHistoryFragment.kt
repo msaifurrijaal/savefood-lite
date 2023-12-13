@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,14 +22,16 @@ import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.ui.detailtransaction.DetailTransactionActivity
 import com.msaifurrijaal.savefood.ui.detailtransaction.DetailTransactionActivity.Companion.TRANSACTION_ITEM
 import com.msaifurrijaal.savefood.utils.showDialogError
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ListHistoryFragment : Fragment() {
 
     private var _binding: FragmentListHistoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var historyTransactionRv : HistoryAdapter
-    private lateinit var listHistoryViewModel: ListHistoryViewModel
+    private val listHistoryViewModel: ListHistoryViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +39,6 @@ class ListHistoryFragment : Fragment() {
     ): View? {
         _binding = FragmentListHistoryBinding.inflate(inflater, container, false)
 
-        listHistoryViewModel = ViewModelProvider(this).get(ListHistoryViewModel::class.java)
         historyTransactionRv = HistoryAdapter(requireContext())
 
         return binding.root

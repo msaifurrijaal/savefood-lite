@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.LayoutItemFoodOrderBinding
+import javax.inject.Inject
 
-class FoodOrderAdapter: RecyclerView.Adapter<FoodOrderAdapter.ViewHolder>(), Filterable {
+class FoodOrderAdapter @Inject constructor(): RecyclerView.Adapter<FoodOrderAdapter.ViewHolder>(), Filterable {
 
     lateinit var onItemClick: ((Food) -> Unit)
 

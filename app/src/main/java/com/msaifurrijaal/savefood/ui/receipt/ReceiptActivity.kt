@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -19,13 +20,16 @@ import com.msaifurrijaal.savefood.ui.main.MainActivity
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReceiptActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReceiptBinding
     private var food: Food? = null
     private var paymentMethod: String? = null
-    private lateinit var receiptViewModel: ReceiptViewModel
+    private val receiptViewModel: ReceiptViewModel by viewModels()
+
     private lateinit var dialogLoading: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +37,6 @@ class ReceiptActivity : AppCompatActivity() {
         binding = ActivityReceiptBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        receiptViewModel = ViewModelProvider(this).get(ReceiptViewModel::class.java)
         dialogLoading = showDialogLoading(this)
 
         getInformationFromIntent()

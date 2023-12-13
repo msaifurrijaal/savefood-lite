@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -22,7 +23,9 @@ import com.msaifurrijaal.savefood.databinding.LayoutDialogCancelBinding
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
 import com.msaifurrijaal.savefood.utils.showDialogSuccess
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailTransactionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTransactionBinding
@@ -30,7 +33,7 @@ class DetailTransactionActivity : AppCompatActivity() {
     private var transaction: Transaction? = null
     private lateinit var auth: FirebaseAuth
     private var currentUser: FirebaseUser? = null
-    private lateinit var detailTransactionViewModel: DetailTransactionViewModel
+    private val detailTransactionViewModel: DetailTransactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,6 @@ class DetailTransactionActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser
-        detailTransactionViewModel = ViewModelProvider(this).get(DetailTransactionViewModel::class.java)
         dialogLoading = showDialogLoading(this)
 
         onAction()

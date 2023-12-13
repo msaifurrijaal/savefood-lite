@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,20 +14,21 @@ import com.msaifurrijaal.savefood.data.Resource
 import com.msaifurrijaal.savefood.data.model.User
 import com.msaifurrijaal.savefood.databinding.ActivityListChatBinding
 import com.msaifurrijaal.savefood.utils.showDialogError
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ListChatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityListChatBinding
-    private lateinit var chatViewModel: ChatViewModel
-    private lateinit var chatAdapter: ListChatAdapter
+    private val chatViewModel: ChatViewModel by viewModels()
+    @Inject
+    lateinit var chatAdapter: ListChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
-        chatAdapter = ListChatAdapter()
 
         listUserObserve()
         onAction()

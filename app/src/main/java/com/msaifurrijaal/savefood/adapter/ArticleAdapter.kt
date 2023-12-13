@@ -8,8 +8,10 @@ import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.data.model.Article
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.LayoutItemArticleBinding
+import javax.inject.Inject
 
-class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
+class ArticleAdapter @Inject constructor():
+    RecyclerView.Adapter<ArticleAdapter.ViewHolder>()  {
 
     lateinit var onItemClick: ((Article) -> Unit)
 

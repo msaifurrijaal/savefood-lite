@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.LayoutItemFoodHomeBinding
+import javax.inject.Inject
 
-class FoodHomeAdapter: RecyclerView.Adapter<FoodHomeAdapter.ViewHolder>() {
+class FoodHomeAdapter @Inject constructor(): RecyclerView.Adapter<FoodHomeAdapter.ViewHolder>() {
 
     lateinit var onItemClick: ((Food) -> Unit)
 

@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.msaifurrijaal.savefood.data.model.Food
 import com.msaifurrijaal.savefood.databinding.LayoutItemMyProductBinding
+import javax.inject.Inject
 
-class MyProductAdapter(): RecyclerView.Adapter<MyProductAdapter.ViewHolder>()  {
+class MyProductAdapter @Inject constructor(): RecyclerView.Adapter<MyProductAdapter.ViewHolder>()  {
 
     lateinit var onItemClick: ((Food) -> Unit)
     lateinit var btnDeleteClick: ((Food) -> Unit)

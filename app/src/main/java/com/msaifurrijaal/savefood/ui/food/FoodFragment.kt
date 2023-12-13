@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,14 +27,18 @@ import com.msaifurrijaal.savefood.ui.detailproduct.DetailProductActivity
 import com.msaifurrijaal.savefood.utils.hideSoftKeyboard
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FoodFragment : Fragment() {
 
     private var _binding: FragmentFoodBinding? = null
     private val binding get() = _binding!!
     private lateinit var dialogLoading: AlertDialog
-    private lateinit var foodOrderAdapter: FoodOrderAdapter
-    private lateinit var foodViewModel: FoodViewModel
+    @Inject
+    lateinit var foodOrderAdapter: FoodOrderAdapter
+    private val foodViewModel: FoodViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +47,6 @@ class FoodFragment : Fragment() {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
 
         dialogLoading = showDialogLoading(requireContext())
-        foodOrderAdapter = FoodOrderAdapter()
-        foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
 
         return binding.root
     }

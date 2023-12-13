@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -18,12 +19,14 @@ import com.msaifurrijaal.savefood.ui.chat.ChatActivity
 import com.msaifurrijaal.savefood.ui.chat.ChatActivity.Companion.USER_ITEM
 import com.msaifurrijaal.savefood.ui.receipt.ReceiptActivity
 import com.msaifurrijaal.savefood.utils.showDialogError
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailProductBinding
     private var food: Food? = null
-    private lateinit var detailProductViewModel: DetailProductViewModel
+    private val detailProductViewModel: DetailProductViewModel by viewModels()
     private lateinit var auth: FirebaseAuth
     private var currentUser: FirebaseUser? = null
     private var seller: User? = null
@@ -35,7 +38,6 @@ class DetailProductActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser
-        detailProductViewModel = ViewModelProvider(this).get(DetailProductViewModel::class.java)
 
         getInformationFromIntent()
         getDataSeller(food?.idUploader)

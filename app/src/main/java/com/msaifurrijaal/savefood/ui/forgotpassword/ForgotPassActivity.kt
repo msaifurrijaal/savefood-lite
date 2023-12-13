@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.msaifurrijaal.savefood.R
@@ -12,11 +13,13 @@ import com.msaifurrijaal.savefood.databinding.ActivityForgotPassBinding
 import com.msaifurrijaal.savefood.ui.login.LoginActivity
 import com.msaifurrijaal.savefood.utils.showDialogError
 import com.msaifurrijaal.savefood.utils.showDialogLoading
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgotPassActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForgotPassBinding
-    private lateinit var forgotPassViewModel: ForgotPassViewModel
+    private val forgotPassViewModel: ForgotPassViewModel by viewModels()
     private lateinit var dialogLoading: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +27,6 @@ class ForgotPassActivity : AppCompatActivity() {
         binding = ActivityForgotPassBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        forgotPassViewModel = ViewModelProvider(this).get(ForgotPassViewModel::class.java)
         dialogLoading = showDialogLoading(this)
 
         onAction()
